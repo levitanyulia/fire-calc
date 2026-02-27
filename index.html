@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>מחשבוני הגנה מאש</title>
-  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&family=Rubik:wght@700;800;900&display=swap" rel="stylesheet" />
   <style>
     /* ═══ RESET ═══ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -15,7 +15,7 @@
       --green-lt:   #e8f5eb;
       --gold:       #c8972a;
       --gold-lt:    #fdf3dc;
-      --bg:         #f5f6f4;
+      --bg:         #f3f5f1;
       --surface:    #ffffff;
       --border:     #dde3d8;
       --text:       #212b1e;
@@ -38,7 +38,8 @@
 
     /* ═══ TOP BAR ═══ */
     .topbar {
-      background: var(--green);
+      background: linear-gradient(135deg, #162f1b 0%, var(--green) 100%);
+      box-shadow: 0 2px 12px rgba(0,0,0,.18);
       color: #fff;
       display: flex;
       align-items: center;
@@ -46,6 +47,8 @@
       padding: 0 28px;
       height: 62px;
       flex-shrink: 0;
+      position: relative;
+      z-index: 10;
     }
     .topbar-brand {
       display: flex;
@@ -60,7 +63,7 @@
       font-size: 1.3rem;
       flex-shrink: 0;
     }
-    .topbar-title { font-size: 1.15rem; font-weight: 700; letter-spacing: -.01em; }
+    .topbar-title { font-family: 'Rubik', 'Heebo', sans-serif; font-size: 1.15rem; font-weight: 800; letter-spacing: -.02em; }
     .topbar-sub   { font-size: .75rem; opacity: .65; margin-top: 1px; }
     .topbar-badge {
       background: rgba(255,255,255,.12);
@@ -81,13 +84,14 @@
     /* ═══ SIDEBAR ═══ */
     .sidebar {
       width: 210px;
-      background: var(--surface);
+      background: linear-gradient(180deg, #fafcf9 0%, var(--surface) 100%);
       border-left: 1px solid var(--border);
       padding: 20px 0;
       flex-shrink: 0;
       display: flex;
       flex-direction: column;
       gap: 4px;
+      box-shadow: inset -1px 0 0 var(--border);
     }
     .sidebar-label {
       font-size: .72rem;
@@ -116,11 +120,12 @@
     }
     .nav-item:hover { background: var(--green-lt); color: var(--green); }
     .nav-item.active {
-      background: var(--green-lt);
-      color: var(--green);
-      font-weight: 600;
-      border-right-color: var(--green);
+      background: var(--green);
+      color: #fff;
+      font-weight: 700;
+      border-right-color: transparent;
     }
+    .nav-item.active .nav-badge { background: rgba(255,255,255,.25); color: #fff; }
     .nav-item .nav-icon { font-size: 1.1rem; width: 22px; text-align: center; }
     .nav-badge {
       margin-right: auto;
@@ -159,8 +164,10 @@
       margin-bottom: 22px;
     }
     .page-header h2 {
+      font-family: 'Rubik', 'Heebo', sans-serif;
       font-size: 1.5rem;
-      font-weight: 800;
+      font-weight: 900;
+      letter-spacing: -.03em;
       color: var(--green);
       display: flex;
       align-items: center;
@@ -179,10 +186,13 @@
       border-radius: var(--r);
       margin-bottom: 18px;
       overflow: hidden;
+      border-top: 3px solid var(--green);
+      box-shadow: 0 2px 8px rgba(0,0,0,.06);
     }
     .section-head {
-      background: var(--green);
-      color: #fff;
+      background: linear-gradient(90deg, #eaf3ec 0%, #f4f8f4 100%);
+      color: var(--green);
+      border-bottom: 1px solid #d4e4d8;
       padding: 11px 18px;
       font-size: .88rem;
       font-weight: 700;
@@ -212,12 +222,12 @@
     .field-input {
       width: 100%;
       padding: 9px 12px;
-      border: 1.5px solid var(--border);
-      border-radius: 6px;
+      border: 1.5px solid #cdd6c8;
+      border-radius: 7px;
       font-size: .93rem;
       font-family: inherit;
       color: var(--text);
-      background: #fcfcfb;
+      background: #fafbf9;
       transition: border-color .15s, box-shadow .15s;
     }
     .field-input:focus {
@@ -230,22 +240,23 @@
     /* ═══ TABLE ═══ */
     .tbl-wrap { overflow-x: auto; }
     table { width: 100%; border-collapse: collapse; font-size: .875rem; }
-    thead tr { background: #f0f3ee; }
+    thead tr { background: linear-gradient(180deg, #edf1eb 0%, #f0f3ee 100%); }
     thead th {
-      padding: 9px 10px;
+      padding: 10px 10px;
       text-align: right;
       font-size: .78rem;
       font-weight: 700;
       color: var(--green);
       letter-spacing: .03em;
       text-transform: uppercase;
-      border-bottom: 2px solid var(--border);
+      border-bottom: 2px solid #c8d4c2;
       white-space: nowrap;
     }
     thead th small { display:block; text-transform: none; font-weight: 400; color: var(--muted); letter-spacing: 0; font-size: .75rem; }
-    tbody tr { border-bottom: 1px solid #f0f0ee; transition: background .1s; }
+    tbody tr { border-bottom: 1px solid #f0f0ee; transition: background .12s; }
     tbody tr:last-child { border-bottom: none; }
-    tbody tr:hover { background: #fafbf8; }
+    tbody tr:nth-child(even) { background: #fafbf8; }
+    tbody tr:hover { background: #f0f4ed; }
     tbody td { padding: 7px 8px; vertical-align: middle; }
 
     .col-num  { width: 34px; text-align: center; color: var(--muted); font-size: .78rem; }
@@ -315,8 +326,9 @@
       transition: all .15s;
     }
     .btn:active { transform: scale(.97); }
+    .btn-green:active { transform: scale(.97) translateY(0); box-shadow: none; }
     .btn-green   { background: var(--green); color: #fff; }
-    .btn-green:hover { background: var(--green-mid); }
+    .btn-green:hover { background: var(--green-mid); box-shadow: 0 4px 12px rgba(30,77,43,.28); transform: translateY(-1px); }
     .btn-outline { background: transparent; color: var(--muted); border: 1.5px solid var(--border); }
     .btn-outline:hover { border-color: #b0b8a8; color: var(--text); background: #f4f4f2; }
 
@@ -340,12 +352,18 @@
       margin-bottom: 16px;
     }
     .res-card {
-      border-radius: 8px;
+      border-radius: 10px;
       padding: 16px 18px;
       border: 1px solid var(--border);
       background: var(--surface);
       position: relative;
       overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,.07);
+      transition: box-shadow .18s, transform .18s;
+    }
+    .res-card:hover {
+      box-shadow: 0 4px 18px rgba(0,0,0,.12);
+      transform: translateY(-1px);
     }
     .res-card::before {
       content: '';
@@ -357,7 +375,7 @@
     }
     .res-card.gold::before { background: var(--gold); }
     .res-label { font-size: .75rem; font-weight: 700; color: var(--muted); margin-bottom: 4px; text-transform: uppercase; letter-spacing: .04em; }
-    .res-value { font-size: 1.75rem; font-weight: 800; color: var(--green); line-height: 1; }
+    .res-value { font-family: 'Rubik', 'Heebo', sans-serif; font-size: 1.75rem; font-weight: 800; color: var(--green); line-height: 1; }
     .res-card.gold .res-value { color: var(--gold); }
     .res-unit  { font-size: .75rem; color: var(--muted); margin-top: 3px; }
 
@@ -432,7 +450,7 @@
         font-size: .78rem;
         white-space: nowrap;
       }
-      .nav-item.active { border-bottom-color: var(--green); border-right-color: transparent; }
+      .nav-item.active { background: var(--green-lt); color: var(--green); border-bottom-color: var(--green); border-right-color: transparent; font-weight: 700; }
       .nav-soon, .nav-badge { display: none; }
       .content { padding: 16px 12px 50px; }
       .room-row { grid-template-columns: 1fr !important; }
@@ -475,7 +493,7 @@
 
     <button class="nav-item" onclick="showPage('nfpa30', this)">
       <span class="nav-icon">🛢️</span>
-      NFPA 30 + MAQ
+      סיווג לפי NFPA 30
       <span class="nav-badge">פעיל</span>
     </button>
 
@@ -508,15 +526,9 @@
       <div class="section">
         <div class="section-head">📐 פרטי האזור המבוקר</div>
         <div class="section-body">
-          <div class="room-row">
-            <div>
-              <div class="field-label">שם החדר / האזור</div>
-              <input class="field-input" type="text" id="roomName" placeholder="לדוגמה: מחסן מרכזי, קומה ב'" />
-            </div>
-            <div>
-              <div class="field-label">שטח האזור [מ"ר] <span class="req">*</span></div>
-              <input class="field-input" type="number" id="roomArea" placeholder="הזן שטח" min="0.1" step="0.1" oninput="calculate()" />
-            </div>
+          <div style="max-width:300px">
+            <div class="field-label">שטח האזור [מ"ר] <span class="req">*</span></div>
+            <input class="field-input" type="number" id="roomArea" placeholder="הזן שטח" min="0.1" step="0.1" oninput="calculate()" />
           </div>
         </div>
       </div>
@@ -587,8 +599,7 @@
           <div class="legend">
             <strong>סיווג לפי נוהל הערכת סיכוני אש (גרסה 2, 2024)</strong><br>
             🟢 <strong>מטען אש נמוך</strong> – פחות מ-40,000 קק"ל/מ"ר &nbsp;|&nbsp;
-            🟡 <strong>מטען אש רגיל</strong> – 40,000 קק"ל/מ"ר ומעלה<br>
-            <span style="opacity:.7">מקור ערכים קלוריים: SFPE Handbook, מהדורה 5</span>
+            🟡 <strong>מטען אש רגיל</strong> – 40,000 קק"ל/מ"ר ומעלה
           </div>
 
         </div>
@@ -599,7 +610,7 @@
     <!-- ─── PAGE: NFPA 30 ─── -->
     <div id="page-nfpa30" class="page">
       <div class="page-header">
-        <h2>🛢️ סיווג NFPA 30 וחישוב MAQ</h2>
+        <h2>🛢️ סיווג NFPA 30</h2>
         <p>סיווג נוזלים דליקים ובעירה לפי NFPA 30 (2018) • כמות מרבית מותרת (MAQ) לפי NFPA 400</p>
       </div>
 
@@ -680,7 +691,7 @@
     <div id="page-maq" class="page">
       <div class="page-header">
         <h2>⚗️ מחשבון MAQ – כמות מרבית מותרת</h2>
-        <p>Maximum Allowable Quantity לפי NFPA 400 (2019) Table 5.2.1.1.3 & NFPA 5000 Chapter 34 • תעשייה ואחסנה</p>
+        <p>Maximum Allowable Quantity לפי <strong>NFPA 400 (2025)</strong> Table 5.2.1.1.3 • תעשייה ואחסנה</p>
       </div>
 
       <!-- ── שלב 1: הגדרות אזור בקרה ── -->
@@ -775,13 +786,13 @@
                     <option value="oxidizer_2">מחמצן Class 2</option>
                     <option value="oxidizer_1">מחמצן Class 1</option>
                   </optgroup>
-                  <optgroup label="Physical Hazard – פרוקסידים אורגניים">
-                    <option value="organic_peroxide_UD">פרוקסיד אורגני UD (Unclassified Detonable)</option>
-                    <option value="organic_peroxide_I">פרוקסיד אורגני Class I</option>
-                    <option value="organic_peroxide_II">פרוקסיד אורגני Class II</option>
-                    <option value="organic_peroxide_III">פרוקסיד אורגני Class III</option>
-                    <option value="organic_peroxide_IV">פרוקסיד אורגני Class IV</option>
-                    <option value="organic_peroxide_V">פרוקסיד אורגני Class V</option>
+                  <optgroup label="Physical Hazard – פרוקסידים אורגניים (NFPA 400-2025)">
+                    <option value="organic_peroxide_I">פרוקסיד אורגני Class I (16 lb)</option>
+                    <option value="organic_peroxide_IIA">פרוקסיד אורגני Class IIA (100 lb) ✦חדש</option>
+                    <option value="organic_peroxide_IIB">פרוקסיד אורגני Class IIB (400 lb) ✦חדש</option>
+                    <option value="organic_peroxide_III">פרוקסיד אורגני Class III (840 lb)</option>
+                    <option value="organic_peroxide_IV">פרוקסיד אורגני Class IV (ללא הגבלה)</option>
+                    <option value="organic_peroxide_V">פרוקסיד אורגני Class V (ללא הגבלה)</option>
                   </optgroup>
                   <optgroup label="Physical Hazard – פירופוריים ולא יציבים">
                     <option value="pyrophoric">פירופורי (מוצק/נוזל)</option>
@@ -889,6 +900,9 @@
           <!-- סיכום צבירה -->
           <div id="maqAggregateInfo" style="margin-top:16px;"></div>
 
+          <!-- הערות שוליים חובה -->
+          <div id="maqFootnoteWarnings" style="margin-top:16px;"></div>
+
           <!-- Protection Level & H-Occupancy -->
           <div id="maqProtectionInfo" style="margin-top:16px;"></div>
 
@@ -896,10 +910,11 @@
           <div id="maqAreasWarning" style="margin-top:16px;"></div>
 
           <div class="legend" style="margin-top:16px">
-            ⚠️ ערכי MAQ מתייחסים ל<strong>אזור בקרה אחד</strong> (Control Area) לפי NFPA 400 (2019) Section 5.2.
+            ⚠️ ערכי MAQ מתייחסים ל<strong>אזור בקרה אחד</strong> (Control Area) לפי <strong>NFPA 400 (2025)</strong> Table 5.2.1.1.3.
             <br>יחידות: ק"ג (מוצקים), ליטר (נוזלים), Nm³ (גזים). המרה: 1 gal = 3.785 L | 1 lb = 0.454 kg | 1 scf = 0.0283 Nm³
-            <br>הכמות המצטברת בשימוש+אחסון לא תעלה על כמות האחסון (NFPA 400 footnote a).
-            <br><strong>יש לוודא מול AHJ מקומי וגרסה עדכנית של התקן.</strong>
+            <br>§5.2.1.1.2: הכמות <strong>המצטברת</strong> (אחסון + שימוש) מכל הרשומות באותה קטגוריה לא תעלה על MAQ האחסון.
+            <br>שינויים עיקריים ב-2025 לעומת גרסאות קודמות: פרוקסידים אורגניים Class II → IIA/IIB; Class III עלה ל-840 lb; Class I עלה ל-16 lb.
+            <br><strong>יש לוודא מול AHJ מקומי ומהדורה עדכנית של התקן.</strong>
           </div>
         </div>
       </div>
@@ -1092,7 +1107,6 @@ function clearAll(){
   if(!confirm('לנקות את כל הנתונים?')) return;
   document.getElementById('matBody').innerHTML = '';
   document.getElementById('roomArea').value = '';
-  document.getElementById('roomName').value = '';
   _id = 0;
   calculate();
   addRow(); addRow(); addRow();
@@ -1436,8 +1450,10 @@ document.addEventListener('click', e=>{
 });
 
 /* ═══════════════════════════════════════════════
-   MAQ CALCULATOR – based on NFPA 400 (2019)
+   MAQ CALCULATOR – based on NFPA 400 (2025)
    Table 5.2.1.1.3 & Table 5.2.2.1
+   עודכן ל-2025: ערכי פרוקסידים אורגניים עודכנו,
+   נוספו IIA/IIB, תוקנה בדיקת צבירה, נוספו הערות שוליים
    ═══════════════════════════════════════════════ */
 
 /* ── NFPA 400 Table 5.2.1.1.3 – MAQ per Control Area ──
@@ -1448,67 +1464,86 @@ document.addEventListener('click', e=>{
 ──────────────────────────────────────────────────────── */
 const MAQ_TABLE = {
   // ─── Physical Hazard Materials ── METRIC: kg, L, Nm³ ───
-  'combustible_liquid_II':   {he:'נוזל בעיר Class II',    stor_s:null,  stor_l:454,  stor_g:null, uc_s:null, uc_l:null, uc_g:null, uo_s:null, uo_l:null, fn_s:'cd', fn_u:'', protLevel:3, unit:'L', note:'use: See NFPA 30'},
+  'combustible_liquid_II':   {he:'נוזל בעיר Class II',    stor_s:null,  stor_l:454,  stor_g:null, uc_s:null, uc_l:null, uc_g:null, uo_s:null, uo_l:null, fn_s:'ab', fn_u:'', protLevel:3, unit:'L', note:'use: See NFPA 30'},
   // ─── Physical Hazard – Combustible/Flammable Liquids (L) ───
   // 1 gal = 3.785 L
-  'combustible_liquid_IIIA': {he:'נוזל בעיר Class IIIA',  stor_s:null,  stor_l:1249, stor_g:null, uc_s:null, uc_l:null, uc_g:null, uo_s:null, uo_l:null, fn_s:'cd', fn_u:'', protLevel:3, unit:'L', note:'use: See NFPA 30'},
-  'combustible_liquid_IIIB': {he:'נוזל בעיר Class IIIB',  stor_s:null,  stor_l:49962,stor_g:null, uc_s:null, uc_l:null, uc_g:null, uo_s:null, uo_l:null, fn_s:'cd', fn_u:'', protLevel:null, unit:'L', note:'use: See NFPA 30; sprinkler=NL per NFPA 30 Ch.16'},
-  'flammable_liquid_IA':     {he:'נוזל דליק Class IA',    stor_s:null,  stor_l:114,  stor_g:null, uc_s:null, uc_l:null, uc_g:null, uo_s:null, uo_l:null, fn_s:'cd', fn_u:'', protLevel:3, unit:'L', note:'use: See NFPA 30'},
-  'flammable_liquid_IB_IC':  {he:'נוזל דליק Class IB/IC', stor_s:null,  stor_l:454,  stor_g:null, uc_s:null, uc_l:null, uc_g:null, uo_s:null, uo_l:null, fn_s:'cd', fn_u:'', protLevel:3, unit:'L', note:'use: See NFPA 30'},
-  'flammable_liquid_combo':  {he:'נוזל דליק שילוב IA+IB+IC',stor_s:null,stor_l:454,  stor_g:null, uc_s:null, uc_l:null, uc_g:null, uo_s:null, uo_l:null, fn_s:'cd', fn_u:'', protLevel:3, unit:'L', note:'max 114L IA'},
+  'combustible_liquid_IIIA': {he:'נוזל בעיר Class IIIA',  stor_s:null,  stor_l:1249, stor_g:null, uc_s:null, uc_l:null, uc_g:null, uo_s:null, uo_l:null, fn_s:'ab', fn_u:'', protLevel:3, unit:'L', note:'use: See NFPA 30'},
+  'combustible_liquid_IIIB': {he:'נוזל בעיר Class IIIB',  stor_s:null,  stor_l:49962,stor_g:null, uc_s:null, uc_l:null, uc_g:null, uo_s:null, uo_l:null, fn_s:'ab', fn_u:'', protLevel:null, unit:'L', note:'use: See NFPA 30; sprinkler=NL per NFPA 30 Ch.16'},
+  'flammable_liquid_IA':     {he:'נוזל דליק Class IA',    stor_s:null,  stor_l:114,  stor_g:null, uc_s:null, uc_l:null, uc_g:null, uo_s:null, uo_l:null, fn_s:'ab', fn_u:'', protLevel:3, unit:'L', note:'use: See NFPA 30'},
+  'flammable_liquid_IB_IC':  {he:'נוזל דליק Class IB/IC', stor_s:null,  stor_l:454,  stor_g:null, uc_s:null, uc_l:null, uc_g:null, uo_s:null, uo_l:null, fn_s:'ab', fn_u:'', protLevel:3, unit:'L', note:'use: See NFPA 30'},
+  'flammable_liquid_combo':  {he:'נוזל דליק שילוב IA+IB+IC',stor_s:null,stor_l:454,  stor_g:null, uc_s:null, uc_l:null, uc_g:null, uo_s:null, uo_l:null, fn_s:'ab', fn_u:'', protLevel:3, unit:'L', note:'max 114L IA',
+    fn_conditions:[{type:'individual_limits', text:'⚠️ גבול השילוב הוא 454 ליטר, אך כל סוג בנפרד (IA, IB, IC) גם חייב לעמוד ב-MAQ שלו בנפרד: IA≤114L, IB/IC≤454L [footnote k, NFPA 400-2025]'}]},
   // ─── Physical Hazard – Flammable Solid (kg) ───
   // 1 lb = 0.454 kg
-  'flammable_solid':         {he:'מוצק דליק',             stor_s:56.7,  stor_l:null, stor_g:null, uc_s:56.7, uc_l:null, uc_g:null, uo_s:11.3, uo_l:null, fn_s:'cd', fn_u:'cd', protLevel:3, unit:'kg'},
+  'flammable_solid':         {he:'מוצק דליק',             stor_s:56.7,  stor_l:null, stor_g:null, uc_s:56.7, uc_l:null, uc_g:null, uo_s:11.3, uo_l:null, fn_s:'ab', fn_u:'ab', protLevel:3, unit:'kg'},
   // ─── Physical Hazard – Gases (Nm³) ───
   // 1 scf = 0.0283 Nm³; lbs for liquefied = 0.454 kg
-  'flammable_gas':           {he:'גז דליק (Gaseous)',     stor_s:null,  stor_l:null, stor_g:28.3, uc_s:null, uc_l:null, uc_g:28.3, uo_s:null, uo_l:null, fn_s:'cd', fn_u:'cd', protLevel:2, unit:'Nm3'},
-  'flammable_gas_liq':       {he:'גז דליק (Liquefied)',   stor_s:null,  stor_l:null, stor_g:68.1, uc_s:null, uc_l:null, uc_g:68.1, uo_s:null, uo_l:null, fn_s:'cd', fn_u:'cd', protLevel:2, unit:'kg', note:'150 lb = 68.1 kg'},
-  'flammable_gas_lp':        {he:'גז נוזלי LP-Gas',      stor_s:null,  stor_l:null, stor_g:136,  uc_s:null, uc_l:null, uc_g:136,  uo_s:null, uo_l:null, fn_s:'',   fn_u:'',   protLevel:2, unit:'kg', note:'300 lb = 136 kg; See NFPA 58'},
+  'flammable_gas':           {he:'גז דליק (Gaseous)',     stor_s:null,  stor_l:null, stor_g:28.3, uc_s:null, uc_l:null, uc_g:28.3, uo_s:null, uo_l:null, fn_s:'ab', fn_u:'ab', protLevel:2, unit:'Nm3'},
+  'flammable_gas_liq':       {he:'גז דליק (Liquefied)',   stor_s:null,  stor_l:null, stor_g:68.1, uc_s:null, uc_l:null, uc_g:68.1, uo_s:null, uo_l:null, fn_s:'ab', fn_u:'ab', protLevel:2, unit:'kg', note:'150 lb = 68.1 kg'},
+  'flammable_gas_lp':        {he:'גז נוזלי LP-Gas',      stor_s:null,  stor_l:null, stor_g:136,  uc_s:null, uc_l:null, uc_g:136,  uo_s:null, uo_l:null, fn_s:'',   fn_u:'',   protLevel:2, unit:'kg', note:'300 lb = 136 kg; See NFPA 58',
+    fn_conditions:[{type:'outside_scope', text:'⚠️ LP-Gas אינו בתחום NFPA 400 – נדרשת עמידה ב-NFPA 58 (Liquefied Petroleum Gas Code) [footnote j]'}]},
   // ─── Physical Hazard – Cryogenics (L) ───
-  'cryogenic_flammable':     {he:'קריוגני דליק',          stor_s:null,  stor_l:170,  stor_g:null, uc_s:null, uc_l:170,  uc_g:null, uo_s:null, uo_l:170,  fn_s:'cd', fn_u:'cd', protLevel:2, unit:'L'},
-  'cryogenic_oxidizing':     {he:'קריוגני מחמצן',         stor_s:null,  stor_l:170,  stor_g:null, uc_s:null, uc_l:170,  uc_g:null, uo_s:null, uo_l:170,  fn_s:'cd', fn_u:'cd', protLevel:3, unit:'L'},
+  'cryogenic_flammable':     {he:'קריוגני דליק',          stor_s:null,  stor_l:170,  stor_g:null, uc_s:null, uc_l:170,  uc_g:null, uo_s:null, uo_l:170,  fn_s:'ab', fn_u:'ab', protLevel:2, unit:'L',
+    fn_conditions:[
+      {type:'requires_enclosure_if_no_sprinkler', text:'⚠️ ללא ספרינקלרים – אסור כלל אלא אם כן באחסון/שימוש בחדרי גזים, ארונות מאושרים, או מתקני פליטה [footnote e]'},
+      {type:'requires_vent', text:'⚠️ נדרשים שסתומי לחץ עם פליטה ישירה לחוץ או לאוורור [footnote f]'}
+    ]},
+  'cryogenic_oxidizing':     {he:'קריוגני מחמצן',         stor_s:null,  stor_l:170,  stor_g:null, uc_s:null, uc_l:170,  uc_g:null, uo_s:null, uo_l:170,  fn_s:'ab', fn_u:'ab', protLevel:3, unit:'L'},
   'cryogenic_inert':         {he:'קריוגני אינרטי',        stor_s:null,  stor_l:'NL', stor_g:null, uc_s:null, uc_l:'NL', uc_g:null, uo_s:null, uo_l:'NL', fn_s:'',   fn_u:'',   protLevel:null, unit:'L'},
   // ─── Physical Hazard – Oxidizers (kg/L) ───
-  'oxidizer_4':              {he:'מחמצן Class 4',          stor_s:0.45,  stor_l:0.45, stor_g:null, uc_s:0.11, uc_l:0.11, uc_g:null, uo_s:0.11, uo_l:0.11, fn_s:'ci', fn_u:'i', protLevel:1, unit:'kg'},
-  'oxidizer_3':              {he:'מחמצן Class 3',          stor_s:4.5,   stor_l:4.5,  stor_g:null, uc_s:0.9,  uc_l:0.9,  uc_g:null, uo_s:0.9,  uo_l:0.9,  fn_s:'cd', fn_u:'d', protLevel:2, unit:'kg'},
-  'oxidizer_2':              {he:'מחמצן Class 2',          stor_s:113,   stor_l:113,  stor_g:null, uc_s:113,  uc_l:113,  uc_g:null, uo_s:22.7, uo_l:22.7, fn_s:'cd', fn_u:'d', protLevel:3, unit:'kg'},
-  'oxidizer_1':              {he:'מחמצן Class 1',          stor_s:1814,  stor_l:1814, stor_g:null, uc_s:1814, uc_l:1814, uc_g:null, uo_s:454,  uo_l:454,  fn_s:'ce', fn_u:'e', protLevel:null, unit:'kg'},
+  'oxidizer_4':              {he:'מחמצן Class 4',          stor_s:0.45,  stor_l:0.45, stor_g:null, uc_s:0.11, uc_l:0.11, uc_g:null, uo_s:0.11, uo_l:0.11, fn_s:'', fn_u:'', protLevel:1, unit:'kg',
+    fn_conditions:[{type:'requires_sprinkler', text:'🚫 מחמצן Class 4 מותר רק בבניין מרוסס לחלוטין (NFPA 13) – אסור ללא ספרינקלרים [footnote l]'}]},
+  'oxidizer_3':              {he:'מחמצן Class 3',          stor_s:4.5,   stor_l:4.5,  stor_g:null, uc_s:0.9,  uc_l:0.9,  uc_g:null, uo_s:0.9,  uo_l:0.9,  fn_s:'ab', fn_u:'b', protLevel:2, unit:'kg',
+    fn_conditions:[{type:'maintenance_note', text:'ℹ️ חריג לתחזוקה: עד 99 ק"ג מוצק / 83 ליטר נוזל Class 3 מחמצן מותרים לצרכי תחזוקה/הפעלה/תברואה בלבד, בהגבלת מיכלים מאושרים [footnote m]'}]},
+  'oxidizer_2':              {he:'מחמצן Class 2',          stor_s:113,   stor_l:113,  stor_g:null, uc_s:113,  uc_l:113,  uc_g:null, uo_s:22.7, uo_l:22.7, fn_s:'ab', fn_u:'b', protLevel:3, unit:'kg'},
+  'oxidizer_1':              {he:'מחמצן Class 1',          stor_s:1814,  stor_l:1814, stor_g:null, uc_s:1814, uc_l:1814, uc_g:null, uo_s:454,  uo_l:454,  fn_s:'ab', fn_u:'b', protLevel:null, unit:'kg'},
   // ─── Physical Hazard – Oxidizing Gases (Nm³/kg) ───
-  'oxidizing_gas':           {he:'גז מחמצן (Gaseous)',     stor_s:null,  stor_l:null, stor_g:42.5, uc_s:null, uc_l:null, uc_g:42.5, uo_s:null, uo_l:null, fn_s:'cd', fn_u:'cd', protLevel:3, unit:'Nm3'},
-  'oxidizing_gas_liq':       {he:'גז מחמצן (Liquefied)',   stor_s:null,  stor_l:null, stor_g:68.1, uc_s:null, uc_l:null, uc_g:68.1, uo_s:null, uo_l:null, fn_s:'cd', fn_u:'cd', protLevel:3, unit:'kg'},
-  // ─── Physical Hazard – Organic Peroxides (kg) ───
-  'organic_peroxide_UD':     {he:'פרוקסיד אורגני UD',     stor_s:0.45,  stor_l:0.45, stor_g:null, uc_s:0.11, uc_l:0.11, uc_g:null, uo_s:0.11, uo_l:0.11, fn_s:'ci', fn_u:'i', protLevel:1, unit:'kg'},
-  'organic_peroxide_I':      {he:'פרוקסיד אורגני Class I', stor_s:2.27,  stor_l:2.27, stor_g:null, uc_s:0.45, uc_l:0.45, uc_g:null, uo_s:0.45, uo_l:0.45, fn_s:'cd', fn_u:'cd',protLevel:1, unit:'kg'},
-  'organic_peroxide_II':     {he:'פרוקסיד אורגני Class II',stor_s:22.7,  stor_l:22.7, stor_g:null, uc_s:22.7, uc_l:22.7, uc_g:null, uo_s:4.5,  uo_l:4.5,  fn_s:'cd', fn_u:'d', protLevel:2, unit:'kg'},
-  'organic_peroxide_III':    {he:'פרוקסיד אורגני Class III',stor_s:56.7,  stor_l:56.7, stor_g:null, uc_s:56.7, uc_l:56.7, uc_g:null, uo_s:11.3, uo_l:11.3, fn_s:'cd', fn_u:'d', protLevel:3, unit:'kg'},
-  'organic_peroxide_IV':     {he:'פרוקסיד אורגני Class IV', stor_s:'NL', stor_l:'NL', stor_g:null, uc_s:'NL', uc_l:'NL', uc_g:null, uo_s:'NL', uo_l:'NL', fn_s:'',   fn_u:'',   protLevel:null, unit:'kg'},
-  'organic_peroxide_V':      {he:'פרוקסיד אורגני Class V',  stor_s:'NL', stor_l:'NL', stor_g:null, uc_s:'NL', uc_l:'NL', uc_g:null, uo_s:'NL', uo_l:'NL', fn_s:'',   fn_u:'',   protLevel:null, unit:'kg'},
+  'oxidizing_gas':           {he:'גז מחמצן (Gaseous)',     stor_s:null,  stor_l:null, stor_g:42.5, uc_s:null, uc_l:null, uc_g:42.5, uo_s:null, uo_l:null, fn_s:'ab', fn_u:'ab', protLevel:3, unit:'Nm3'},
+  'oxidizing_gas_liq':       {he:'גז מחמצן (Liquefied)',   stor_s:null,  stor_l:null, stor_g:68.1, uc_s:null, uc_l:null, uc_g:68.1, uo_s:null, uo_l:null, fn_s:'ab', fn_u:'ab', protLevel:3, unit:'kg'},
+  // ─── Physical Hazard – Organic Peroxides (kg) – NFPA 400-2025 Table 5.2.1.1.3 ───
+  // שינויים מ-2019: הוסרה קטגוריית UD; Class I עלה מ-5 ל-16 ליב'; Class II פוצל ל-IIA/IIB;
+  // Class III עלה מ-125 ל-840 ליב'; רמת ההגנה של Class I שונתה מ-1 ל-2
+  // 1 lb = 0.454 kg
+  'organic_peroxide_I':      {he:'פרוקסיד אורגני Class I',   stor_s:7.26,  stor_l:7.26,  stor_g:null, uc_s:3.63, uc_l:3.63, uc_g:null, uo_s:3.63, uo_l:3.63, fn_s:'ab', fn_u:'ab', protLevel:2, unit:'kg'},
+  // Class IIA: 100 lb storage; Class IIB: 400 lb storage (פיצול חדש ב-NFPA 400-2025)
+  'organic_peroxide_IIA':    {he:'פרוקסיד אורגני Class IIA', stor_s:45.4,  stor_l:45.4,  stor_g:null, uc_s:45.4, uc_l:45.4, uc_g:null, uo_s:22.7, uo_l:22.7, fn_s:'ab', fn_u:'b',  protLevel:3, unit:'kg'},
+  'organic_peroxide_IIB':    {he:'פרוקסיד אורגני Class IIB', stor_s:181.4, stor_l:181.4, stor_g:null, uc_s:181.4,uc_l:181.4,uc_g:null, uo_s:90.7, uo_l:90.7, fn_s:'ab', fn_u:'b',  protLevel:3, unit:'kg'},
+  // Class III: 840 lb (עלה מ-125 ליב' בגרסאות קודמות)
+  'organic_peroxide_III':    {he:'פרוקסיד אורגני Class III', stor_s:381.2, stor_l:381.2, stor_g:null, uc_s:381.2,uc_l:381.2,uc_g:null, uo_s:381.2,uo_l:381.2, fn_s:'ab', fn_u:'b',  protLevel:3, unit:'kg'},
+  'organic_peroxide_IV':     {he:'פרוקסיד אורגני Class IV',  stor_s:'NL',  stor_l:'NL',  stor_g:null, uc_s:'NL', uc_l:'NL', uc_g:null, uo_s:'NL', uo_l:'NL', fn_s:'',   fn_u:'',   protLevel:null, unit:'kg'},
+  'organic_peroxide_V':      {he:'פרוקסיד אורגני Class V',   stor_s:'NL',  stor_l:'NL',  stor_g:null, uc_s:'NL', uc_l:'NL', uc_g:null, uo_s:'NL', uo_l:'NL', fn_s:'',   fn_u:'',   protLevel:null, unit:'kg'},
   // ─── Physical Hazard – Pyrophoric (kg/Nm³) ───
-  'pyrophoric':              {he:'פירופורי (מוצק/נוזל)',   stor_s:1.8,   stor_l:1.8,  stor_g:null, uc_s:0.45, uc_l:0.45, uc_g:null, uo_s:'NP', uo_l:'NP', fn_s:'ci', fn_u:'i', protLevel:2, unit:'kg'},
-  'pyrophoric_gas':          {he:'גז פירופורי (Gaseous)',   stor_s:null,  stor_l:null, stor_g:1.42, uc_s:null, uc_l:null, uc_g:1.42, uo_s:null, uo_l:null, fn_s:'ci', fn_u:'ci', protLevel:2, unit:'Nm3'},
-  'pyrophoric_gas_liq':      {he:'גז פירופורי (Liquefied)', stor_s:null,  stor_l:null, stor_g:1.8,  uc_s:null, uc_l:null, uc_g:1.8,  uo_s:null, uo_l:null, fn_s:'ci', fn_u:'ci', protLevel:2, unit:'kg'},
+  'pyrophoric':              {he:'פירופורי (מוצק/נוזל)',   stor_s:1.8,   stor_l:1.8,  stor_g:null, uc_s:0.45, uc_l:0.45, uc_g:null, uo_s:'NP', uo_l:'NP', fn_s:'', fn_u:'', protLevel:2, unit:'kg',
+    fn_conditions:[{type:'requires_sprinkler', text:'🚫 חומר פירופורי מותר רק בבניין מרוסס לחלוטין (NFPA 13) – אסור ללא ספרינקלרים [footnote l]'}]},
+  'pyrophoric_gas':          {he:'גז פירופורי (Gaseous)',   stor_s:null,  stor_l:null, stor_g:1.42, uc_s:null, uc_l:null, uc_g:1.42, uo_s:null, uo_l:null, fn_s:'', fn_u:'', protLevel:2, unit:'Nm3',
+    fn_conditions:[{type:'requires_sprinkler', text:'🚫 גז פירופורי מותר רק בבניין מרוסס לחלוטין (NFPA 13) – אסור ללא ספרינקלרים [footnote l]'}]},
+  'pyrophoric_gas_liq':      {he:'גז פירופורי (Liquefied)', stor_s:null,  stor_l:null, stor_g:1.8,  uc_s:null, uc_l:null, uc_g:1.8,  uo_s:null, uo_l:null, fn_s:'', fn_u:'', protLevel:2, unit:'kg',
+    fn_conditions:[{type:'requires_sprinkler', text:'🚫 גז פירופורי נוזל מותר רק בבניין מרוסס לחלוטין (NFPA 13) – אסור ללא ספרינקלרים [footnote l]'}]},
   // ─── Physical Hazard – Unstable Reactive (kg) ───
-  'unstable_4':              {he:'לא יציב (Reactive) Class 4',stor_s:0.45,stor_l:0.45, stor_g:null, uc_s:0.11, uc_l:0.11, uc_g:null, uo_s:0.11, uo_l:0.11, fn_s:'ci', fn_u:'i', protLevel:1, unit:'kg'},
-  'unstable_3':              {he:'לא יציב (Reactive) Class 3',stor_s:2.27,stor_l:2.27, stor_g:null, uc_s:0.45, uc_l:0.45, uc_g:null, uo_s:0.45, uo_l:0.45, fn_s:'cd', fn_u:'d', protLevel:1, unit:'kg'},
-  'unstable_2':              {he:'לא יציב (Reactive) Class 2',stor_s:22.7,stor_l:22.7, stor_g:null, uc_s:22.7, uc_l:22.7, uc_g:null, uo_s:4.5,  uo_l:4.5,  fn_s:'cd', fn_u:'d', protLevel:2, unit:'kg'},
+  'unstable_4':              {he:'לא יציב (Reactive) Class 4',stor_s:0.45,stor_l:0.45, stor_g:null, uc_s:0.11, uc_l:0.11, uc_g:null, uo_s:0.11, uo_l:0.11, fn_s:'', fn_u:'', protLevel:1, unit:'kg',
+    fn_conditions:[{type:'requires_sprinkler', text:'🚫 לא יציב Class 4 מותר רק בבניין מרוסס לחלוטין (NFPA 13) – אסור ללא ספרינקלרים [footnote l]'}]},
+  'unstable_3':              {he:'לא יציב (Reactive) Class 3',stor_s:2.27,stor_l:2.27, stor_g:null, uc_s:0.45, uc_l:0.45, uc_g:null, uo_s:0.45, uo_l:0.45, fn_s:'ab', fn_u:'b', protLevel:1, unit:'kg'},
+  'unstable_2':              {he:'לא יציב (Reactive) Class 2',stor_s:22.7,stor_l:22.7, stor_g:null, uc_s:22.7, uc_l:22.7, uc_g:null, uo_s:4.5,  uo_l:4.5,  fn_s:'ab', fn_u:'b', protLevel:2, unit:'kg'},
   'unstable_1':              {he:'לא יציב (Reactive) Class 1',stor_s:'NL',stor_l:'NL', stor_g:null, uc_s:'NL', uc_l:'NL', uc_g:null, uo_s:'NL', uo_l:'NL', fn_s:'',   fn_u:'',   protLevel:null, unit:'kg'},
   // ─── Physical Hazard – Water Reactive (kg) ───
-  'water_reactive_3':        {he:'רגיש למים Class 3',      stor_s:2.27,  stor_l:2.27, stor_g:null, uc_s:2.27, uc_l:2.27, uc_g:null, uo_s:0.45, uo_l:0.45, fn_s:'cd', fn_u:'d', protLevel:2, unit:'kg'},
-  'water_reactive_2':        {he:'רגיש למים Class 2',      stor_s:22.7,  stor_l:22.7, stor_g:null, uc_s:22.7, uc_l:22.7, uc_g:null, uo_s:4.5,  uo_l:4.5,  fn_s:'cd', fn_u:'d', protLevel:3, unit:'kg'},
+  'water_reactive_3':        {he:'רגיש למים Class 3',      stor_s:2.27,  stor_l:2.27, stor_g:null, uc_s:2.27, uc_l:2.27, uc_g:null, uo_s:0.45, uo_l:0.45, fn_s:'ab', fn_u:'b', protLevel:2, unit:'kg'},
+  'water_reactive_2':        {he:'רגיש למים Class 2',      stor_s:22.7,  stor_l:22.7, stor_g:null, uc_s:22.7, uc_l:22.7, uc_g:null, uo_s:4.5,  uo_l:4.5,  fn_s:'ab', fn_u:'b', protLevel:3, unit:'kg'},
   'water_reactive_1':        {he:'רגיש למים Class 1',      stor_s:'NL',  stor_l:'NL', stor_g:null, uc_s:'NL', uc_l:'NL', uc_g:null, uo_s:'NL', uo_l:'NL', fn_s:'',   fn_u:'',   protLevel:null, unit:'kg'},
   // ─── Health Hazard Materials ───
-  'corrosive':               {he:'קורוזיבי (מוצק/נוזל)',  stor_s:2268,  stor_l:1893, stor_g:null, uc_s:2268, uc_l:1893, uc_g:null, uo_s:454,  uo_l:379,  fn_s:'cd', fn_u:'d', protLevel:4, unit:'kg/L'},
-  'corrosive_gas':           {he:'גז קורוזיבי (Gaseous)',  stor_s:null,  stor_l:null, stor_g:22.9, uc_s:null, uc_l:null, uc_g:22.9, uo_s:null, uo_l:null, fn_s:'cdg',fn_u:'cdg',protLevel:4, unit:'Nm3'},
-  'corrosive_gas_liq':       {he:'גז קורוזיבי (Liquefied)',stor_s:null,  stor_l:null, stor_g:68.1, uc_s:null, uc_l:null, uc_g:68.1, uo_s:null, uo_l:null, fn_s:'cd', fn_u:'cd', protLevel:4, unit:'kg'},
-  'highly_toxic':            {he:'רעיל מאוד (מוצק/נוזל)', stor_s:4.5,   stor_l:4.5,  stor_g:null, uc_s:4.5,  uc_l:4.5,  uc_g:null, uo_s:1.36, uo_l:1.36, fn_s:'cd', fn_u:'d', protLevel:4, unit:'kg'},
-  'highly_toxic_gas':        {he:'גז רעיל מאוד (Gaseous)', stor_s:null,  stor_l:null, stor_g:0.57, uc_s:null, uc_l:null, uc_g:0.57, uo_s:null, uo_l:null, fn_s:'dg', fn_u:'dg', protLevel:4, unit:'Nm3'},
-  'highly_toxic_gas_liq':    {he:'גז רעיל מאוד (Liquefied)',stor_s:null, stor_l:null, stor_g:1.8,  uc_s:null, uc_l:null, uc_g:1.8,  uo_s:null, uo_l:null, fn_s:'dg', fn_u:'dg', protLevel:4, unit:'kg'},
-  'toxic':                   {he:'רעיל (מוצק/נוזל)',      stor_s:227,   stor_l:227,  stor_g:null, uc_s:227,  uc_l:227,  uc_g:null, uo_s:56.7, uo_l:56.7, fn_s:'cd', fn_u:'d', protLevel:4, unit:'kg'},
-  'toxic_gas':               {he:'גז רעיל (Gaseous)',      stor_s:null,  stor_l:null, stor_g:22.9, uc_s:null, uc_l:null, uc_g:22.9, uo_s:null, uo_l:null, fn_s:'cd', fn_u:'cd', protLevel:4, unit:'Nm3'},
-  'toxic_gas_liq':           {he:'גז רעיל (Liquefied)',    stor_s:null,  stor_l:null, stor_g:68.1, uc_s:null, uc_l:null, uc_g:68.1, uo_s:null, uo_l:null, fn_s:'cd', fn_u:'cd', protLevel:4, unit:'kg'},
+  'corrosive':               {he:'קורוזיבי (מוצק/נוזל)',  stor_s:2268,  stor_l:1893, stor_g:null, uc_s:2268, uc_l:1893, uc_g:null, uo_s:454,  uo_l:379,  fn_s:'ab', fn_u:'b', protLevel:4, unit:'kg/L'},
+  'corrosive_gas':           {he:'גז קורוזיבי (Gaseous)',  stor_s:null,  stor_l:null, stor_g:22.9, uc_s:null, uc_l:null, uc_g:22.9, uo_s:null, uo_l:null, fn_s:'abg',fn_u:'ab',protLevel:4, unit:'Nm3'},
+  'corrosive_gas_liq':       {he:'גז קורוזיבי (Liquefied)',stor_s:null,  stor_l:null, stor_g:68.1, uc_s:null, uc_l:null, uc_g:68.1, uo_s:null, uo_l:null, fn_s:'ab', fn_u:'ab', protLevel:4, unit:'kg'},
+  'highly_toxic':            {he:'רעיל מאוד (מוצק/נוזל)', stor_s:4.5,   stor_l:4.5,  stor_g:null, uc_s:4.5,  uc_l:4.5,  uc_g:null, uo_s:1.36, uo_l:1.36, fn_s:'ab', fn_u:'b', protLevel:4, unit:'kg'},
+  'highly_toxic_gas':        {he:'גז רעיל מאוד (Gaseous)', stor_s:null,  stor_l:null, stor_g:0.57, uc_s:null, uc_l:null, uc_g:0.57, uo_s:null, uo_l:null, fn_s:'b', fn_u:'b', protLevel:4, unit:'Nm3',
+    fn_conditions:[{type:'requires_enclosure', text:'🚫 גז רעיל מאוד מותר רק באחסון/שימוש בחדרי גזים, ארונות גז מאושרים, או מתקני פליטה – תמיד, ללא קשר לספרינקלרים [footnote o]'}]},
+  'highly_toxic_gas_liq':    {he:'גז רעיל מאוד (Liquefied)',stor_s:null, stor_l:null, stor_g:1.8,  uc_s:null, uc_l:null, uc_g:1.8,  uo_s:null, uo_l:null, fn_s:'b', fn_u:'b', protLevel:4, unit:'kg',
+    fn_conditions:[{type:'requires_enclosure', text:'🚫 גז רעיל מאוד (נוזל) מותר רק באחסון/שימוש בחדרי גזים, ארונות גז מאושרים, או מתקני פליטה – תמיד, ללא קשר לספרינקלרים [footnote o]'}]},
+  'toxic':                   {he:'רעיל (מוצק/נוזל)',      stor_s:227,   stor_l:227,  stor_g:null, uc_s:227,  uc_l:227,  uc_g:null, uo_s:56.7, uo_l:56.7, fn_s:'ab', fn_u:'b', protLevel:4, unit:'kg'},
+  'toxic_gas':               {he:'גז רעיל (Gaseous)',      stor_s:null,  stor_l:null, stor_g:22.9, uc_s:null, uc_l:null, uc_g:22.9, uo_s:null, uo_l:null, fn_s:'ab', fn_u:'ab', protLevel:4, unit:'Nm3'},
+  'toxic_gas_liq':           {he:'גז רעיל (Liquefied)',    stor_s:null,  stor_l:null, stor_g:68.1, uc_s:null, uc_l:null, uc_g:68.1, uo_s:null, uo_l:null, fn_s:'ab', fn_u:'ab', protLevel:4, unit:'kg'},
 };
 
-/* ── NFPA 400 Table 5.2.2.1 / NFPA 5000 Table 34.2.5.1.1 – Control Areas ── */
+/* ── NFPA 400-2025 Table 5.2.2.1 – Control Areas per Floor ── */
 const FLOOR_FACTORS = {
   '1':  {pct:100, areas:4, fire_hr:1, label:'קומת קרקע'},
   '2':  {pct:75,  areas:3, fire_hr:1, label:'קומה 2'},
@@ -1520,7 +1555,7 @@ const FLOOR_FACTORS = {
   '-2': {pct:50,  areas:2, fire_hr:1, label:'מרתף 2'},
 };
 
-/* ── H-Occupancy Level Definitions (NFPA 5000 §6.3.2.4) ── */
+/* ── High Hazard Protection Level Definitions (NFPA 400-2025 §4.2.1.2) ── */
 const H_LEVELS = {
   1: {he:'High Hazard Level 1', desc:'סכנת פיצוץ (Detonation)', color:'#b71c1c', bg:'#ffebee'},
   2: {he:'High Hazard Level 2', desc:'סכנת דפלגרציה (Deflagration)', color:'#e65100', bg:'#fff3e0'},
@@ -1649,26 +1684,6 @@ function maqGetBaseValue(cat, useType, unit){
   return {val, fn, he: row.he, protLevel: row.protLevel, rowUnit: row.unit};
 }
 
-/* ── Calculate protection multiplier ── */
-function maqProtMult(fn, sprinkler, cabinet){
-  if(!fn) fn = '';
-  const hasC = fn.includes('c');
-  const hasD = fn.includes('d');
-  let mult = 1;
-  let desc = 'ללא הגנות נוספות';
-
-  if(cabinet && hasC && sprinkler && hasD){
-    mult = 4; desc = 'ארונות (c) + מתזים (d) = ×4';
-  } else if(cabinet && hasC){
-    mult = 2; desc = 'ארונות מאושרים (footnote c)';
-  } else if(sprinkler && hasD){
-    mult = 2; desc = 'מתזים NFPA 13 (footnote d)';
-  } else if((cabinet && !hasC) || (sprinkler && !hasD)){
-    desc = 'הגנות קיימות אך footnote לא חל על קטגוריה זו';
-  }
-  return {mult, desc};
-}
-
 /* ── Recalc triggered by floor/sprinkler/cabinet change ── */
 function maqRecalcAll(){
   maqUpdateFloorInfo();
@@ -1726,6 +1741,27 @@ function maqCalcAll(){
       if(pct > 100) { status = 'exceed'; allPass = false; }
     }
 
+    // Check mandatory conditions (fn_conditions) – NFPA 400-2025
+    // Overrides individual MAQ status if stricter restriction applies
+    const rowDef = MAQ_TABLE[m.cat];
+    if(rowDef && rowDef.fn_conditions){
+      for(const fc of rowDef.fn_conditions){
+        if(fc.type === 'requires_sprinkler' && !sprinkler){
+          // NOT PERMITTED without full sprinkler system – overrides any other status
+          status = 'np_sprinkler'; allPass = false;
+        }
+        if(fc.type === 'requires_enclosure'){
+          // Always requires gas room / approved cabinet – mandatory regardless of sprinkler
+          if(status === 'ok' || status === 'nl') status = 'np_enclosure';
+          allPass = false;
+        }
+        if(fc.type === 'requires_enclosure_if_no_sprinkler' && !sprinkler){
+          // Must be in gas room / cabinet when no sprinkler
+          if(status === 'ok') status = 'warn_enclosure';
+        }
+      }
+    }
+
     // Track protection level
     if(base.protLevel && (highestProtLevel === null || base.protLevel < highestProtLevel)){
       highestProtLevel = base.protLevel;
@@ -1756,14 +1792,15 @@ function maqCalcAll(){
   let tableHtml = `
     <table style="width:100%;border-collapse:collapse;border:1px solid var(--border);border-radius:8px;overflow:hidden;">
       <thead><tr style="background:var(--green);color:#fff">
-        <th style="padding:9px 12px;text-align:right;font-size:.82rem">#</th>
-        <th style="padding:9px 12px;text-align:right;font-size:.82rem">קטגוריה</th>
-        <th style="padding:9px 12px;text-align:right;font-size:.82rem">סוג פעולה</th>
-        <th style="padding:9px 12px;text-align:right;font-size:.82rem">כמות בפועל</th>
-        <th style="padding:9px 12px;text-align:right;font-size:.82rem">MAQ סופי</th>
-        <th style="padding:9px 12px;text-align:right;font-size:.82rem">מכפיל</th>
-        <th style="padding:9px 12px;text-align:right;font-size:.82rem">ניצול</th>
-        <th style="padding:9px 12px;text-align:right;font-size:.82rem">סטטוס</th>
+        <th style="padding:9px 12px;text-align:right;font-size:.82rem" title="מספר סידורי">#</th>
+        <th style="padding:9px 12px;text-align:right;font-size:.82rem" title="קטגוריית הסיכון לפי NFPA 400">קטגוריה</th>
+        <th style="padding:9px 12px;text-align:right;font-size:.82rem" title="אחסון / שימוש במערכת סגורה / שימוש במערכת פתוחה">סוג פעולה</th>
+        <th style="padding:9px 12px;text-align:right;font-size:.82rem" title="הכמות שהוזנה בפועל">כמות בפועל</th>
+        <th style="padding:9px 12px;text-align:right;font-size:.82rem" title="MAQ מהטבלה (NFPA 400-2025) ללא הגנות נוספות">MAQ (טבלה)</th>
+        <th style="padding:9px 12px;text-align:right;font-size:.82rem" title="MAQ החל בפועל: ערך טבלה × מכפיל הגנה × אחוז קומה">MAQ חל</th>
+        <th style="padding:9px 12px;text-align:right;font-size:.82rem" title="מכפיל הגנה: ×1 ללא הגנה / ×2 מתזים או ארונות / ×4 שניהם">מכפיל הגנה</th>
+        <th style="padding:9px 12px;text-align:right;font-size:.82rem" title="אחוז הניצול של ה-MAQ החל (כמות בפועל ÷ MAQ חל)">ניצול %</th>
+        <th style="padding:9px 12px;text-align:right;font-size:.82rem" title="סטטוס הציות לדרישות NFPA 400">סטטוס</th>
       </tr></thead><tbody>`;
 
   results.forEach((r, i) => {
@@ -1771,6 +1808,12 @@ function maqCalcAll(){
       ? '<span style="background:#ffebee;color:#c62828;padding:3px 8px;border-radius:5px;font-weight:700;font-size:.8rem">🚫 חריגה</span>'
       : r.status === 'np'
       ? '<span style="background:#ffebee;color:#c62828;padding:3px 8px;border-radius:5px;font-weight:700;font-size:.8rem">🚫 NP</span>'
+      : r.status === 'np_sprinkler'
+      ? '<span style="background:#ffebee;color:#c62828;padding:3px 8px;border-radius:5px;font-weight:700;font-size:.8rem">🚫 אסור – נדרשים מתזים</span>'
+      : r.status === 'np_enclosure'
+      ? '<span style="background:#fff3e0;color:#e65100;padding:3px 8px;border-radius:5px;font-weight:700;font-size:.8rem">⚠️ חובה: ארון/חדר גזים</span>'
+      : r.status === 'warn_enclosure'
+      ? '<span style="background:#fff8e1;color:#f57f17;padding:3px 8px;border-radius:5px;font-weight:700;font-size:.8rem">⚠️ נדרש ארון/חדר גזים</span>'
       : r.status === 'nl'
       ? '<span style="background:var(--green-lt);color:var(--green);padding:3px 8px;border-radius:5px;font-weight:700;font-size:.8rem">✅ NL</span>'
       : r.status === 'na'
@@ -1778,43 +1821,116 @@ function maqCalcAll(){
       : '<span style="background:var(--green-lt);color:var(--green);padding:3px 8px;border-radius:5px;font-weight:700;font-size:.8rem">✅ תקין</span>';
 
     const pctColor = r.pct > 100 ? '#c62828' : r.pct > 75 ? '#e65100' : 'var(--green)';
-    const rowBg = r.status === 'exceed' || r.status === 'np' ? '#fff5f5' : '';
+    const rowBg = (r.status === 'exceed' || r.status === 'np' || r.status === 'np_sprinkler') ? '#fff5f5'
+      : (r.status === 'np_enclosure' || r.status === 'warn_enclosure') ? '#fffde7' : '';
+
+    // MAQ base value (raw table value, no multipliers, no floor factor)
+    const baseVal = r.base.val;
+    const maqBaseDisplay = baseVal === null ? '—'
+      : baseVal === 'NP' ? 'NP'
+      : (baseVal === 'NL' || baseVal === Infinity) ? 'NL'
+      : fmtN(baseVal) + ' ' + unitLabels[r.unit];
+
+    // Helper: wrap value with small column-name label above it
+    const cell = (colName, val, extraStyle='') =>
+      `<td style="padding:8px 12px;border-bottom:1px solid #f0f0ee;${extraStyle}">
+        <div style="font-size:.66rem;color:#9e9e9e;font-weight:600;margin-bottom:2px;line-height:1">${colName}</div>
+        <div>${val}</div>
+      </td>`;
 
     tableHtml += `<tr style="background:${rowBg}">
       <td style="padding:8px 12px;border-bottom:1px solid #f0f0ee;font-weight:700;font-size:.85rem">${i+1}</td>
-      <td style="padding:8px 12px;border-bottom:1px solid #f0f0ee;font-size:.85rem">${r.he}</td>
-      <td style="padding:8px 12px;border-bottom:1px solid #f0f0ee;font-size:.85rem">${useLabels[r.useType]}</td>
-      <td style="padding:8px 12px;border-bottom:1px solid #f0f0ee;font-size:.85rem;font-weight:600">${fmtN(r.qty)} ${unitLabels[r.unit]}</td>
-      <td style="padding:8px 12px;border-bottom:1px solid #f0f0ee;font-size:.85rem;font-weight:600">${r.maqFinal === Infinity ? 'NL' : r.maqFinal === null ? 'N/A' : fmtN(r.maqFinal)} ${r.maqFinal && r.maqFinal !== Infinity ? unitLabels[r.unit] : ''}</td>
-      <td style="padding:8px 12px;border-bottom:1px solid #f0f0ee;font-size:.85rem">×${r.prot.mult}</td>
-      <td style="padding:8px 12px;border-bottom:1px solid #f0f0ee;font-size:.85rem;font-weight:700;color:${pctColor}">${r.status==='nl'?'—':r.status==='na'?'—':r.status==='np'?'—':fmtN(r.pct)+'%'}</td>
-      <td style="padding:8px 12px;border-bottom:1px solid #f0f0ee">${statusBadge}</td>
+      ${cell('קטגוריה',       r.he,                                                'font-size:.85rem')}
+      ${cell('סוג פעולה',     useLabels[r.useType],                                'font-size:.85rem')}
+      ${cell('כמות בפועל',    `<span style="font-weight:600">${fmtN(r.qty)} ${unitLabels[r.unit]}</span>`, 'font-size:.85rem')}
+      ${cell('MAQ (טבלה)',    `<span style="color:var(--muted)">${maqBaseDisplay}</span>`,                 'font-size:.85rem')}
+      ${cell('MAQ חל',        `<span style="font-weight:600">${r.maqFinal === Infinity ? 'NL' : r.maqFinal === null ? 'N/A' : fmtN(r.maqFinal)} ${r.maqFinal && r.maqFinal !== Infinity ? unitLabels[r.unit] : ''}</span>`, 'font-size:.85rem')}
+      ${cell('מכפיל הגנה',    `×${r.prot.mult}`,                                   'font-size:.85rem')}
+      ${cell('ניצול %',       `<span style="font-weight:700;color:${pctColor}">${['nl','na','np','np_sprinkler','np_enclosure','warn_enclosure'].includes(r.status)?'—':fmtN(r.pct)+'%'}</span>`, 'font-size:.85rem')}
+      ${cell('סטטוס',         statusBadge)}
     </tr>`;
   });
 
   tableHtml += '</tbody></table>';
   document.getElementById('maqResultsTable').innerHTML = tableHtml;
 
-  // Aggregate check (NFPA 400 footnote a: storage+use ≤ storage MAQ)
+  // Aggregate check – NFPA 400-2025 §5.2.1.1.2:
+  // "The aggregate quantity of hazardous materials in storage AND use
+  //  shall not exceed the quantity for storage set forth in Table 5.2.1.1.3."
+  // תיקון: הוסרה בדיקת ag.useQty > 0 – עכשיו נבדק גם storage+storage וגם storage+use
   let aggregateWarnings = [];
   Object.keys(aggregateMap).forEach(cat => {
     const ag = aggregateMap[cat];
-    if(ag.storMAQ && ag.storMAQ !== Infinity && ag.useQty > 0){
+    if(ag.storMAQ && ag.storMAQ !== Infinity){
       const total = ag.storQty + ag.useQty;
       if(total > ag.storMAQ){
-        aggregateWarnings.push(`<strong>${ag.he}</strong>: סה"כ אחסון+שימוש = ${fmtN(total)} ${unitLabels[ag.unit]} > MAQ אחסון = ${fmtN(ag.storMAQ)} ${unitLabels[ag.unit]}`);
+        const breakdown = [];
+        if(ag.storQty > 0) breakdown.push(`אחסון: ${fmtN(ag.storQty)}`);
+        if(ag.useQty > 0) breakdown.push(`שימוש: ${fmtN(ag.useQty)}`);
+        aggregateWarnings.push(
+          `<strong>${ag.he}</strong>: סה"כ צבירה = ${fmtN(total)} ${unitLabels[ag.unit]} ` +
+          `(${breakdown.join(' + ')}) > MAQ אחסון = ${fmtN(ag.storMAQ)} ${unitLabels[ag.unit]} ` +
+          `<span style="font-size:.8rem;color:#b71c1c">[NFPA 400-2025 §5.2.1.1.2]</span>`
+        );
         allPass = false;
       }
     }
   });
 
+  // ── Cross-category flammable liquid combination check (footnote k) ──
+  // NFPA 400-2025 Table 5.2.1.1.3 footnote k:
+  // When Class IA, IB, and/or IC flammable liquids coexist in the same control area,
+  // the combined total must not exceed the MAQ for IB/IC storage (454 L / 120 gal).
+  {
+    const flamCatKeys = ['flammable_liquid_IA', 'flammable_liquid_IB_IC', 'flammable_liquid_combo'];
+    const presentFlamCats = flamCatKeys.filter(k => aggregateMap[k]);
+
+    if(presentFlamCats.length >= 2){
+      // Normalize all quantities to liters for cross-category comparison
+      const unitToL = {'L': 1, 'l': 1, 'gal': 3.785, 'GAL': 3.785};
+      let totalFlamL = 0;
+      let allUnitsKnown = true;
+      const comboParts = [];
+
+      presentFlamCats.forEach(cat => {
+        const ag = aggregateMap[cat];
+        const qty = ag.storQty + ag.useQty;
+        const factor = unitToL[ag.unit];
+        if(factor === undefined){ allUnitsKnown = false; return; }
+        const qtyL = qty * factor;
+        totalFlamL += qtyL;
+        const catLabel = cat === 'flammable_liquid_IA' ? 'Class IA'
+          : cat === 'flammable_liquid_IB_IC' ? 'Class IB/IC' : 'שילוב';
+        comboParts.push(`${catLabel}: ${fmtN(qtyL)} L`);
+      });
+
+      if(allUnitsKnown){
+        // Get protection multiplier using IB/IC as the reference category
+        const ibBase = maqGetBaseValue('flammable_liquid_IB_IC', 'stor', 'L');
+        const ibProt = maqProtMult(ibBase.fn, sprinkler, cabinet);
+        const comboMAQ_L = 454 * ibProt.mult * floorPct; // 120 gal = 454 L
+
+        if(totalFlamL > comboMAQ_L){
+          aggregateWarnings.push(
+            `<strong>🔥 נוזלים דליקים – שילוב קטגוריות (footnote k)</strong>: ` +
+            `${comboParts.join(' + ')} = ${fmtN(totalFlamL)} L` +
+            ` > MAQ משולב = ${fmtN(comboMAQ_L)} L` +
+            ` <span style="font-size:.8rem;color:#b71c1c">[NFPA 400-2025 Table 5.2.1.1.3 footnote k]</span>`
+          );
+          allPass = false;
+        }
+      }
+    }
+  }
+
   if(aggregateWarnings.length > 0){
     document.getElementById('maqAggregateInfo').innerHTML = `
       <div style="background:#ffebee;border:1.5px solid #c62828;border-radius:9px;padding:14px 18px">
-        <div style="font-weight:800;font-size:1rem;color:#b71c1c">🚫 חריגה בצבירת אחסון+שימוש</div>
+        <div style="font-weight:800;font-size:1rem;color:#b71c1c">🚫 חריגה בצבירה מצטברת (NFPA 400-2025 §5.2.1.1.2)</div>
         <div style="font-size:.88rem;color:#c62828;margin-top:6px">
-          לפי NFPA 400 footnote a: הכמות המצטברת בשימוש+אחסון לא תעלה על כמות האחסון.
-          <br>${aggregateWarnings.join('<br>')}
+          הכמות המצטברת (אחסון + שימוש) באותה קטגוריה לא תעלה על MAQ האחסון.<br>
+          <em>שים לב: גם שתי רשומות אחסון מאותה קטגוריה נסכמות יחד לעומת MAQ אחד!</em>
+          <div style="margin-top:6px">${aggregateWarnings.join('<br>')}</div>
         </div>
       </div>`;
   } else {
@@ -1831,7 +1947,7 @@ function maqCalcAll(){
         </div>
         <div style="font-size:.88rem;color:${h.color};margin-top:4px">
           ${h.desc}
-          <br>במקרה של חריגה מ-MAQ נדרש לעמוד בדרישות NFPA 400 Section 5.3 / NFPA 5000 Section 34.3.${highestProtLevel+2}
+          <br>במקרה של חריגה מ-MAQ נדרש לעמוד בדרישות NFPA 400-2025 Section 5.3 ו-Chapter 6
         </div>
       </div>`;
   } else {
@@ -1853,7 +1969,7 @@ function maqCalcAll(){
               כמות כוללת: ${fmtN(totalQty)} ${unitLabels[ag.unit]} &nbsp;|&nbsp;
               MAQ × ${floorInfo.areas} אזורים = ${fmtN(totalAllAreas)} ${unitLabels[ag.unit]}
               <br>הכמות הכוללת חורגת מסה"כ המותר בכל ${floorInfo.areas} אזורי הבקרה בקומה זו.
-              <br>נדרש סיווג Protection Level בהתאם ל-NFPA 400 / NFPA 5000 Chapter 34.
+              <br>נדרש סיווג Protection Level בהתאם ל-NFPA 400-2025 Section 5.3.
             </div>
           </div>`;
         allPass = false;
@@ -1861,6 +1977,59 @@ function maqCalcAll(){
     }
   });
   document.getElementById('maqAreasWarning').innerHTML = areasWarningHtml;
+
+  // ── הערות שוליים חובה (Mandatory Footnotes) – NFPA 400-2025 ──
+  // איסוף כל הערות החובה מהחומרים שנבחרו
+  const footnoteWarnings = [];
+  const seenConditions = new Set();
+  maqMaterials.forEach(m => {
+    const row = MAQ_TABLE[m.cat];
+    if(!row || !row.fn_conditions) return;
+    row.fn_conditions.forEach(fc => {
+      const key = fc.type + '|' + fc.text;
+      if(seenConditions.has(key)) return;
+      seenConditions.add(key);
+      // type: requires_sprinkler → אזהרה אם ספרינקלר לא נבחר
+      // type: requires_enclosure → אזהרה תמיד (חובה גמורה)
+      // type: requires_enclosure_if_no_sprinkler → אזהרה אם אין ספרינקלר
+      // type: outside_scope / individual_limits / maintenance_note / requires_vent → תמיד
+      let shouldShow = true;
+      if(fc.type === 'requires_sprinkler' && sprinkler) shouldShow = false; // מרוסס → OK
+      if(fc.type === 'requires_enclosure_if_no_sprinkler' && sprinkler) shouldShow = false;
+      if(shouldShow){
+        const isCritical = fc.type === 'requires_sprinkler' || fc.type === 'requires_enclosure';
+        footnoteWarnings.push({text: `<strong>${row.he}:</strong> ${fc.text}`, critical: isCritical});
+        if(isCritical && !sprinkler) allPass = false;
+      }
+    });
+  });
+
+  if(footnoteWarnings.length > 0){
+    const critical = footnoteWarnings.filter(w => w.critical);
+    const info    = footnoteWarnings.filter(w => !w.critical);
+    let fwHtml = '';
+    if(critical.length > 0){
+      fwHtml += `
+        <div style="background:#ffebee;border:1.5px solid #c62828;border-radius:9px;padding:14px 18px;margin-bottom:8px">
+          <div style="font-weight:800;font-size:1rem;color:#b71c1c">🚫 הגבלות חובה – הערות שוליים קריטיות (NFPA 400-2025)</div>
+          <div style="font-size:.87rem;color:#c62828;margin-top:6px;line-height:1.7">
+            ${critical.map(w=>`• ${w.text}`).join('<br>')}
+          </div>
+        </div>`;
+    }
+    if(info.length > 0){
+      fwHtml += `
+        <div style="background:#fff8e1;border:1.5px solid #f9a825;border-radius:9px;padding:14px 18px">
+          <div style="font-weight:800;font-size:1rem;color:#e65100">⚠️ הערות שוליים נוספות (NFPA 400-2025)</div>
+          <div style="font-size:.87rem;color:#5d4037;margin-top:6px;line-height:1.7">
+            ${info.map(w=>`• ${w.text}`).join('<br>')}
+          </div>
+        </div>`;
+    }
+    document.getElementById('maqFootnoteWarnings').innerHTML = fwHtml;
+  } else {
+    document.getElementById('maqFootnoteWarnings').innerHTML = '';
+  }
 
   // Overall status
   const overall = document.getElementById('resOverall');
@@ -2139,9 +2308,14 @@ function maqGetState(item){
 }
 
 /* ── Calculate protection multiplier based on footnotes ── */
+// fn field convention (NFPA 400-2025 Table 5.2.1.1.3):
+//   'a' = approved cabinet storage → ×2  (footnote a)
+//   'b' = full NFPA 13 sprinkler system → ×2  (footnote b)
+//   Both together → ×4
+//   Categories with fn='' do NOT benefit from these multipliers
+//   (e.g. Oxidizer-4, Pyrophoric, Unstable Reactive-4 – mandatory sprinkler but no quantity increase)
 function maqProtMult(fn, sprinkler, cabinet){
-  // NFPA 400: footnote a = cabinet ×2, footnote b = sprinkler ×2
-  // Applied accumulatively when both apply
+  if(!fn) fn = '';
   const hasA = fn.includes('a');
   const hasB = fn.includes('b');
   let mult = 1;
