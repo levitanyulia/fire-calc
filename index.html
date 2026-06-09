@@ -462,6 +462,128 @@
     @media (max-width: 400px) {
       .results-strip { grid-template-columns: 1fr; }
     }
+
+    /* ═══ NFPA 400 CARDS ═══ */
+    .nfpa-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 12px;
+    }
+    .nfpa-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,.07);
+      transition: box-shadow .18s, transform .18s;
+      animation: n400in .2s ease both;
+    }
+    .nfpa-card:hover { box-shadow: 0 4px 18px rgba(0,0,0,.12); transform: translateY(-1px); }
+    .nfpa-card::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 4px; height: 100%;
+      border-radius: 0 8px 8px 0;
+    }
+    @keyframes n400in { from { opacity:0; transform:translateY(5px) } to { opacity:1; transform:none } }
+    .nfpa-card-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 8px; }
+    .nfpa-card-name { font-size: .9rem; font-weight: 600; color: var(--text); flex: 1; line-height: 1.4; }
+    .nfpa-card-name mark { background: rgba(200,151,42,.22); border-radius: 2px; color: inherit; padding: 0 1px; }
+    .nfpa-badge {
+      flex-shrink: 0;
+      padding: 4px 9px;
+      border-radius: 6px;
+      border: 1.5px solid;
+      text-align: center;
+      min-width: 62px;
+    }
+    .nfpa-badge-cat { font-size: .65rem; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; display: block; opacity: .85; }
+    .nfpa-badge-cls { font-family: 'Rubik','Heebo',sans-serif; font-size: .95rem; font-weight: 800; line-height: 1.2; display: block; }
+    .nfpa-cas { font-size: .74rem; color: var(--muted); background: #f3f5f1; padding: 2px 7px; border-radius: 4px; border: 1px solid var(--border); font-family: monospace; display: inline-block; margin-bottom: 5px; }
+    .nfpa-desc { font-size: .82rem; color: var(--muted); line-height: 1.5; }
+    .nfpa-note { font-size: .77rem; color: var(--muted); font-style: italic; margin-top: 6px; padding-top: 6px; border-top: 1px solid var(--border); line-height: 1.5; }
+    .nfpa-note::before { content: '⚠ '; font-style: normal; opacity: .6; }
+    /* card accent colors */
+    .nc-ox1::before { background:#16a34a; } .nc-ox1 .nfpa-badge { background:rgba(22,163,74,.1); border-color:rgba(22,163,74,.4); color:#15803d; }
+    .nc-ox2::before { background:#ca8a04; } .nc-ox2 .nfpa-badge { background:rgba(202,138,4,.1); border-color:rgba(202,138,4,.4); color:#b45309; }
+    .nc-ox3::before { background:#ea580c; } .nc-ox3 .nfpa-badge { background:rgba(234,88,12,.1); border-color:rgba(234,88,12,.4); color:#c2410c; }
+    .nc-ox4::before { background:#dc2626; } .nc-ox4 .nfpa-badge { background:rgba(220,38,38,.1); border-color:rgba(220,38,38,.4); color:#b91c1c; }
+    .nc-op1::before { background:#dc2626; } .nc-op1 .nfpa-badge { background:rgba(220,38,38,.1); border-color:rgba(220,38,38,.4); color:#b91c1c; }
+    .nc-op2a::before,.nc-op2b::before { background:#ea580c; } .nc-op2a .nfpa-badge,.nc-op2b .nfpa-badge { background:rgba(234,88,12,.1); border-color:rgba(234,88,12,.4); color:#c2410c; }
+    .nc-op3::before { background:#ca8a04; } .nc-op3 .nfpa-badge { background:rgba(202,138,4,.1); border-color:rgba(202,138,4,.4); color:#b45309; }
+    .nc-op4::before,.nc-op5::before { background:#16a34a; } .nc-op4 .nfpa-badge,.nc-op5 .nfpa-badge { background:rgba(22,163,74,.1); border-color:rgba(22,163,74,.4); color:#15803d; }
+    .nc-corr::before { background:#7c3aed; } .nc-corr .nfpa-badge { background:rgba(124,58,237,.1); border-color:rgba(124,58,237,.4); color:#6d28d9; }
+    .nc-flam::before { background:#d97706; } .nc-flam .nfpa-badge { background:rgba(217,119,6,.1); border-color:rgba(217,119,6,.4); color:#b45309; }
+    .nc-pyr::before  { background:#dc2626; } .nc-pyr  .nfpa-badge { background:rgba(220,38,38,.1); border-color:rgba(220,38,38,.4); color:#b91c1c; }
+    .nc-tox::before  { background:#059669; } .nc-tox  .nfpa-badge { background:rgba(5,150,105,.1); border-color:rgba(5,150,105,.4); color:#047857; }
+    .nc-unst::before { background:#db2777; } .nc-unst .nfpa-badge { background:rgba(219,39,119,.1); border-color:rgba(219,39,119,.4); color:#be185d; }
+    .nc-wat::before  { background:#0284c7; } .nc-wat  .nfpa-badge { background:rgba(2,132,199,.1); border-color:rgba(2,132,199,.4); color:#0369a1; }
+    /* filter pills */
+    .n400-pill {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 5px 12px; border: 1.5px solid var(--border); border-radius: 20px;
+      font-size: .78rem; font-weight: 600; cursor: pointer;
+      background: #fafcf9; color: var(--muted);
+      transition: all .15s; user-select: none; white-space: nowrap;
+    }
+    .n400-pill:hover { background: var(--green-lt); color: var(--green); border-color: var(--green-mid); }
+    .n400-pill.active { background: var(--green); color: #fff; border-color: var(--green); }
+    .n400-pill .pdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+    /* welcome cards */
+    .n400-welcome { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px,1fr)); gap: 10px; }
+    .n400-wcard {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+      padding: 11px 14px; cursor: pointer; display: flex; align-items: center; gap: 10px;
+      transition: all .15s;
+    }
+    .n400-wcard:hover { background: var(--green-lt); border-color: var(--green-mid); }
+    .n400-wcard .wdot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+    .n400-wcard .wcat { font-size: .86rem; font-weight: 600; color: var(--text); }
+    .n400-wcard .wcnt { font-size: .72rem; color: var(--muted); }
+    /* card color for classes without number */
+    .nc-ox::before  { background:#ea580c; } .nc-ox  .nfpa-badge { background:rgba(234,88,12,.1); border-color:rgba(234,88,12,.4); color:#c2410c; }
+    .nc-op::before  { background:#c026d3; } .nc-op  .nfpa-badge { background:rgba(192,38,211,.1); border-color:rgba(192,38,211,.4); color:#a21caf; }
+    .nc-oxgas::before{ background:#ea580c; } .nc-oxgas .nfpa-badge { background:rgba(234,88,12,.1); border-color:rgba(234,88,12,.4); color:#c2410c; }
+    /* secondary hazard tags */
+    .nfpa-also-row { display: flex; flex-wrap: wrap; align-items: center; gap: 5px; margin-top: 7px; }
+    .nfpa-also-lbl { font-size: .7rem; color: var(--muted); white-space: nowrap; }
+    .nfpa-also-tag {
+      font-size: .68rem; font-weight: 700; padding: 2px 7px; border-radius: 10px;
+      border: 1px solid; white-space: nowrap; letter-spacing: .01em;
+    }
+    /* property grid rows */
+    .nfpa-props { display: grid; grid-template-columns: repeat(5,1fr); gap: 4px; margin-top: 10px; }
+    .nfpa-prop-box { background: var(--bg); border: 1px solid var(--border); border-radius: 5px; padding: 4px 6px; min-width: 0; }
+    .nfpa-prop-lbl { font-size: .63rem; color: var(--muted); margin-bottom: 1px; line-height: 1.2; }
+    .nfpa-prop-val { font-weight: 600; font-size: .72rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--text); }
+    /* NFPA 704 diamond row */
+    .nfpa-diamond-row { display: flex; align-items: center; gap: 6px; margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border); }
+    .nfpa-diamond-lbl { font-size: .66rem; color: var(--muted); flex-shrink: 0; }
+    .nfpa-hfr { display: flex; gap: 3px; }
+    .nfpa-hfr-box {
+      width: 28px; height: 28px; border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: .82rem; font-family: 'Rubik',sans-serif; flex-shrink: 0;
+    }
+    .hfr-h { background: #fee2e2; color: #b91c1c; border: 1.5px solid #fca5a5; }
+    .hfr-f { background: #fff7ed; color: #c2410c; border: 1.5px solid #fed7aa; }
+    .hfr-r { background: #eff6ff; color: #1d4ed8; border: 1.5px solid #bfdbfe; }
+    .hfr-sp { background: #f5f3ff; color: #6d28d9; border: 1.5px solid #ddd6fe; font-size: .6rem; padding: 0 3px; width: auto; min-width: 28px; }
+    .nfpa-en-name { font-size: .75rem; color: var(--muted); margin-top: 1px; }
+    .nfpa-formula { font-family: monospace; font-size: .78rem; color: var(--green-mid); background: var(--green-lt); padding: 1px 5px; border-radius: 3px; }
+    /* accordion ref */
+    .n400-acc-btn { cursor: pointer; display: flex; align-items: center; justify-content: space-between; padding: 9px 0; border-bottom: 1px solid var(--border); font-size: .82rem; font-weight: 700; color: var(--text); user-select: none; }
+    .n400-acc-btn:hover { color: var(--green); }
+    .n400-acc-body { padding: 10px 0; }
+    .n400-cls-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .n400-cls-box { background: #f8faf6; border: 1px solid var(--border); border-radius: 8px; padding: 9px 12px; display: flex; gap: 9px; }
+    .n400-cls-tag { border-radius: 6px; padding: 3px 8px; font-family: 'Rubik',sans-serif; font-weight: 800; font-size: .82rem; min-width: 50px; text-align: center; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+    .n400-cls-info .ttl { font-size: .8rem; font-weight: 700; color: var(--text); }
+    .n400-cls-info .sub { font-size: .74rem; color: var(--muted); margin-top: 2px; line-height: 1.4; }
+    @media (max-width:680px) { .nfpa-grid { grid-template-columns: 1fr; } .n400-cls-grid { grid-template-columns: 1fr; } .nfpa-props { grid-template-columns: repeat(3,1fr); } }
   </style>
 </head>
 <body>
@@ -502,6 +624,14 @@
       מחשבון MAQ
       <span class="nav-badge">פעיל</span>
     </button>
+
+    <!-- NFPA 400 nav hidden temporarily
+    <button class="nav-item" onclick="showPage('nfpa400', this)">
+      <span class="nav-icon">☢️</span>
+      סיווג NFPA 400
+      <span class="nav-badge">פעיל</span>
+    </button>
+    -->
 
     <div class="sidebar-divider"></div>
     <div class="sidebar-label">מידע</div>
@@ -611,7 +741,7 @@
     <div id="page-nfpa30" class="page">
       <div class="page-header">
         <h2>🛢️ סיווג NFPA 30</h2>
-        <p>סיווג נוזלים דליקים ובעירה לפי NFPA 30 (2018) • כמות מרבית מותרת (MAQ) לפי NFPA 400</p>
+        <p>סיווג נוזלים דליקים ובעירים לפי NFPA 30 (2018) • חיפוש חומר לפי שם / CAS / UN</p>
       </div>
 
       <!-- חיפוש -->
@@ -619,7 +749,7 @@
         <div class="section-head">🔍 חיפוש חומר</div>
         <div class="section-body">
           <div class="room-row" style="grid-template-columns:1fr 1fr 1fr; gap:14px;">
-            <div>
+            <div style="position:relative;">
               <div class="field-label">שם החומר (עברית / English)</div>
               <input class="field-input" type="text" id="n30search"
                      placeholder="לדוגמה: אצטון / Acetone"
@@ -735,9 +865,9 @@
           </div>
 
           <div class="tip" style="margin-top:14px;">
-            💡 <strong>מכפילים (NFPA 400 footnotes c, d):</strong>
-            ארונות מאושרים (c) = ×2 &nbsp;|&nbsp; מתזים NFPA 13 (d) = ×2 &nbsp;|&nbsp; שניהם = ×4
-            <br>⚠️ מכפילים חלים רק כאשר ה-footnote הרלוונטי מצוין עבור הקטגוריה.
+            💡 <strong>מכפילי הגנה (NFPA 400 הערות שוליים a, b):</strong>
+            ארונות מאושרים (a) = ×2 &nbsp;|&nbsp; מתזים NFPA 13 (b) = ×2 &nbsp;|&nbsp; שניהם = ×4
+            <br>⚠️ מכפילים חלים רק כאשר הערת השוליים הרלוונטית מצוינת עבור הקטגוריה.
             <br><strong>יחידות:</strong> ק"ג (מוצקים) &nbsp;|&nbsp; ליטר (נוזלים) &nbsp;|&nbsp; Nm³ (גזים)
           </div>
         </div>
@@ -854,13 +984,20 @@
           <!-- רשימת חומרים שנוספו -->
           <div id="maqMaterialsList" style="margin-top:16px;"></div>
 
-          <!-- כפתור חישוב -->
-          <div id="maqCalcBtnWrap" style="margin-top:16px; display:none;">
-            <button onclick="maqCalcAll()" style="width:100%; background:var(--gold); color:#fff; border:none;
-                    padding:14px; border-radius:10px; font-size:1.05rem; font-weight:800; cursor:pointer;
-                    transition:background .2s; letter-spacing:.01em;">
-              📊 חשב MAQ
-            </button>
+          <!-- כפתורי חישוב / איפוס -->
+          <div id="maqCalcBtnWrap" style="margin-top:16px; display:none; gap:12px;">
+            <div style="display:flex; gap:12px;">
+              <button onclick="maqCalcAll()" style="flex:1; background:var(--gold); color:#fff; border:none;
+                      padding:14px; border-radius:10px; font-size:1.05rem; font-weight:800; cursor:pointer;
+                      transition:background .2s; letter-spacing:.01em;">
+                📊 חשב MAQ
+              </button>
+              <button onclick="maqClearAll()" style="flex-shrink:0; background:#fff; color:#c62828; border:1.5px solid #ef9a9a;
+                      padding:14px 20px; border-radius:10px; font-size:.95rem; font-weight:700; cursor:pointer;
+                      transition:all .2s;">
+                🗑 נקה הכל
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -893,6 +1030,9 @@
               <div class="res-unit" id="resOverallSub"></div>
             </div>
           </div>
+
+          <!-- אזהרת סקר סיכוני אש (חריגה / סיכון גבוה) -->
+          <div id="maqSurveyWarning" style="margin-top:16px;"></div>
 
           <!-- טבלת תוצאות לכל חומר -->
           <div id="maqResultsTable" style="margin-top:20px;"></div>
@@ -964,6 +1104,184 @@
       </div>
     </div>
 
+    <!-- ─── PAGE: NFPA 400 (hidden temporarily for development) ─── -->
+    <div id="page-nfpa400" class="page" style="display:none!important">
+      <div class="page-header">
+        <h2>☢️ מסווג חומרים מסוכנים NFPA 400</h2>
+        <p>חיפוש וסיווג חומרים לפי <strong>NFPA 400 (2025)</strong> • מחמצנים, פרוקסידים אורגניים, מאכלים, דליקים, פירופוריים, רעילים ועוד</p>
+      </div>
+
+      <!-- חיפוש -->
+      <div class="section">
+        <div class="section-head">🔍 חיפוש חומר לפי NFPA 400</div>
+        <div class="section-body">
+          <input class="field-input" type="text" id="n400search"
+                 placeholder="לדוגמה: מי חמצן, אשלגן כלוראט, אמוניום ניטראט, hydrogen peroxide..."
+                 oninput="n400doSearch()" autocomplete="off" spellcheck="false"
+                 style="font-size:.95rem;" />
+          <!-- Filter pills -->
+          <div id="n400pills" style="display:flex; flex-wrap:wrap; gap:7px; margin-top:14px;">
+            <span class="n400-pill active" data-n400="all" onclick="n400setFilter(this,'all')"><span class="pdot" style="background:#1e4d2b"></span>הכל</span>
+            <span class="n400-pill" data-n400="Oxidizer" onclick="n400setFilter(this,'Oxidizer')"><span class="pdot" style="background:#ea580c"></span>מחמצן (Oxidizer)</span>
+            <span class="n400-pill" data-n400="Organic Peroxide" onclick="n400setFilter(this,'Organic Peroxide')"><span class="pdot" style="background:#c026d3"></span>פרוקסיד אורגני (Organic Peroxide)</span>
+            <span class="n400-pill" data-n400="Corrosive" onclick="n400setFilter(this,'Corrosive')"><span class="pdot" style="background:#7c3aed"></span>מאכל (Corrosive)</span>
+            <span class="n400-pill" data-n400="Flammable Gas" onclick="n400setFilter(this,'Flammable Gas')"><span class="pdot" style="background:#d97706"></span>גז דליק (Flammable Gas)</span>
+            <span class="n400-pill" data-n400="Flammable Solid" onclick="n400setFilter(this,'Flammable Solid')"><span class="pdot" style="background:#d97706"></span>מוצק דליק (Flammable Solid)</span>
+            <span class="n400-pill" data-n400="Pyrophoric" onclick="n400setFilter(this,'Pyrophoric')"><span class="pdot" style="background:#dc2626"></span>פירופורי (Pyrophoric)</span>
+            <span class="n400-pill" data-n400="Toxic" onclick="n400setFilter(this,'Toxic')"><span class="pdot" style="background:#059669"></span>רעיל (Toxic)</span>
+            <span class="n400-pill" data-n400="Unstable (Reactive)" onclick="n400setFilter(this,'Unstable (Reactive)')"><span class="pdot" style="background:#db2777"></span>בלתי יציב (Unstable)</span>
+            <span class="n400-pill" data-n400="Water-Reactive" onclick="n400setFilter(this,'Water-Reactive')"><span class="pdot" style="background:#0284c7"></span>תגובתי למים (Water-Reactive)</span>
+            <span class="n400-pill" data-n400="Oxidizing Gas" onclick="n400setFilter(this,'Oxidizing Gas')"><span class="pdot" style="background:#ea580c"></span>גז מחמצן (Oxidizing Gas)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- תוצאות / welcome -->
+      <div id="n400welcome">
+        <div style="font-size:.84rem; color:var(--muted); margin-bottom:12px;">עיין לפי קטגוריה או הקלד שם חומר למעלה</div>
+        <div class="n400-welcome" id="n400wcards"></div>
+      </div>
+
+      <div id="n400resultsMeta" style="display:none; margin-bottom:10px;">
+        <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px;">
+          <span id="n400count" style="font-size:.82rem; color:var(--muted);"></span>
+          <div style="display:flex; gap:6px;">
+            <button class="btn btn-outline" id="n400sortName" onclick="n400setSort('name')" style="font-size:.78rem; padding:5px 10px;">א–ת</button>
+            <button class="btn btn-outline" id="n400sortCls" onclick="n400setSort('class')" style="font-size:.78rem; padding:5px 10px;">לפי סיווג</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="nfpa-grid" id="n400grid" style="display:none;"></div>
+
+      <div id="n400empty" style="display:none; text-align:center; padding:60px 20px; color:var(--muted);">
+        <div style="font-size:2.5rem; margin-bottom:12px; opacity:.4;">🔍</div>
+        <div style="font-size:1rem; font-weight:700; color:var(--text); margin-bottom:6px;">לא נמצאו חומרים</div>
+        <div style="font-size:.85rem;">נסה איות אחר או בדוק את מספר ה-CAS</div>
+      </div>
+
+      <!-- טבלת סיווג NFPA 400 -->
+      <div class="section" style="margin-top:24px;">
+        <div class="section-head" style="cursor:pointer;" onclick="n400toggleRef()">
+          📋 טבלת סיווג NFPA 400 — עיון מלא
+          <span id="n400refArrow" style="margin-right:auto; color:var(--muted);">▾</span>
+        </div>
+        <div id="n400refBody" style="display:none;">
+          <div class="section-body" style="padding-top:0;">
+
+            <!-- מחמצנים -->
+            <div class="n400-acc-btn" onclick="n400accToggle('acc-ox',this)"><span>🔥 מחמצנים — מוצקים ונוזלים (פרק 15)</span><span class="n400-arr">▾</span></div>
+            <div id="acc-ox" class="n400-acc-body">
+              <div class="n400-cls-grid">
+                <div class="n400-cls-box"><div class="n400-cls-tag" style="background:rgba(22,163,74,.12);border:1.5px solid rgba(22,163,74,.4);color:#15803d;">סיווג 1</div><div class="n400-cls-info"><div class="ttl">חמצון חלש</div><div class="sub">מגביר במקצת את קצב הבעירה של חמרים דליקים. דוגמה: ניטראטים אנאורגניים, מי חמצן 8–27.5%</div></div></div>
+                <div class="n400-cls-box"><div class="n400-cls-tag" style="background:rgba(202,138,4,.12);border:1.5px solid rgba(202,138,4,.4);color:#b45309;">סיווג 2</div><div class="n400-cls-info"><div class="ttl">חמצון בינוני</div><div class="sub">מגביר במידה בינונית את קצב הבעירה. דוגמה: אשלגן פרמנגנאט, מי חמצן 27.5–52%, כלוראטים</div></div></div>
+                <div class="n400-cls-box"><div class="n400-cls-tag" style="background:rgba(234,88,12,.12);border:1.5px solid rgba(234,88,12,.4);color:#c2410c;">סיווג 3</div><div class="n400-cls-info"><div class="ttl">חמצון חזק</div><div class="sub">מגביר בחוזקה את קצב הבעירה; פירוק עצמי אפשרי. דוגמה: מי חמצן 52–91%, נתרן כלוראט, אשלגן ברומאט</div></div></div>
+                <div class="n400-cls-box"><div class="n400-cls-tag" style="background:rgba(220,38,38,.12);border:1.5px solid rgba(220,38,38,.4);color:#b91c1c;">סיווג 4</div><div class="n400-cls-info"><div class="ttl">סכנה קיצונית — שריפה/פיצוץ</div><div class="sub">עלול להתפוצץ עקב זיהום, חום או הלם. דוגמה: אמוניום פרכלוראט, מי חמצן >91%, חומצה פרכלורית >72%</div></div></div>
+              </div>
+            </div>
+
+            <!-- פרוקסידים אורגניים -->
+            <div class="n400-acc-btn" onclick="n400accToggle('acc-op',this)"><span>⚗️ פרוקסידים אורגניים (פרק 14)</span><span class="n400-arr">▾</span></div>
+            <div id="acc-op" class="n400-acc-body">
+              <div class="n400-cls-grid">
+                <div class="n400-cls-box"><div class="n400-cls-tag" style="background:rgba(220,38,38,.12);border:1.5px solid rgba(220,38,38,.4);color:#b91c1c;">UD / I</div><div class="n400-cls-info"><div class="ttl">ניתן להתפוצצות</div><div class="sub">UD: בדיקה נדרשת — ייתכן פיצוץ; Class I: מתפוצץ כאריזה. דוגמה: MEKP (ריכוז גבוה)</div></div></div>
+                <div class="n400-cls-box"><div class="n400-cls-tag" style="background:rgba(234,88,12,.12);border:1.5px solid rgba(234,88,12,.4);color:#c2410c;">IIA</div><div class="n400-cls-info"><div class="ttl">בוער מהר מאוד</div><div class="sub">פירוק עצמי מהיר מאוד; אינו מתפוצץ. דוגמה: בנזואיל פרוקסיד 95%</div></div></div>
+                <div class="n400-cls-box"><div class="n400-cls-tag" style="background:rgba(234,88,12,.12);border:1.5px solid rgba(234,88,12,.4);color:#c2410c;">IIB</div><div class="n400-cls-info"><div class="ttl">בוער במהירות</div><div class="sub">פירוק עצמי מהיר; אינו מתפוצץ. דוגמה: די-tert-בוטיל פרוקסיד</div></div></div>
+                <div class="n400-cls-box"><div class="n400-cls-tag" style="background:rgba(202,138,4,.12);border:1.5px solid rgba(202,138,4,.4);color:#b45309;">III</div><div class="n400-cls-info"><div class="ttl">בעירה רגילה</div><div class="sub">בוערות כחמרים דליקים רגילים. דוגמה: חומצה פרוקסי-אצטית (PAA), peroxybenzoic acid</div></div></div>
+                <div class="n400-cls-box"><div class="n400-cls-tag" style="background:rgba(22,163,74,.12);border:1.5px solid rgba(22,163,74,.4);color:#15803d;">IV</div><div class="n400-cls-info"><div class="ttl">בעירה חלשה</div><div class="sub">בוערות פחות מחמרים דליקים רגילים. דוגמה: di-cumyl peroxide &lt;52% בהידרוקרבון</div></div></div>
+                <div class="n400-cls-box"><div class="n400-cls-tag" style="background:rgba(22,163,74,.12);border:1.5px solid rgba(22,163,74,.4);color:#15803d;">V</div><div class="n400-cls-info"><div class="ttl">לא מקיים בעירה</div><div class="sub">לא מקיים בעירה בבדיקת שריפה. דוגמה: t-amyl hydroperoxide &lt;32% במים</div></div></div>
+              </div>
+            </div>
+
+            <!-- בלתי יציבים -->
+            <div class="n400-acc-btn" onclick="n400accToggle('acc-unst',this)"><span>💥 חומרים בלתי יציבים (תגובתיים) (פרק 16)</span><span class="n400-arr">▾</span></div>
+            <div id="acc-unst" class="n400-acc-body">
+              <div class="n400-cls-grid">
+                <div class="n400-cls-box"><div class="n400-cls-tag" style="background:rgba(22,163,74,.12);border:1.5px solid rgba(22,163,74,.4);color:#15803d;">Class 1</div><div class="n400-cls-info"><div class="ttl">יציבות נמוכה — מתחמם</div><div class="sub">מתחמם עצמאי ומתפרק, אך בקצב מתון בלבד. דוגמה: חנקן-מתיל-ניטראמין מדולל</div></div></div>
+                <div class="n400-cls-box"><div class="n400-cls-tag" style="background:rgba(202,138,4,.12);border:1.5px solid rgba(202,138,4,.4);color:#b45309;">Class 2</div><div class="n400-cls-info"><div class="ttl">תגובה חזקה בחשיפה לחום/הלם</div><div class="sub">מתפרק בחוזקה — נפץ סוּב-קריטי. דוגמה: חומצה פיקרית לחה, נתרן אזיד בריכוז נמוך</div></div></div>
+                <div class="n400-cls-box"><div class="n400-cls-tag" style="background:rgba(234,88,12,.12);border:1.5px solid rgba(234,88,12,.4);color:#c2410c;">Class 3</div><div class="n400-cls-info"><div class="ttl">מתפוצץ עצמאי</div><div class="sub">פיצוץ עצמאי ביוזמת חום, הלם, אלח או חיכוך. דוגמה: חנקן-מתיל-ניטרט, פיקרמין</div></div></div>
+                <div class="n400-cls-box"><div class="n400-cls-tag" style="background:rgba(220,38,38,.12);border:1.5px solid rgba(220,38,38,.4);color:#b91c1c;">Class 4</div><div class="n400-cls-info"><div class="ttl">פיצוץ בעוצמה מלאה</div><div class="sub">מתפוצץ בעוצמה מלאה; מסוכן ביותר. דוגמה: ניטרוגליצרין, RDX, PETN, mercury fulminate</div></div></div>
+              </div>
+            </div>
+
+            <!-- תגובתי למים -->
+            <div class="n400-acc-btn" onclick="n400accToggle('acc-wat',this)"><span>💧 חומרים תגובתיים למים (פרק 17)</span><span class="n400-arr">▾</span></div>
+            <div id="acc-wat" class="n400-acc-body">
+              <div class="n400-cls-grid">
+                <div class="n400-cls-box"><div class="n400-cls-tag" style="background:rgba(2,132,199,.1);border:1.5px solid rgba(2,132,199,.4);color:#0369a1;">Class 1</div><div class="n400-cls-info"><div class="ttl">תגובה איטית</div><div class="sub">משחרר גז דליק במגע עם מים — תגובה ניכרת רק בחשיפה ממושכת. דוגמה: לחות-מתכת שורפת</div></div></div>
+                <div class="n400-cls-box"><div class="n400-cls-tag" style="background:rgba(2,132,199,.18);border:1.5px solid rgba(2,132,199,.5);color:#0369a1;">Class 2</div><div class="n400-cls-info"><div class="ttl">תגובה מהירה</div><div class="sub">משחרר גז דליק/רעיל במגע מהיר עם מים; עלול להתלקח. דוגמה: NaBH₄, LiBH₄, קרביד סידן</div></div></div>
+                <div class="n400-cls-box"><div class="n400-cls-tag" style="background:rgba(2,132,199,.3);border:1.5px solid rgba(2,132,199,.7);color:#075985;">Class 3</div><div class="n400-cls-info"><div class="ttl">תגובה סוערת — עלול להתלקח ספונטנית</div><div class="sub">תגובה אלימה עם מים; מתלקח ספונטנית לאחר מגע. דוגמה: נתרן מתכתי, אשלגן מתכתי, אלומיניום טרימתיל</div></div></div>
+              </div>
+            </div>
+
+            <!-- רעילים -->
+            <div class="n400-acc-btn" onclick="n400accToggle('acc-tox',this)"><span>☠️ חומרים רעילים (פרק 12)</span><span class="n400-arr">▾</span></div>
+            <div id="acc-tox" class="n400-acc-body">
+              <div class="n400-cls-grid">
+                <div class="n400-cls-box"><div class="n400-cls-tag" style="background:rgba(5,150,105,.1);border:1.5px solid rgba(5,150,105,.4);color:#047857;">רעיל</div><div class="n400-cls-info"><div class="ttl">Toxic — מוצקים ונוזלים</div><div class="sub">LC₅₀ אוראלי 200–2,000 מ"ג/ק"ג; LC₅₀ שאיפה 200–2,000 ppm/שעה. דוגמה: מלתיון, אניליין, פנול</div></div></div>
+                <div class="n400-cls-box"><div class="n400-cls-tag" style="background:rgba(4,120,87,.15);border:1.5px solid rgba(4,120,87,.5);color:#065f46;">רעיל מאוד</div><div class="n400-cls-info"><div class="ttl">Highly Toxic — מוצקים ונוזלים</div><div class="sub">LC₅₀ אוראלי ≤200 מ"ג/ק"ג; LC₅₀ שאיפה ≤200 ppm/שעה. דוגמה: ניקוטין, סטריכנין, DMS</div></div></div>
+                <div class="n400-cls-box"><div class="n400-cls-tag" style="background:rgba(5,150,105,.1);border:1.5px solid rgba(5,150,105,.4);color:#047857;">גז רעיל</div><div class="n400-cls-info"><div class="ttl">Toxic Gas</div><div class="sub">LC₅₀ שאיפה 200–2,000 ppm/שעה בצורת גז. דוגמה: אמוניה, כלור גזי, SO₂</div></div></div>
+                <div class="n400-cls-box"><div class="n400-cls-tag" style="background:rgba(4,120,87,.15);border:1.5px solid rgba(4,120,87,.5);color:#065f46;">גז רעיל מאוד</div><div class="n400-cls-info"><div class="ttl">Highly Toxic Gas</div><div class="sub">LC₅₀ שאיפה ≤200 ppm/שעה בצורת גז. דוגמה: פוסגן (COCl₂), ארסין (AsH₃), HCN, פלואור (F₂)</div></div></div>
+              </div>
+            </div>
+
+            <!-- מאכלים -->
+            <div class="n400-acc-btn" onclick="n400accToggle('acc-corr',this)"><span>🧪 מאכלים (Corrosive) (פרק 9)</span><span class="n400-arr">▾</span></div>
+            <div id="acc-corr" class="n400-acc-body">
+              <div class="n400-cls-grid">
+                <div class="n400-cls-box"><div class="n400-cls-tag" style="background:rgba(124,58,237,.1);border:1.5px solid rgba(124,58,237,.4);color:#6d28d9;">מוצק / נוזל</div><div class="n400-cls-info"><div class="ttl">Corrosive Solid/Liquid</div><div class="sub">גורם לנמק רקמות עור או עיניים ב-4 שעות בחשיפה. דוגמה: חומצה גופרתית, נתרן הידרוקסיד, HF, HCl</div></div></div>
+                <div class="n400-cls-box"><div class="n400-cls-tag" style="background:rgba(124,58,237,.2);border:1.5px solid rgba(124,58,237,.5);color:#5b21b6;">גז</div><div class="n400-cls-info"><div class="ttl">Corrosive Gas</div><div class="sub">גז שגורם לנמק רקמות ריריות בחשיפה נשימתית קצרה. דוגמה: BCl₃, BF₃, TiCl₄ (אדים), SO₃</div></div></div>
+              </div>
+            </div>
+
+            <!-- פירופוריים -->
+            <div class="n400-acc-btn" onclick="n400accToggle('acc-pyr',this)"><span>🔴 פירופוריים (Pyrophoric) (פרק 10)</span><span class="n400-arr">▾</span></div>
+            <div id="acc-pyr" class="n400-acc-body">
+              <div class="n400-cls-grid">
+                <div class="n400-cls-box"><div class="n400-cls-tag" style="background:rgba(220,38,38,.1);border:1.5px solid rgba(220,38,38,.4);color:#b91c1c;">מוצק / נוזל</div><div class="n400-cls-info"><div class="ttl">Pyrophoric Solid/Liquid</div><div class="sub">מתלקח ספונטנית במגע עם אוויר בטמפרטורת חדר. דוגמה: n-BuLi, TMA, DIBAL-H, זרחן לבן, נתרן מתכתי</div></div></div>
+                <div class="n400-cls-box"><div class="n400-cls-tag" style="background:rgba(220,38,38,.2);border:1.5px solid rgba(220,38,38,.5);color:#991b1b;">גז</div><div class="n400-cls-info"><div class="ttl">Pyrophoric Gas</div><div class="sub">גז שמתלקח ספונטנית במגע עם אוויר. דוגמה: סילאן (SiH₄), פוספין (PH₃), גרמאן (GeH₄), בוראן</div></div></div>
+              </div>
+            </div>
+
+            <!-- גזים דליקים -->
+            <div class="n400-acc-btn" onclick="n400accToggle('acc-fg',this)"><span>🟡 גזים דליקים (פרק 11)</span><span class="n400-arr">▾</span></div>
+            <div id="acc-fg" class="n400-acc-body">
+              <div class="n400-cls-grid">
+                <div class="n400-cls-box"><div class="n400-cls-tag" style="background:rgba(217,119,6,.1);border:1.5px solid rgba(217,119,6,.4);color:#b45309;">גז דחוס</div><div class="n400-cls-info"><div class="ttl">Flammable Gas — Gaseous</div><div class="sub">גז דחוס שדליקותו בטווח 13% LFL ומטה, או טווח ≥12% בין LFL ל-UFL. דוגמה: מימן, מתאן, אצטילן, אמוניה</div></div></div>
+                <div class="n400-cls-box"><div class="n400-cls-tag" style="background:rgba(217,119,6,.15);border:1.5px solid rgba(217,119,6,.5);color:#92400e;">גז מנוזל</div><div class="n400-cls-info"><div class="ttl">Flammable Gas — Liquefied</div><div class="sub">גז המאוחסן בצורה נוזלית בלחץ (LPG, כלור ויניל). דוגמה: פרופן, בוטן, HCN, SO₂</div></div></div>
+                <div class="n400-cls-box"><div class="n400-cls-tag" style="background:rgba(217,119,6,.2);border:1.5px solid rgba(217,119,6,.6);color:#78350f;">LP-Gas</div><div class="n400-cls-info"><div class="ttl">Liquefied Petroleum Gas</div><div class="sub">תערובת של פרופן/בוטן — LPG מסחרי. כולל CNG (גז טבעי דחוס) ו-LNG (גז טבעי מנוזל קריוגני).</div></div></div>
+              </div>
+            </div>
+
+            <!-- גזים מחמצנים -->
+            <div class="n400-acc-btn" onclick="n400accToggle('acc-og',this)"><span>🟠 גזים מחמצנים (Oxidizing Gas) (פרק 13)</span><span class="n400-arr">▾</span></div>
+            <div id="acc-og" class="n400-acc-body">
+              <div class="n400-cls-grid">
+                <div class="n400-cls-box"><div class="n400-cls-tag" style="background:rgba(234,88,12,.1);border:1.5px solid rgba(234,88,12,.4);color:#c2410c;">גז דחוס</div><div class="n400-cls-info"><div class="ttl">Oxidizing Gas — Gaseous</div><div class="sub">גז שמחמצן חמרים בעיצומים גבוהים ממה שאוויר עושה; מגביר סיכוני שריפה. דוגמה: חמצן, תחמוצת חנקן, פלואור</div></div></div>
+                <div class="n400-cls-box"><div class="n400-cls-tag" style="background:rgba(234,88,12,.2);border:1.5px solid rgba(234,88,12,.5);color:#9a3412;">גז מנוזל</div><div class="n400-cls-info"><div class="ttl">Oxidizing Gas — Liquefied</div><div class="sub">גז מחמצן המאוחסן בצורה נוזלית — קריוגני או בלחץ. דוגמה: חמצן נוזלי (LOX), ClF₅, ClF₃</div></div></div>
+              </div>
+            </div>
+
+            <!-- מוצקים דליקים -->
+            <div class="n400-acc-btn" onclick="n400accToggle('acc-fs',this)"><span>🟤 מוצקים דליקים (פרק 8 — NFPA 400 / NFPA 654)</span><span class="n400-arr">▾</span></div>
+            <div id="acc-fs" class="n400-acc-body">
+              <div class="n400-cls-grid">
+                <div class="n400-cls-box"><div class="n400-cls-tag" style="background:rgba(217,119,6,.1);border:1.5px solid rgba(217,119,6,.4);color:#b45309;">מוצק דליק</div><div class="n400-cls-info"><div class="ttl">Flammable Solid</div><div class="sub">מוצק הבוער בקלות ועלול לגרום לאש; לרוב מאובק או אבקתי. דוגמה: גופרית, נפטלן, מגנזיום, זרחן אדום</div></div></div>
+                <div class="n400-cls-box"><div class="n400-cls-tag" style="background:rgba(217,119,6,.15);border:1.5px solid rgba(217,119,6,.5);color:#92400e;">בעיר</div><div class="n400-cls-info"><div class="ttl">Combustible Solid</div><div class="sub">מוצק שנקודת הבזק שלו &gt;93°C; עלול לבעור בחשיפה לאש. דוגמה: נפטלן מוצק, פחמן פעיל, תאית</div></div></div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="legend">
+        מקור נתונים: <strong>NFPA 400, Hazardous Materials Code, מהדורה 2025</strong> —
+        נספח G (מחמצנים) · נספח F (פרוקסידים אורגניים) · פרק 3 (הגדרות)
+        <br>⚠️ לשימוש רשמי יש לעיין תמיד במסמך המלא של NFPA 400.
+      </div>
+    </div><!-- /page-nfpa400 -->
+
   </div><!-- /content -->
 </div><!-- /layout -->
 
@@ -972,54 +1290,54 @@
 <script>
 /* ─── MATERIALS (SFPE Table C.2) – ערכים בקק"ל/ק"ג ─── */
 const MATS = [
-  { g:"🪵 עצים ונייר",    n:"עץ (כללי) (Wood, general)",               hi:4179 },
-  { g:"🪵 עצים ונייר",    n:"עץ אורן / אשוח (Pine / Spruce)",          hi:4487 },
-  { g:"🪵 עצים ונייר",    n:"עץ אלון / עצי קשה (Hardwood / Oak)",      hi:4060 },
+  { g:"🪵 עצים ונייר",    n:"עץ (כללי) (Wood, general)",               hi:4469 },
+  { g:"🪵 עצים ונייר",    n:"עץ אורן / אשוח (Pine / Spruce)",          hi:4637 },
+  { g:"🪵 עצים ונייר",    n:"עץ אלון / עצי קשה (Hardwood / Oak)",      hi:4469 },
   { g:"🪵 עצים ונייר",    n:"שבבי עץ / נסורת (Wood chips)",            hi:3987 },
   { g:"🪵 עצים ונייר",    n:"לוחות עץ דחוס (Plywood / Chipboard)",     hi:4060 },
-  { g:"🪵 עצים ונייר",    n:"נייר (Paper)",                             hi:3822 },
+  { g:"🪵 עצים ונייר",    n:"נייר (Paper)",                             hi:4063 },
   { g:"🪵 עצים ונייר",    n:"קרטון (Cardboard)",                        hi:3940 },
   { g:"🪵 עצים ונייר",    n:"ספרים ומסמכים (Books / Documents)",        hi:3344 },
 
   { g:"🧴 פלסטיקים",      n:"פוליאתילן PE (Polyethylene PE)",           hi:10332 },
   { g:"🧴 פלסטיקים",      n:"פוליפרופילן PP (Polypropylene PP)",        hi:10308 },
-  { g:"🧴 פלסטיקים",      n:"פוליסטירן PS (Polystyrene PS)",            hi:9075 },
-  { g:"🧴 פלסטיקים",      n:"פוליסטירן מוקצף EPS (Expanded PS)",        hi:9075 },
+  { g:"🧴 פלסטיקים",      n:"פוליסטירן PS (Polystyrene PS)",            hi:9525 },
+  { g:"🧴 פלסטיקים",      n:"פוליסטירן מוקצף EPS (Expanded PS)",        hi:9525 },
   { g:"🧴 פלסטיקים",      n:"PVC (PolyVinyl Chloride)",                 hi:4036 },
   { g:"🧴 פלסטיקים",      n:"ניילון / פוליאמיד PA (Nylon / PA)",        hi:7356 },
   { g:"🧴 פלסטיקים",      n:"ABS (ABS Plastic)",                        hi:8360 },
   { g:"🧴 פלסטיקים",      n:"פוליאוריתן קשיח (PUR Rigid Foam)",         hi:5732 },
-  { g:"🧴 פלסטיקים",      n:"פוליאוריתן גמיש (PUR Flexible Foam)",      hi:5828 },
-  { g:"🧴 פלסטיקים",      n:"פוליאסטר (Polyester)",                     hi:7404 },
+  { g:"🧴 פלסטיקים",      n:"פוליאוריתן גמיש (PUR Flexible Foam)",      hi:6240 },
+  { g:"🧴 פלסטיקים",      n:"פוליאסטר (Polyester)",                     hi:5355 },
   { g:"🧴 פלסטיקים",      n:"אקריליק / פרספקס (Acrylic / PMMA)",        hi:6258 },
   { g:"🧴 פלסטיקים",      n:"אפוקסי (Epoxy Resin)",                     hi:7165 },
   { g:"🧴 פלסטיקים",      n:"פנולי / בקליט (Phenolic / Bakelite)",      hi:6640 },
-  { g:"🧴 פלסטיקים",      n:"פוליקרבונט PC (Polycarbonate PC)",         hi:7090 },
+  { g:"🧴 פלסטיקים",      n:"פוליקרבונט PC (Polycarbonate PC)",         hi:7360 },
 
   { g:"🧵 טקסטיל",        n:"כותנה (Cotton)",                           hi:3893 },
   { g:"🧵 טקסטיל",        n:"צמר (Wool)",                               hi:5016 },
-  { g:"🧵 טקסטיל",        n:"טקסטיל פוליאסטר (Polyester Fabric)",       hi:7404 },
+  { g:"🧵 טקסטיל",        n:"טקסטיל פוליאסטר (Polyester Fabric)",       hi:5355 },
   { g:"🧵 טקסטיל",        n:"טקסטיל ניילון (Nylon Fabric)",             hi:7284 },
-  { g:"🧵 טקסטיל",        n:"תערובת כותנה-פוליאסטר (Cotton-Polyester)", hi:5254 },
+  { g:"🧵 טקסטיל",        n:"תערובת כותנה-פוליאסטר (Cotton-Polyester)", hi:4624 },
   { g:"🧵 טקסטיל",        n:"שטיחים מצמר (Wool Carpets)",               hi:5016 },
   { g:"🧵 טקסטיל",        n:"שטיחים סינתטיים (Synthetic Carpets)",      hi:7165 },
 
-  { g:"⚫ גומי וצמיגים",   n:"גומי טבעי (Natural Rubber)",               hi:8121 },
-  { g:"⚫ גומי וצמיגים",   n:"גומי סינטטי SBR (Synthetic Rubber SBR)",   hi:8240 },
+  { g:"⚫ גומי וצמיגים",   n:"גומי טבעי (Natural Rubber)",               hi:10037 },
+  { g:"⚫ גומי וצמיגים",   n:"גומי סינטטי SBR (Synthetic Rubber SBR)",   hi:10732 },
   { g:"⚫ גומי וצמיגים",   n:"צמיגים (Tyres / Rubber Tyres)",            hi:7789 },
 
-  { g:"🛢️ נוזלים דליקים",  n:"בנזין / גזולין (Gasoline / Petrol)",      hi:10437 },
-  { g:"🛢️ נוזלים דליקים",  n:"סולר / דיזל (Diesel Fuel)",               hi:10317 },
-  { g:"🛢️ נוזלים דליקים",  n:"שמן מנוע (Engine Oil)",                    hi:9196 },
-  { g:"🛢️ נוזלים דליקים",  n:"שמן הידראולי (Hydraulic Oil)",             hi:8837 },
-  { g:"🛢️ נוזלים דליקים",  n:"אתנול (Ethanol)",                          hi:6616 },
-  { g:"🛢️ נוזלים דליקים",  n:"מתנול (Methanol)",                         hi:5326 },
+  { g:"🛢️ נוזלים דליקים",  n:"בנזין / גזולין (Gasoline / Petrol)",      hi:11112 },
+  { g:"🛢️ נוזלים דליקים",  n:"סולר / דיזל (Diesel Fuel)",               hi:10946 },
+  { g:"🛢️ נוזלים דליקים",  n:"שמן מנוע (Engine Oil)",                    hi:10993 },
+  { g:"🛢️ נוזלים דליקים",  n:"שמן הידראולי (Hydraulic Oil)",             hi:10993 },
+  { g:"🛢️ נוזלים דליקים",  n:"אתנול (Ethanol)",                          hi:7091 },
+  { g:"🛢️ נוזלים דליקים",  n:"מתנול (Methanol)",                         hi:5425 },
   { g:"🛢️ נוזלים דליקים",  n:"אצטון (Acetone)",                          hi:7356 },
-  { g:"🛢️ נוזלים דליקים",  n:"איזופרופנול IPA (Isopropanol IPA)",        hi:7261 },
-  { g:"🛢️ נוזלים דליקים",  n:"שמן בישול (Cooking Oil)",                  hi:8837 },
+  { g:"🛢️ נוזלים דליקים",  n:"איזופרופנול IPA (Isopropanol IPA)",        hi:7979 },
+  { g:"🛢️ נוזלים דליקים",  n:"שמן בישול (Cooking Oil)",                  hi:9441 },
 
   { g:"🌾 מזון ואחסון",    n:"חיטה / קמח (Wheat / Flour)",              hi:3917 },
-  { g:"🌾 מזון ואחסון",    n:"סוכר (Sugar)",                             hi:4179 },
+  { g:"🌾 מזון ואחסון",    n:"סוכר (Sugar)",                             hi:3941 },
 
   { g:"📦 ריהוט וסחורות",  n:"ריהוט מעורב (Mixed Furniture)",            hi:4299 },
   { g:"📦 ריהוט וסחורות",  n:"מזרנים (Mattresses – Foam)",               hi:5494 },
@@ -1147,8 +1465,8 @@ function calculate(){
     document.getElementById('classIcon').textContent  = fl < LOW ? '🟢' : '🟡';
     document.getElementById('classTitle').textContent = fl < LOW ? 'מטען אש נמוך' : 'מטען אש רגיל';
     document.getElementById('classSub').textContent   = fl < LOW
-      ? `${fmt(fl)} קק"ל/מ"ר – פחות מ-40,000 קק"ל/מ"ר`
-      : `${fmt(fl)} קק"ל/מ"ר – 40,000 קק"ל/מ"ר ומעלה`;
+      ? `${fmt(fl)} קק"ל/מ"ר – פחות מ-${fmt(LOW)} קק"ל/מ"ר`
+      : `${fmt(fl)} קק"ל/מ"ר – ${fmt(LOW)} קק"ל/מ"ר ומעלה`;
   } else {
     document.getElementById('r-fl').textContent = '—';
     box.className = 'class-box';
@@ -1174,24 +1492,24 @@ window.addEventListener('DOMContentLoaded', ()=>{
 
 /* ── CLASS DEFINITIONS ── */
 const NFPA30_CLASSES = {
-  'Class IA':  { label:'Class IA – נוזל דליק',   color:'#b71c1c', bg:'#ffebee', desc:'נקודת הבזק < 23°C ונקודת רתיחה < 38°C', examples:'אתר דיאתילי, פנטאן, בנזין (חלק)' },
-  'Class IB':  { label:'Class IB – נוזל דליק',   color:'#c62828', bg:'#fdecea', desc:'נקודת הבזק < 23°C ונקודת רתיחה ≥ 38°C', examples:'אצטון, אתנול, בנזן, טולואן, מתנול' },
-  'Class IC':  { label:'Class IC – נוזל דליק',   color:'#e53935', bg:'#fff3e0', desc:'נקודת הבזק ≥ 23°C ו- < 38°C',            examples:'קסילן, טרפנטין' },
-  'Class II':  { label:'Class II – נוזל בעיר',   color:'#e65100', bg:'#fff8e1', desc:'נקודת הבזק ≥ 38°C ו- < 60°C',            examples:'קרוסין, סולר' },
-  'Class IIIA':{ label:'Class IIIA – נוזל בעיר', color:'#f57f17', bg:'#fffde7', desc:'נקודת הבזק ≥ 60°C ו- < 93°C',            examples:'שמן מנוע, שמן פשתן' },
-  'Class IIIB':{ label:'Class IIIB – נוזל בעיר', color:'#827717', bg:'#f9fbe7', desc:'נקודת הבזק ≥ 93°C',                      examples:'גליצרין, שמן צמחי, אתילן גליקול' },
+  'Class IA':  { label:'Class IA – נוזל דליק',   color:'#b71c1c', bg:'#ffebee', desc:'נקודת הבזק < 22.8°C ונקודת רתיחה < 37.8°C', examples:'אתר דיאתילי, פנטאן, איזופנטאן, פטרוליום אתר' },
+  'Class IB':  { label:'Class IB – נוזל דליק',   color:'#c62828', bg:'#fdecea', desc:'נקודת הבזק < 22.8°C ונקודת רתיחה ≥ 37.8°C', examples:'בנזין, אצטון, אתנול, בנזן, טולואן, מתנול' },
+  'Class IC':  { label:'Class IC – נוזל דליק',   color:'#e53935', bg:'#fff3e0', desc:'נקודת הבזק ≥ 22.8°C ו- < 37.8°C',             examples:'קסילן, טרפנטין' },
+  'Class II':  { label:'Class II – נוזל בעיר',   color:'#e65100', bg:'#fff8e1', desc:'נקודת הבזק ≥ 37.8°C ו- < 60°C',               examples:'קרוסין, סולר' },
+  'Class IIIA':{ label:'Class IIIA – נוזל בעיר', color:'#f57f17', bg:'#fffde7', desc:'נקודת הבזק ≥ 60°C ו- < 93.3°C',                examples:'פנול, פורמלין 37%, נפטלין, סולר (חלק)' },
+  'Class IIIB':{ label:'Class IIIB – נוזל בעיר', color:'#827717', bg:'#f9fbe7', desc:'נקודת הבזק ≥ 93.3°C',                          examples:'גליצרין, שמן צמחי, שמן מנוע, שמן פשתן, אתילן גליקול' },
 };
 
 /* ── CLASSIFY BY FLASH POINT + BOILING POINT ── */
 function classifyNFPA30(fp, bp){
   if(isNaN(fp)) return null;
-  if(fp < 23){
-    if(!isNaN(bp) && bp < 38) return 'Class IA';
+  if(fp < 22.8){
+    if(!isNaN(bp) && bp < 37.8) return 'Class IA';
     return 'Class IB';
   }
-  if(fp < 38)  return 'Class IC';
-  if(fp < 60)  return 'Class II';
-  if(fp < 93)  return 'Class IIIA';
+  if(fp < 37.8) return 'Class IC';
+  if(fp < 60)   return 'Class II';
+  if(fp < 93.3) return 'Class IIIA';
   return 'Class IIIB';
 }
 
@@ -1220,27 +1538,39 @@ function classBadge(cls){
   return `<span style="background:${c.bg};color:${c.color};border:1.5px solid ${c.color};border-radius:6px;padding:4px 12px;font-weight:700;font-size:.9rem">${c.label}</span>`;
 }
 
-/* ── MAQ TABLE ── */
+/* ── MAQ TABLE (NFPA 400 Table 5.2.1.1.3 – Storage / Use-Closed / Use-Open) ── */
 function maqTable(item){
   const hasMaq = item.msc||item.mso||item.muc||item.muo||item.mgs||item.mgu;
   if(!hasMaq) return '<p style="color:var(--muted);font-size:.85rem">אין נתוני MAQ זמינים לחומר זה</p>';
 
-  const row = (label, val) => val && val!=='' && val!=='0' ?
+  // Determine correct unit by physical state (solid → kg, liquid → L)
+  const grp = (item.grp||'');
+  const isSolid = /מוצק/.test(grp) || item.fp==='מוצק';
+  const liqUnit = isSolid ? 'ק"ג' : 'ליטר';
+
+  // NFPA 400 has a single Storage column (no closed/open split).
+  // Use msc as the primary storage value, fall back to mso when msc is empty.
+  const storageVal = (item.msc && item.msc!=='') ? item.msc : (item.mso||'');
+
+  const fmtVal = (v, unit) => {
+    if(v==='ללא הגבלה'||v==='NL') return 'ללא הגבלה';
+    return v + ' ' + unit;
+  };
+  const row = (label, val, unit) => val && val!=='' && val!=='0' ?
     `<tr><td style="padding:7px 12px;color:var(--muted);font-size:.85rem;border-bottom:1px solid #f0f0ee">${label}</td>
-         <td style="padding:7px 12px;font-weight:600;font-size:.88rem;border-bottom:1px solid #f0f0ee">${val}</td></tr>` : '';
+         <td style="padding:7px 12px;font-weight:600;font-size:.88rem;border-bottom:1px solid #f0f0ee">${fmtVal(val, unit)}</td></tr>` : '';
 
   return `<table style="width:100%;border-collapse:collapse;border:1px solid var(--border);border-radius:8px;overflow:hidden">
     <thead><tr style="background:var(--green);color:#fff">
-      <th style="padding:9px 12px;text-align:right;font-size:.82rem">סוג</th>
+      <th style="padding:9px 12px;text-align:right;font-size:.82rem">סוג שימוש</th>
       <th style="padding:9px 12px;text-align:right;font-size:.82rem">כמות מרבית (MAQ)</th>
     </tr></thead>
     <tbody>
-      ${row('אחסון – מערכת סגורה', item.msc ? item.msc+' ליטר/ק"ג' : '')}
-      ${row('אחסון – מערכת פתוחה', item.mso ? item.mso+' ליטר/ק"ג' : '')}
-      ${row('שימוש – מערכת סגורה', item.muc ? item.muc+' ליטר/ק"ג' : '')}
-      ${row('שימוש – מערכת פתוחה', item.muo ? item.muo+' ליטר/ק"ג' : '')}
-      ${row('גז – אחסון', item.mgs ? item.mgs+' מ"ק' : '')}
-      ${row('גז – שימוש', item.mgu ? item.mgu+' מ"ק' : '')}
+      ${row('אחסון (Storage)', storageVal, liqUnit)}
+      ${row('שימוש – מערכת סגורה (Use-Closed)', item.muc, liqUnit)}
+      ${row('שימוש – מערכת פתוחה (Use-Open)', item.muo, liqUnit)}
+      ${row('גז – אחסון (Storage)', item.mgs, 'Nm³')}
+      ${row('גז – שימוש (Use)', item.mgu, 'Nm³')}
     </tbody>
   </table>`;
 }
@@ -1333,21 +1663,13 @@ function n30search(){
       c.en.toLowerCase().includes(q)
     ).slice(0, 100);
 
+    // dropdown removed – results shown as rich cards only (consistent with CAS/UN search)
+    if(drop) drop.style.display = 'none';
+
     if(!matches.length){
-      drop.style.display = 'none';
       resDiv.style.display = 'none';
       return;
     }
-
-    // dropdown suggestions (first 8)
-    drop.innerHTML = matches.slice(0,8).map((c,i)=>`
-      <div onclick="n30Select(${CHEM_DB.indexOf(c)})" style="padding:9px 14px;cursor:pointer;border-bottom:1px solid #f0f0ee;
-           font-size:.86rem;transition:background .12s" onmouseover="this.style.background='#f0f7f1'" onmouseout="this.style.background=''">
-        <strong style="color:var(--green)">${c.he}</strong>
-        <span style="color:var(--muted);font-size:.8rem;margin-right:6px">${c.en}</span>
-        ${c.cls ? `<span style="float:left;font-size:.75rem;background:var(--green-lt);color:var(--green);border-radius:4px;padding:1px 6px">${c.cls}</span>` : ''}
-      </div>`).join('');
-    drop.style.display = 'block';
 
     // result cards
     showResultsList(matches);
@@ -1491,12 +1813,12 @@ const MAQ_TABLE = {
   'cryogenic_oxidizing':     {he:'קריוגני מחמצן',         stor_s:null,  stor_l:170,  stor_g:null, uc_s:null, uc_l:170,  uc_g:null, uo_s:null, uo_l:170,  fn_s:'ab', fn_u:'ab', protLevel:3, unit:'L'},
   'cryogenic_inert':         {he:'קריוגני אינרטי',        stor_s:null,  stor_l:'NL', stor_g:null, uc_s:null, uc_l:'NL', uc_g:null, uo_s:null, uo_l:'NL', fn_s:'',   fn_u:'',   protLevel:null, unit:'L'},
   // ─── Physical Hazard – Oxidizers (kg/L) ───
-  'oxidizer_4':              {he:'מחמצן Class 4',          stor_s:0.45,  stor_l:0.45, stor_g:null, uc_s:0.11, uc_l:0.11, uc_g:null, uo_s:0.11, uo_l:0.11, fn_s:'', fn_u:'', protLevel:1, unit:'kg',
+  'oxidizer_4':              {he:'מחמצן Class 4',          stor_s:0.45,  stor_l:3.78, stor_g:null, uc_s:0.11, uc_l:0.95, uc_g:null, uo_s:0.11, uo_l:0.95, fn_s:'', fn_u:'', protLevel:1, unit:'kg/L',
     fn_conditions:[{type:'requires_sprinkler', text:'🚫 מחמצן Class 4 מותר רק בבניין מרוסס לחלוטין (NFPA 13) – אסור ללא ספרינקלרים [footnote l]'}]},
-  'oxidizer_3':              {he:'מחמצן Class 3',          stor_s:4.5,   stor_l:4.5,  stor_g:null, uc_s:0.9,  uc_l:0.9,  uc_g:null, uo_s:0.9,  uo_l:0.9,  fn_s:'ab', fn_u:'b', protLevel:2, unit:'kg',
+  'oxidizer_3':              {he:'מחמצן Class 3',          stor_s:4.54,  stor_l:37.85,stor_g:null, uc_s:0.91, uc_l:7.57, uc_g:null, uo_s:0.91, uo_l:7.57, fn_s:'ab', fn_u:'b', protLevel:2, unit:'kg/L',
     fn_conditions:[{type:'maintenance_note', text:'ℹ️ חריג לתחזוקה: עד 99 ק"ג מוצק / 83 ליטר נוזל Class 3 מחמצן מותרים לצרכי תחזוקה/הפעלה/תברואה בלבד, בהגבלת מיכלים מאושרים [footnote m]'}]},
-  'oxidizer_2':              {he:'מחמצן Class 2',          stor_s:113,   stor_l:113,  stor_g:null, uc_s:113,  uc_l:113,  uc_g:null, uo_s:22.7, uo_l:22.7, fn_s:'ab', fn_u:'b', protLevel:3, unit:'kg'},
-  'oxidizer_1':              {he:'מחמצן Class 1',          stor_s:1814,  stor_l:1814, stor_g:null, uc_s:1814, uc_l:1814, uc_g:null, uo_s:454,  uo_l:454,  fn_s:'ab', fn_u:'b', protLevel:null, unit:'kg'},
+  'oxidizer_2':              {he:'מחמצן Class 2',          stor_s:113,   stor_l:946,  stor_g:null, uc_s:113,  uc_l:946,  uc_g:null, uo_s:22.7, uo_l:189.3,fn_s:'ab', fn_u:'b', protLevel:3, unit:'kg/L'},
+  'oxidizer_1':              {he:'מחמצן Class 1',          stor_s:1814,  stor_l:15142,stor_g:null, uc_s:1814, uc_l:15142,uc_g:null, uo_s:454,  uo_l:3785, fn_s:'ab', fn_u:'b', protLevel:null, unit:'kg/L'},
   // ─── Physical Hazard – Oxidizing Gases (Nm³/kg) ───
   'oxidizing_gas':           {he:'גז מחמצן (Gaseous)',     stor_s:null,  stor_l:null, stor_g:42.5, uc_s:null, uc_l:null, uc_g:42.5, uo_s:null, uo_l:null, fn_s:'ab', fn_u:'ab', protLevel:3, unit:'Nm3'},
   'oxidizing_gas_liq':       {he:'גז מחמצן (Liquefied)',   stor_s:null,  stor_l:null, stor_g:68.1, uc_s:null, uc_l:null, uc_g:68.1, uo_s:null, uo_l:null, fn_s:'ab', fn_u:'ab', protLevel:3, unit:'kg'},
@@ -1504,41 +1826,41 @@ const MAQ_TABLE = {
   // שינויים מ-2019: הוסרה קטגוריית UD; Class I עלה מ-5 ל-16 ליב'; Class II פוצל ל-IIA/IIB;
   // Class III עלה מ-125 ל-840 ליב'; רמת ההגנה של Class I שונתה מ-1 ל-2
   // 1 lb = 0.454 kg
-  'organic_peroxide_I':      {he:'פרוקסיד אורגני Class I',   stor_s:7.26,  stor_l:7.26,  stor_g:null, uc_s:3.63, uc_l:3.63, uc_g:null, uo_s:3.63, uo_l:3.63, fn_s:'ab', fn_u:'ab', protLevel:2, unit:'kg'},
+  'organic_peroxide_I':      {he:'פרוקסיד אורגני Class I',   stor_s:7.26,  stor_l:60.6,  stor_g:null, uc_s:3.63, uc_l:30.3, uc_g:null, uo_s:3.63, uo_l:30.3, fn_s:'ab', fn_u:'ab', protLevel:2, unit:'kg/L'},
   // Class IIA: 100 lb storage; Class IIB: 400 lb storage (פיצול חדש ב-NFPA 400-2025)
-  'organic_peroxide_IIA':    {he:'פרוקסיד אורגני Class IIA', stor_s:45.4,  stor_l:45.4,  stor_g:null, uc_s:45.4, uc_l:45.4, uc_g:null, uo_s:22.7, uo_l:22.7, fn_s:'ab', fn_u:'b',  protLevel:3, unit:'kg'},
-  'organic_peroxide_IIB':    {he:'פרוקסיד אורגני Class IIB', stor_s:181.4, stor_l:181.4, stor_g:null, uc_s:181.4,uc_l:181.4,uc_g:null, uo_s:90.7, uo_l:90.7, fn_s:'ab', fn_u:'b',  protLevel:3, unit:'kg'},
+  'organic_peroxide_IIA':    {he:'פרוקסיד אורגני Class IIA', stor_s:45.4,  stor_l:378.5, stor_g:null, uc_s:45.4, uc_l:378.5,uc_g:null, uo_s:22.7, uo_l:189.3,fn_s:'ab', fn_u:'b',  protLevel:3, unit:'kg/L'},
+  'organic_peroxide_IIB':    {he:'פרוקסיד אורגני Class IIB', stor_s:181.4, stor_l:1514,  stor_g:null, uc_s:181.4,uc_l:1514, uc_g:null, uo_s:90.7, uo_l:757,  fn_s:'ab', fn_u:'b',  protLevel:3, unit:'kg/L'},
   // Class III: 840 lb (עלה מ-125 ליב' בגרסאות קודמות)
-  'organic_peroxide_III':    {he:'פרוקסיד אורגני Class III', stor_s:381.2, stor_l:381.2, stor_g:null, uc_s:381.2,uc_l:381.2,uc_g:null, uo_s:381.2,uo_l:381.2, fn_s:'ab', fn_u:'b',  protLevel:3, unit:'kg'},
+  'organic_peroxide_III':    {he:'פרוקסיד אורגני Class III', stor_s:381.2, stor_l:3180,  stor_g:null, uc_s:381.2,uc_l:3180, uc_g:null, uo_s:381.2,uo_l:3180, fn_s:'ab', fn_u:'b',  protLevel:3, unit:'kg/L'},
   'organic_peroxide_IV':     {he:'פרוקסיד אורגני Class IV',  stor_s:'NL',  stor_l:'NL',  stor_g:null, uc_s:'NL', uc_l:'NL', uc_g:null, uo_s:'NL', uo_l:'NL', fn_s:'',   fn_u:'',   protLevel:null, unit:'kg'},
   'organic_peroxide_V':      {he:'פרוקסיד אורגני Class V',   stor_s:'NL',  stor_l:'NL',  stor_g:null, uc_s:'NL', uc_l:'NL', uc_g:null, uo_s:'NL', uo_l:'NL', fn_s:'',   fn_u:'',   protLevel:null, unit:'kg'},
   // ─── Physical Hazard – Pyrophoric (kg/Nm³) ───
-  'pyrophoric':              {he:'פירופורי (מוצק/נוזל)',   stor_s:1.8,   stor_l:1.8,  stor_g:null, uc_s:0.45, uc_l:0.45, uc_g:null, uo_s:'NP', uo_l:'NP', fn_s:'', fn_u:'', protLevel:2, unit:'kg',
+  'pyrophoric':              {he:'פירופורי (מוצק/נוזל)',   stor_s:1.81,  stor_l:15.14,stor_g:null, uc_s:0.45, uc_l:3.78, uc_g:null, uo_s:'NP', uo_l:'NP', fn_s:'', fn_u:'', protLevel:2, unit:'kg/L',
     fn_conditions:[{type:'requires_sprinkler', text:'🚫 חומר פירופורי מותר רק בבניין מרוסס לחלוטין (NFPA 13) – אסור ללא ספרינקלרים [footnote l]'}]},
   'pyrophoric_gas':          {he:'גז פירופורי (Gaseous)',   stor_s:null,  stor_l:null, stor_g:1.42, uc_s:null, uc_l:null, uc_g:1.42, uo_s:null, uo_l:null, fn_s:'', fn_u:'', protLevel:2, unit:'Nm3',
     fn_conditions:[{type:'requires_sprinkler', text:'🚫 גז פירופורי מותר רק בבניין מרוסס לחלוטין (NFPA 13) – אסור ללא ספרינקלרים [footnote l]'}]},
   'pyrophoric_gas_liq':      {he:'גז פירופורי (Liquefied)', stor_s:null,  stor_l:null, stor_g:1.8,  uc_s:null, uc_l:null, uc_g:1.8,  uo_s:null, uo_l:null, fn_s:'', fn_u:'', protLevel:2, unit:'kg',
     fn_conditions:[{type:'requires_sprinkler', text:'🚫 גז פירופורי נוזל מותר רק בבניין מרוסס לחלוטין (NFPA 13) – אסור ללא ספרינקלרים [footnote l]'}]},
   // ─── Physical Hazard – Unstable Reactive (kg) ───
-  'unstable_4':              {he:'לא יציב (Reactive) Class 4',stor_s:0.45,stor_l:0.45, stor_g:null, uc_s:0.11, uc_l:0.11, uc_g:null, uo_s:0.11, uo_l:0.11, fn_s:'', fn_u:'', protLevel:1, unit:'kg',
+  'unstable_4':              {he:'לא יציב (Reactive) Class 4',stor_s:0.45,stor_l:3.78, stor_g:null, uc_s:0.11, uc_l:0.95, uc_g:null, uo_s:0.11, uo_l:0.95, fn_s:'', fn_u:'', protLevel:1, unit:'kg/L',
     fn_conditions:[{type:'requires_sprinkler', text:'🚫 לא יציב Class 4 מותר רק בבניין מרוסס לחלוטין (NFPA 13) – אסור ללא ספרינקלרים [footnote l]'}]},
-  'unstable_3':              {he:'לא יציב (Reactive) Class 3',stor_s:2.27,stor_l:2.27, stor_g:null, uc_s:0.45, uc_l:0.45, uc_g:null, uo_s:0.45, uo_l:0.45, fn_s:'ab', fn_u:'b', protLevel:1, unit:'kg'},
-  'unstable_2':              {he:'לא יציב (Reactive) Class 2',stor_s:22.7,stor_l:22.7, stor_g:null, uc_s:22.7, uc_l:22.7, uc_g:null, uo_s:4.5,  uo_l:4.5,  fn_s:'ab', fn_u:'b', protLevel:2, unit:'kg'},
+  'unstable_3':              {he:'לא יציב (Reactive) Class 3',stor_s:2.27,stor_l:18.93,stor_g:null, uc_s:0.45, uc_l:3.78, uc_g:null, uo_s:0.45, uo_l:3.78, fn_s:'ab', fn_u:'b', protLevel:1, unit:'kg/L'},
+  'unstable_2':              {he:'לא יציב (Reactive) Class 2',stor_s:22.7,stor_l:189.3,stor_g:null, uc_s:22.7, uc_l:189.3,uc_g:null, uo_s:4.54, uo_l:37.85,fn_s:'ab', fn_u:'b', protLevel:2, unit:'kg/L'},
   'unstable_1':              {he:'לא יציב (Reactive) Class 1',stor_s:'NL',stor_l:'NL', stor_g:null, uc_s:'NL', uc_l:'NL', uc_g:null, uo_s:'NL', uo_l:'NL', fn_s:'',   fn_u:'',   protLevel:null, unit:'kg'},
   // ─── Physical Hazard – Water Reactive (kg) ───
-  'water_reactive_3':        {he:'רגיש למים Class 3',      stor_s:2.27,  stor_l:2.27, stor_g:null, uc_s:2.27, uc_l:2.27, uc_g:null, uo_s:0.45, uo_l:0.45, fn_s:'ab', fn_u:'b', protLevel:2, unit:'kg'},
-  'water_reactive_2':        {he:'רגיש למים Class 2',      stor_s:22.7,  stor_l:22.7, stor_g:null, uc_s:22.7, uc_l:22.7, uc_g:null, uo_s:4.5,  uo_l:4.5,  fn_s:'ab', fn_u:'b', protLevel:3, unit:'kg'},
+  'water_reactive_3':        {he:'רגיש למים Class 3',      stor_s:2.27,  stor_l:18.93,stor_g:null, uc_s:2.27, uc_l:18.93,uc_g:null, uo_s:0.45, uo_l:3.78, fn_s:'ab', fn_u:'b', protLevel:2, unit:'kg/L'},
+  'water_reactive_2':        {he:'רגיש למים Class 2',      stor_s:22.7,  stor_l:189.3,stor_g:null, uc_s:22.7, uc_l:189.3,uc_g:null, uo_s:4.54, uo_l:37.85,fn_s:'ab', fn_u:'b', protLevel:3, unit:'kg/L'},
   'water_reactive_1':        {he:'רגיש למים Class 1',      stor_s:'NL',  stor_l:'NL', stor_g:null, uc_s:'NL', uc_l:'NL', uc_g:null, uo_s:'NL', uo_l:'NL', fn_s:'',   fn_u:'',   protLevel:null, unit:'kg'},
   // ─── Health Hazard Materials ───
   'corrosive':               {he:'קורוזיבי (מוצק/נוזל)',  stor_s:2268,  stor_l:1893, stor_g:null, uc_s:2268, uc_l:1893, uc_g:null, uo_s:454,  uo_l:379,  fn_s:'ab', fn_u:'b', protLevel:4, unit:'kg/L'},
-  'corrosive_gas':           {he:'גז קורוזיבי (Gaseous)',  stor_s:null,  stor_l:null, stor_g:22.9, uc_s:null, uc_l:null, uc_g:22.9, uo_s:null, uo_l:null, fn_s:'abg',fn_u:'ab',protLevel:4, unit:'Nm3'},
+  'corrosive_gas':           {he:'גז קורוזיבי (Gaseous)',  stor_s:null,  stor_l:null, stor_g:22.9, uc_s:null, uc_l:null, uc_g:22.9, uo_s:null, uo_l:null, fn_s:'ab', fn_u:'ab',protLevel:4, unit:'Nm3'},
   'corrosive_gas_liq':       {he:'גז קורוזיבי (Liquefied)',stor_s:null,  stor_l:null, stor_g:68.1, uc_s:null, uc_l:null, uc_g:68.1, uo_s:null, uo_l:null, fn_s:'ab', fn_u:'ab', protLevel:4, unit:'kg'},
-  'highly_toxic':            {he:'רעיל מאוד (מוצק/נוזל)', stor_s:4.5,   stor_l:4.5,  stor_g:null, uc_s:4.5,  uc_l:4.5,  uc_g:null, uo_s:1.36, uo_l:1.36, fn_s:'ab', fn_u:'b', protLevel:4, unit:'kg'},
+  'highly_toxic':            {he:'רעיל מאוד (מוצק/נוזל)', stor_s:4.54,  stor_l:37.85,stor_g:null, uc_s:4.54, uc_l:37.85,uc_g:null, uo_s:1.36, uo_l:11.36,fn_s:'ab', fn_u:'b', protLevel:4, unit:'kg/L'},
   'highly_toxic_gas':        {he:'גז רעיל מאוד (Gaseous)', stor_s:null,  stor_l:null, stor_g:0.57, uc_s:null, uc_l:null, uc_g:0.57, uo_s:null, uo_l:null, fn_s:'b', fn_u:'b', protLevel:4, unit:'Nm3',
     fn_conditions:[{type:'requires_enclosure', text:'🚫 גז רעיל מאוד מותר רק באחסון/שימוש בחדרי גזים, ארונות גז מאושרים, או מתקני פליטה – תמיד, ללא קשר לספרינקלרים [footnote o]'}]},
   'highly_toxic_gas_liq':    {he:'גז רעיל מאוד (Liquefied)',stor_s:null, stor_l:null, stor_g:1.8,  uc_s:null, uc_l:null, uc_g:1.8,  uo_s:null, uo_l:null, fn_s:'b', fn_u:'b', protLevel:4, unit:'kg',
     fn_conditions:[{type:'requires_enclosure', text:'🚫 גז רעיל מאוד (נוזל) מותר רק באחסון/שימוש בחדרי גזים, ארונות גז מאושרים, או מתקני פליטה – תמיד, ללא קשר לספרינקלרים [footnote o]'}]},
-  'toxic':                   {he:'רעיל (מוצק/נוזל)',      stor_s:227,   stor_l:227,  stor_g:null, uc_s:227,  uc_l:227,  uc_g:null, uo_s:56.7, uo_l:56.7, fn_s:'ab', fn_u:'b', protLevel:4, unit:'kg'},
+  'toxic':                   {he:'רעיל (מוצק/נוזל)',      stor_s:227,   stor_l:1892.5,stor_g:null,uc_s:227,  uc_l:1892.5,uc_g:null,uo_s:56.7, uo_l:473.2,fn_s:'ab', fn_u:'b', protLevel:4, unit:'kg/L'},
   'toxic_gas':               {he:'גז רעיל (Gaseous)',      stor_s:null,  stor_l:null, stor_g:22.9, uc_s:null, uc_l:null, uc_g:22.9, uo_s:null, uo_l:null, fn_s:'ab', fn_u:'ab', protLevel:4, unit:'Nm3'},
   'toxic_gas_liq':           {he:'גז רעיל (Liquefied)',    stor_s:null,  stor_l:null, stor_g:68.1, uc_s:null, uc_l:null, uc_g:68.1, uo_s:null, uo_l:null, fn_s:'ab', fn_u:'ab', protLevel:4, unit:'kg'},
 };
@@ -1577,17 +1899,33 @@ function maqUpdateFloorInfo(){
 
 /* ── Category change: auto-select unit ── */
 function maqOnCategoryChange(){
-  const cat = document.getElementById('maqCategory').value;
+  const catEl = document.getElementById('maqCategory');
+  if(!catEl) return;
+  const cat = catEl.value;
+  // Remove corrosive hint if present
+  const oldHint = document.getElementById('corrosiveUnitHint');
+  if(oldHint) oldHint.remove();
   if(!cat) return;
   const row = MAQ_TABLE[cat];
   if(!row) return;
   const unitSel = document.getElementById('maqUnit');
+  if(!unitSel) return;
   if(row.unit === 'Nm3') unitSel.value = 'Nm3';
   else if(row.unit === 'kg') unitSel.value = 'kg';
   else if(row.unit === 'L') unitSel.value = 'L';
   else if(row.unit === 'kg/L'){
-    // For corrosives: solid=kg, liquid=L
+    // For corrosives: user must choose — default to kg but keep L visible
+    // solid corrosives → kg (MAQ=2268), liquid corrosives → L (MAQ=1893)
     unitSel.value = 'kg';
+    // Hint shown below the unit selector
+    const existing = document.getElementById('corrosiveUnitHint');
+    if(!existing){
+      const hint = document.createElement('div');
+      hint.id = 'corrosiveUnitHint';
+      hint.style.cssText = 'font-size:.75rem;color:#7c3aed;margin-top:4px;';
+      hint.textContent = '⚠️ קורוזיבי: מוצק → ק"ג (MAQ=2,268 ק"ג) | נוזל → ליטר (MAQ=1,893 ל)';
+      unitSel.parentNode.appendChild(hint);
+    }
   }
 }
 
@@ -1623,6 +1961,23 @@ function maqRemoveMaterial(id){
   maqRenderMaterialsList();
 }
 
+/* ── Clear all materials and reset the MAQ calculator ── */
+function maqClearAll(){
+  if(maqMaterials.length && !confirm('לנקות את כל החומרים שנוספו?')) return;
+  maqMaterials = [];
+  maqNextId = 1;
+  // Reset input fields
+  const catEl = document.getElementById('maqCategory'); if(catEl) catEl.value = '';
+  const useEl = document.getElementById('maqUseType');  if(useEl) useEl.value = 'stor';
+  const qtyEl = document.getElementById('maqQty');      if(qtyEl) qtyEl.value = '';
+  const unitEl= document.getElementById('maqUnit');     if(unitEl) unitEl.value = 'kg';
+  const hint  = document.getElementById('corrosiveUnitHint'); if(hint) hint.remove();
+  // Hide calc button + results
+  document.getElementById('maqCalcBtnWrap').style.display = 'none';
+  document.getElementById('maqResults').style.display = 'none';
+  maqRenderMaterialsList();
+}
+
 /* ── Render materials list ── */
 function maqRenderMaterialsList(){
   const cont = document.getElementById('maqMaterialsList');
@@ -1655,7 +2010,7 @@ function maqRenderMaterialsList(){
 /* ── Get MAQ base value for a category+useType ── */
 function maqGetBaseValue(cat, useType, unit){
   const row = MAQ_TABLE[cat];
-  if(!row) return null;
+  if(!row) return {val: null, fn: '', protLevel: null};
 
   // Determine state type from unit
   const isGas = (unit === 'Nm3');
@@ -1664,19 +2019,25 @@ function maqGetBaseValue(cat, useType, unit){
   let val = null;
   let fn = '';
 
+  // Liquefied gas: unit='kg', stor_s/stor_l null, stor_g holds the mass value
+  const isLiquefiedGas = (unit === 'kg' && !row.stor_s && !row.stor_l && row.stor_g != null);
+
   if(useType === 'stor'){
     fn = row.fn_s;
     if(isGas) val = row.stor_g;
+    else if(isLiquefiedGas) val = row.stor_g;
     else if(isSolid || unit === 'kg') val = row.stor_s || row.stor_l;
     else val = row.stor_l || row.stor_s;
   } else if(useType === 'uc'){
     fn = row.fn_u || row.fn_s;
     if(isGas) val = row.uc_g;
+    else if(isLiquefiedGas) val = row.uc_g;
     else if(isSolid || unit === 'kg') val = row.uc_s || row.uc_l;
     else val = row.uc_l || row.uc_s;
   } else { // uo
     fn = row.fn_u || row.fn_s;
     if(isGas) val = null; // open use gas usually N/A
+    else if(isLiquefiedGas) val = row.uo_g != null ? row.uo_g : null;
     else if(isSolid || unit === 'kg') val = row.uo_s;
     else val = row.uo_l || row.uo_s;
   }
@@ -1763,7 +2124,7 @@ function maqCalcAll(){
     }
 
     // Track protection level
-    if(base.protLevel && (highestProtLevel === null || base.protLevel < highestProtLevel)){
+    if(base.protLevel && (highestProtLevel === null || base.protLevel > highestProtLevel)){
       highestProtLevel = base.protLevel;
     }
 
@@ -2044,6 +2405,32 @@ function maqCalcAll(){
     overallSub.textContent = 'נמצאו חריגות!';
   }
 
+  // Fire-risk-survey requirement banner – shown whenever MAQ is exceeded / high hazard
+  const surveyEl = document.getElementById('maqSurveyWarning');
+  if(!allPass){
+    const protLine = highestProtLevel && H_LEVELS[highestProtLevel]
+      ? `רמת הסיכון הגבוהה ביותר שזוהתה: <strong>Protection Level ${highestProtLevel} – ${H_LEVELS[highestProtLevel].he}</strong> (${H_LEVELS[highestProtLevel].desc}).`
+      : 'זוהתה חריגה מהכמות המרבית המותרת (MAQ) לאזור בקרה.';
+    surveyEl.innerHTML = `
+      <div style="background:#ffebee;border:2px solid #b71c1c;border-radius:10px;padding:16px 20px;animation:pop .2s ease">
+        <div style="font-weight:900;font-size:1.08rem;color:#b71c1c;display:flex;align-items:center;gap:8px">
+          🚨 נדרשת הכנת סקר סיכוני אש
+        </div>
+        <div style="font-size:.9rem;color:#b71c1c;margin-top:8px;line-height:1.7">
+          חריגה מ-MAQ מסווגת את המבנה כ-<strong>סיכון גבוה (High-Hazard)</strong> לפי NFPA 400.
+          ${protLine}
+          <br>במצב זה <strong>נדרש להכין סקר סיכוני אש</strong> ולעמוד בדרישות הנוספות:
+          <ul style="margin:8px 18px 0;padding:0">
+            <li>סיווג תפוסה High-Hazard ועמידה ב-NFPA 400 Section 5.3 ו-Chapter 6</li>
+            <li>בחינת אמצעי הגנה (מתזים NFPA 13, ארונות מאושרים, חדרי גזים, פליטה)</li>
+            <li>הגשת סקר סיכוני אש לרשות הארצית לכבאות והצלה</li>
+          </ul>
+        </div>
+      </div>`;
+  } else {
+    surveyEl.innerHTML = '';
+  }
+
   // Scroll to results
   document.getElementById('maqResults').scrollIntoView({behavior:'smooth', block:'start'});
 }
@@ -2057,256 +2444,7 @@ function fmtN(n, d=1){
 /* ── Init floor info ── */
 maqUpdateFloorInfo();
 
-/* ── OLD FUNCTIONS REMOVED - replaced by new multi-material system ── */
-function maqDoSearch(){
-  clearTimeout(maqDebounce);
-  maqDebounce = setTimeout(()=>{
-    const q = document.getElementById('maqSearch').value.trim().toLowerCase();
-    const drop = document.getElementById('maqDrop');
-    const resDiv = document.getElementById('maqSearchRes');
-    if(q.length < 2){ drop.style.display='none'; resDiv.style.display='none'; return; }
-
-    const matches = CHEM_DB.filter(c=>
-      c.he.toLowerCase().includes(q) || c.en.toLowerCase().includes(q)
-    ).slice(0, 80);
-
-    if(!matches.length){ drop.style.display='none'; resDiv.style.display='none'; return; }
-
-    drop.innerHTML = matches.slice(0,8).map(c=>`
-      <div onclick="maqPickChem(${CHEM_DB.indexOf(c)})" style="padding:9px 14px;cursor:pointer;border-bottom:1px solid #f0f0ee;
-           font-size:.86rem;transition:background .12s" onmouseover="this.style.background='#f0f7f1'" onmouseout="this.style.background=''">
-        <strong style="color:var(--green)">${c.he}</strong>
-        <span style="color:var(--muted);font-size:.8rem;margin-right:6px">${c.en}</span>
-        ${c.grp ? `<span style="float:left;font-size:.72rem;background:var(--green-lt);color:var(--green);border-radius:4px;padding:1px 6px">${c.grp}</span>` : ''}
-      </div>`).join('');
-    drop.style.display='block';
-
-    maqShowSearchResults(matches);
-  }, 200);
-}
-
-/* ── Search by CAS ── */
-function maqSearchByCAS(){
-  const q = document.getElementById('maqCAS').value.trim().toLowerCase();
-  if(q.length < 3){ document.getElementById('maqSearchRes').style.display='none'; return; }
-  const matches = CHEM_DB.filter(c=> c.cas && c.cas.toLowerCase().includes(q)).slice(0,50);
-  maqShowSearchResults(matches);
-}
-
-/* ── Search by UN ── */
-function maqSearchByUN(){
-  const q = document.getElementById('maqUN').value.trim();
-  if(q.length < 2){ document.getElementById('maqSearchRes').style.display='none'; return; }
-  const matches = CHEM_DB.filter(c=> c.un && (c.un===q || c.un.includes(q))).slice(0,50);
-  maqShowSearchResults(matches);
-}
-
-/* ── Show search results list ── */
-function maqShowSearchResults(matches){
-  const resDiv = document.getElementById('maqSearchRes');
-  const countEl = document.getElementById('maqResCount');
-  const list = document.getElementById('maqResList');
-  if(!matches.length){ resDiv.style.display='none'; return; }
-
-  countEl.textContent = `נמצאו ${matches.length} חומרים`;
-  list.innerHTML = matches.map(c=>{
-    const idx = CHEM_DB.indexOf(c);
-    const hasMaq = c.msc||c.mso||c.muc||c.muo||c.mgs||c.mgu;
-    return `<div onclick="maqPickChem(${idx})" style="background:#fff;border:1.5px solid var(--border);border-radius:8px;
-            padding:12px 16px;cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:space-between;gap:10px"
-            onmouseover="this.style.borderColor='var(--green)';this.style.background='var(--green-lt)'"
-            onmouseout="this.style.borderColor='var(--border)';this.style.background='#fff'">
-      <div>
-        <div style="font-weight:700;font-size:.95rem;color:var(--green)">${c.he}</div>
-        <div style="font-size:.82rem;color:var(--muted);margin-top:2px">${c.en} ${c.cas?'| CAS: '+c.cas:''}</div>
-        <div style="margin-top:5px;display:flex;gap:6px;flex-wrap:wrap">
-          ${c.grp?`<span style="font-size:.72rem;background:#f0f3ee;padding:2px 7px;border-radius:4px;color:var(--muted)">${c.grp}</span>`:''}
-          ${c.cls?`<span style="font-size:.72rem;background:#f0f3ee;padding:2px 7px;border-radius:4px;color:var(--muted)">${c.cls}</span>`:''}
-        </div>
-      </div>
-      <div style="flex-shrink:0;text-align:center">
-        ${hasMaq ? '<span style="font-size:.75rem;background:var(--green-lt);color:var(--green);border-radius:6px;padding:3px 10px;font-weight:600">MAQ זמין</span>'
-                 : '<span style="font-size:.75rem;color:var(--muted)">אין MAQ</span>'}
-      </div>
-    </div>`;
-  }).join('');
-  resDiv.style.display='block';
-}
-
-/* ── Pick a chemical ── */
-function maqPickChem(idx){
-  const item = CHEM_DB[idx];
-  if(!item) return;
-  maqSelectedChem = item;
-
-  document.getElementById('maqSearch').value = item.he;
-  document.getElementById('maqDrop').style.display = 'none';
-  document.getElementById('maqSearchRes').style.display = 'none';
-  if(item.cas) document.getElementById('maqCAS').value = item.cas;
-  if(item.un && item.un!=='לא רלוונטי') document.getElementById('maqUN').value = item.un;
-
-  // Show chemical badge
-  const cls = item.cls;
-  const ci = cls && NFPA30_CLASSES[cls] ? NFPA30_CLASSES[cls] : null;
-  document.getElementById('maqChemBadge').innerHTML = `
-    <div style="display:flex;align-items:center;gap:14px;background:${ci?ci.bg:'var(--green-lt)'};
-         border:1.5px solid ${ci?ci.color:'var(--green)'};border-radius:10px;padding:14px 18px;">
-      <div style="font-size:2rem">🧪</div>
-      <div style="flex:1">
-        <div style="font-weight:800;font-size:1rem;color:var(--text)">${item.he} <span style="font-weight:400;font-size:.88rem;color:var(--muted)">/ ${item.en}</span></div>
-        <div style="margin-top:4px;display:flex;gap:8px;flex-wrap:wrap;align-items:center">
-          ${ci?`<span style="background:${ci.bg};color:${ci.color};border:1px solid ${ci.color};border-radius:5px;padding:2px 8px;font-size:.78rem;font-weight:700">${ci.label}</span>`:''}
-          ${item.grp?`<span style="background:var(--green-lt);color:var(--green);border:1px solid #a5d6a7;border-radius:5px;padding:2px 8px;font-size:.78rem;font-weight:600">${item.grp}</span>`:''}
-          ${item.fp&&item.fp!=='לא דליק'&&item.fp!=='לא רלוונטי'&&item.fp!=='גז'&&item.fp!=='מוצק'?
-            `<span style="font-size:.78rem;color:var(--muted)">הבזק: ${item.fp}°C</span>`:''
-          }
-        </div>
-      </div>
-    </div>`;
-
-  // Auto-select best unit based on chemical type
-  const unitSel = document.getElementById('maqUnit');
-  if(item.mgs || item.mgu){
-    unitSel.value = 'm3';
-  } else {
-    unitSel.value = 'L';
-  }
-
-  // Show step 2
-  document.getElementById('maqStep2').style.display = 'block';
-  document.getElementById('maqStep2').scrollIntoView({behavior:'smooth', block:'start'});
-  maqCalc();
-}
-
-/* ── Unit conversion to NFPA 400 units (gal, lbs, ft³) ── */
-function maqConvertQty(val, fromUnit, stateType){
-  // NFPA 400 uses: gallons (liquids), pounds (solids), ft³ (gases)
-  if(stateType==='gas'){
-    // Target: ft³
-    switch(fromUnit){
-      case 'cf':  return val;
-      case 'm3':  return val / 0.02832;
-      case 'L':   return val / 28.32;
-      default:    return val;
-    }
-  } else if(stateType==='solid'){
-    // Target: lbs
-    switch(fromUnit){
-      case 'lbs': return val;
-      case 'kg':  return val / 0.4536;
-      case 'L':   return val * 2.205; // assume ~1kg/L
-      case 'gal': return val * 10;    // NFPA default: 10 lb/gal
-      default:    return val;
-    }
-  } else {
-    // Target: gallons
-    switch(fromUnit){
-      case 'gal': return val;
-      case 'L':   return val / 3.785;
-      case 'kg':  return val / (10*0.4536); // ~10lb/gal default
-      case 'lbs': return val / 10;          // NFPA default: 10 lb/gal
-      default:    return val;
-    }
-  }
-}
-
-function maqGetUnitLabel(unit){
-  switch(unit){
-    case 'L':   return 'ליטר';
-    case 'kg':  return 'ק"ג';
-    case 'gal': return 'גלון';
-    case 'lbs': return 'פאונד';
-    case 'm3':  return 'מ"ק';
-    case 'cf':  return 'רגל³';
-    default:    return unit;
-  }
-}
-
-/* ── Map chemical group to MAQ_TABLE key ── */
-function maqMapGroup(item){
-  const g = (item.grp||'').trim();
-  const cls = (item.cls||'').trim();
-
-  // Flammable/combustible liquids by NFPA 30 class
-  if(cls==='Class IA') return 'flammable_liquid_IA';
-  if(cls==='Class IB'||cls==='Class IC') return 'flammable_liquid_IB_IC';
-  if(cls==='Class II') return 'combustible_liquid_II';
-  if(cls==='Class IIIA') return 'combustible_liquid_IIIA';
-  if(cls==='Class IIIB') return 'combustible_liquid_IIIB';
-
-  // Gas types
-  if(/גזים דליקים קריוגניים/.test(g)) return 'cryogenic_flammable';
-  if(/מחמצנים קריוגניים/.test(g)) return 'cryogenic_oxidizing';
-  if(/קריוגניים אינרטיים/.test(g)) return 'cryogenic_inert';
-  if(/גזים דליקים/.test(g)||/גז דליק/.test(g)) return 'flammable_gas';
-  if(/גזים מחמצנים/.test(g)||/גז מחמצן/.test(g)) return 'oxidizing_gas';
-  if(/גזים רעילים מאוד/.test(g)) return 'highly_toxic_gas';
-  if(/גזים רעילים/.test(g)||/גז רעיל/.test(g)) return 'toxic_gas';
-  if(/גזים קורוזיביים/.test(g)||/גז קורוזיבי/.test(g)) return 'corrosive_gas';
-  if(/גזים אינרטיים/.test(g)||/גז לא דליק/.test(g)||/גז אינרטי/.test(g)) return 'cryogenic_inert';
-
-  // Solids/Liquids
-  if(/מוצקים דליקים/.test(g)||/מוצק דליק/.test(g)) return 'flammable_solid';
-  if(/פרוקסידים אורגניים/.test(g)||/פרוקסיד/.test(g)) return 'organic_peroxide_III';
-  if(/מחמצנים/.test(g)||/מחמצן/.test(g)) return 'oxidizer_2';
-  if(/פירו/.test(g)) return 'pyrophoric';
-  if(/לא יציב/.test(g)) return 'unstable_3';
-  if(/רגישים למים/.test(g)||/רגיש למים/.test(g)) return 'water_reactive_2';
-  if(/קורוזיבי/.test(g)||/קורוזי/.test(g)) return 'corrosive';
-  if(/רעילים מאוד/.test(g)||/רעיל מאוד/.test(g)) return 'highly_toxic';
-  if(/רעיל/.test(g)) return 'toxic';
-
-  // Fallback: try by NFPA 30 text
-  if(/נוזל דליק/.test(g)||cls==='נוזל דליק') return 'flammable_liquid_IB_IC';
-  if(/נוזל בעיר/.test(g)||cls==='נוזל בעיר') return 'combustible_liquid_II';
-
-  return null; // no match
-}
-
-/* ── Get base MAQ value from NFPA 400 table ── */
-function maqGetBase(item, useType, stateType){
-  // stateType: 'solid','liquid','gas'
-  const key = maqMapGroup(item);
-  if(!key) return {val:null, fn:'', tableKey:null};
-  const row = MAQ_TABLE[key];
-  if(!row) return {val:null, fn:'', tableKey:null};
-
-  let val = null;
-  let fn = '';
-  if(useType==='sc'||useType==='so'){
-    fn = row.fn_s;
-    if(stateType==='gas') val = row.stor_g;
-    else if(stateType==='solid') val = row.stor_s;
-    else val = row.stor_l;
-  } else if(useType==='uc'){
-    fn = row.fn_u || row.fn_s;
-    if(stateType==='gas') val = row.uc_g;
-    else if(stateType==='solid') val = row.uc_s;
-    else val = row.uc_l;
-  } else { // uo
-    fn = row.fn_u || row.fn_s;
-    if(stateType==='gas') val = null; // open gas = N/A usually
-    else if(stateType==='solid') val = row.uo_s;
-    else val = row.uo_l;
-  }
-
-  if(val==='NL') return {val:Infinity, fn:fn, tableKey:key, he:row.he};
-  if(val==='NP') return {val:'NP', fn:fn, tableKey:key, he:row.he};
-  if(val===null||val===undefined) return {val:null, fn:fn, tableKey:key, he:row.he};
-  return {val:parseFloat(val), fn:fn, tableKey:key, he:row.he};
-}
-
-/* ── Determine state type ── */
-function maqGetState(item){
-  if(!item.msc && !item.mso && !item.muc && !item.muo && (item.mgs||item.mgu)) return 'gas';
-  const fp = (item.fp||'').toString().toLowerCase();
-  if(fp==='גז'||fp==='gas') return 'gas';
-  const grp = (item.grp||'');
-  if(/גז/.test(grp)) return 'gas';
-  if(/מוצק/.test(grp)) return 'solid';
-  return 'liquid';
-}
-
+/* ── (פונקציות ישנות של MAQ הוסרו – הוחלפו על-ידי maqCalcAll/maqAddMaterial) ── */
 /* ── Calculate protection multiplier based on footnotes ── */
 // fn field convention (NFPA 400-2025 Table 5.2.1.1.3):
 //   'a' = approved cabinet storage → ×2  (footnote a)
@@ -2337,233 +2475,466 @@ function maqProtMult(fn, sprinkler, cabinet){
   return {mult, desc};
 }
 
-/* ── MAIN CALC ── */
-function maqCalc(){
-  const item = maqSelectedChem;
-  if(!item) return;
-
-  const useType   = document.getElementById('maqUseType').value;
-  const qty       = parseFloat(document.getElementById('maqQty').value);
-  const unit      = document.getElementById('maqUnit').value;
-  const floor     = document.getElementById('maqFloor').value;
-  const sprinkler = document.getElementById('maqSprinkler').value==='1';
-  const cabinet   = document.getElementById('maqCabinet').value==='1';
-
-  const state     = maqGetState(item);
-  const base      = maqGetBase(item, useType, state);
-  const floorInfo = FLOOR_FACTORS[floor] || FLOOR_FACTORS['1'];
-
-  // Protection multiplier based on NFPA 400 footnotes
-  const prot = maqProtMult(base.fn, sprinkler, cabinet);
-
-  // Floor percentage
-  const floorPct = floorInfo.pct / 100;
-
-  // Unit labels
-  const unitLabel = state==='gas' ? 'ft³' : state==='solid' ? 'lbs' : 'gal';
-  const unitLabelHe = state==='gas' ? 'רגל³' : state==='solid' ? 'פאונד' : 'גלון';
-
-  // Show step 3
-  document.getElementById('maqStep3').style.display = 'block';
-
-  // Category badge
-  const catLabel = base.he ? `<span style="font-size:.78rem;color:var(--muted)">(${base.he})</span>` : '';
-
-  // Handle special values
-  if(base.val === null){
-    document.getElementById('maqBaseVal').textContent = 'N/A';
-    document.getElementById('maqBaseUnit').textContent = '';
-    document.getElementById('maqMultVal').textContent = '—';
-    document.getElementById('maqMultDesc').textContent = '';
-    document.getElementById('maqFloorVal').textContent = floorInfo.pct+'%';
-    document.getElementById('maqFloorDesc').textContent = floorInfo.label;
-    document.getElementById('maqFinalVal').textContent = 'N/A';
-    document.getElementById('maqFinalUnit').textContent = '';
-    document.getElementById('maqPctText').textContent = '—';
-    document.getElementById('maqBar').style.width = '0%';
-    const mapKey = maqMapGroup(item);
-    document.getElementById('maqStatus').innerHTML = `
-      <div style="background:#fff3e0;border:1.5px solid #e65100;border-radius:9px;padding:12px 16px;color:#e65100;font-size:.88rem">
-        ⚠️ ${mapKey ? 'אין נתוני MAQ לקטגוריה <strong>'+base.he+'</strong> עבור מצב צבירה/סוג פעולה זה.' : 'לא ניתן למפות את החומר <strong>'+item.he+'</strong> לקטגוריית NFPA 400. בדוק ידנית.'}
-        ${base.tableKey && MAQ_TABLE[base.tableKey].note ? '<br><span style="font-size:.82rem">הערה: '+MAQ_TABLE[base.tableKey].note+'</span>' : ''}
-      </div>`;
-    document.getElementById('maqBreakdown').style.display='none';
-    maqShowAllTypes(item);
-    return;
-  }
-
-  if(base.val === 'NP'){
-    document.getElementById('maqBaseVal').textContent = 'NP';
-    document.getElementById('maqBaseUnit').textContent = 'Not Permitted';
-    document.getElementById('maqMultVal').textContent = '—';
-    document.getElementById('maqMultDesc').textContent = '';
-    document.getElementById('maqFloorVal').textContent = '—';
-    document.getElementById('maqFloorDesc').textContent = '';
-    document.getElementById('maqFinalVal').textContent = 'אסור';
-    document.getElementById('maqFinalUnit').textContent = '';
-    document.getElementById('maqPctText').textContent = '—';
-    document.getElementById('maqBar').style.width = '100%';
-    document.getElementById('maqBar').style.background = '#c62828';
-    document.getElementById('maqStatus').innerHTML = `
-      <div style="background:#ffebee;border:1.5px solid #c62828;border-radius:9px;padding:14px 18px;animation:pop .2s ease">
-        <div style="font-weight:800;font-size:1rem;color:#b71c1c">🚫 Not Permitted</div>
-        <div style="font-size:.88rem;color:#c62828;margin-top:4px">
-          לפי NFPA 400 Table 5.2.1.1.3, קטגוריה <strong>${base.he||item.grp}</strong> אינה מותרת בסוג פעולה זה.
-        </div>
-      </div>`;
-    document.getElementById('maqBreakdown').style.display='none';
-    maqShowAllTypes(item);
-    return;
-  }
-
-  if(base.val === Infinity){
-    document.getElementById('maqBaseVal').textContent = 'NL';
-    document.getElementById('maqBaseUnit').textContent = 'Not Limited';
-    document.getElementById('maqMultVal').textContent = '—';
-    document.getElementById('maqMultDesc').textContent = 'לא רלוונטי';
-    document.getElementById('maqFloorVal').textContent = '—';
-    document.getElementById('maqFloorDesc').textContent = 'לא רלוונטי';
-    document.getElementById('maqFinalVal').textContent = 'ללא הגבלה';
-    document.getElementById('maqFinalUnit').textContent = '';
-    document.getElementById('maqPctText').textContent = '0%';
-    document.getElementById('maqBar').style.width = '0%';
-    document.getElementById('maqBar').style.background = 'var(--green)';
-    document.getElementById('maqStatus').innerHTML = `
-      <div style="background:var(--green-lt);border:1.5px solid var(--green);border-radius:9px;padding:12px 16px;color:var(--green);font-size:.88rem">
-        ✅ <strong>${item.he}</strong> – ללא הגבלת כמות (NL – Not Limited) לפי NFPA 400.
-      </div>`;
-    document.getElementById('maqBreakdown').style.display='none';
-    maqShowAllTypes(item);
-    return;
-  }
-
-  // Calculate final MAQ
-  const baseVal = base.val;
-  const finalMAQ = baseVal * prot.mult * floorPct;
-
-  // Display
-  document.getElementById('maqBaseVal').textContent = fmtN(baseVal);
-  document.getElementById('maqBaseUnit').textContent = unitLabelHe + ' ' + catLabel;
-  document.getElementById('maqMultVal').textContent = '×'+prot.mult;
-  document.getElementById('maqMultDesc').textContent = prot.desc;
-  document.getElementById('maqFloorVal').textContent = floorInfo.pct+'%';
-  document.getElementById('maqFloorDesc').textContent = floorInfo.label + ' | עד '+floorInfo.areas+' אזורי בקרה';
-  document.getElementById('maqFinalVal').textContent = fmtN(finalMAQ);
-  document.getElementById('maqFinalUnit').textContent = unitLabelHe;
-
-  // Percentage usage
-  if(!isNaN(qty) && qty > 0){
-    const qtyConverted = maqConvertQty(qty, unit, state);
-    const pct = (qtyConverted / finalMAQ) * 100;
-    const pctClamped = Math.min(pct, 100);
-
-    document.getElementById('maqPctText').textContent = pct.toFixed(1) + '%';
-    document.getElementById('maqPctText').style.color = pct>100?'#b71c1c':pct>75?'#e65100':'var(--green)';
-    document.getElementById('maqBar').style.width = pctClamped + '%';
-    document.getElementById('maqBar').style.background = pct>100?'#c62828':pct>75?'#e65100':pct>50?'#f9a825':'var(--green)';
-
-    // Status message
-    if(pct > 100){
-      document.getElementById('maqStatus').innerHTML = `
-        <div style="background:#ffebee;border:1.5px solid #c62828;border-radius:9px;padding:14px 18px;animation:pop .2s ease">
-          <div style="font-weight:800;font-size:1rem;color:#b71c1c">🚫 חריגה מ-MAQ!</div>
-          <div style="font-size:.88rem;color:#c62828;margin-top:4px">
-            הכמות בפועל (${fmtN(qtyConverted)} ${unitLabelHe}) חורגת מה-MAQ המותאם (${fmtN(finalMAQ)} ${unitLabelHe}) ב-<strong>${fmtN(qtyConverted-finalMAQ)} ${unitLabelHe}</strong>.
-            <br>נדרש סיווג לרמת הגנה (Protection Level) בהתאם ל-NFPA 400 Section 5.3, או הקטנת הכמות.
-          </div>
-        </div>`;
-    } else if(pct > 75){
-      document.getElementById('maqStatus').innerHTML = `
-        <div style="background:#fff3e0;border:1.5px solid #e65100;border-radius:9px;padding:14px 18px;animation:pop .2s ease">
-          <div style="font-weight:800;font-size:1rem;color:#e65100">⚠️ קרוב למגבלת MAQ</div>
-          <div style="font-size:.88rem;color:#e65100;margin-top:4px">
-            הכמות בפועל (${fmtN(qtyConverted)} ${unitLabelHe}) מנצלת ${pct.toFixed(1)}% מה-MAQ המותאם.
-          </div>
-        </div>`;
-    } else {
-      document.getElementById('maqStatus').innerHTML = `
-        <div style="background:var(--green-lt);border:1.5px solid var(--green);border-radius:9px;padding:14px 18px;animation:pop .2s ease">
-          <div style="font-weight:800;font-size:1rem;color:var(--green)">✅ בתוך MAQ</div>
-          <div style="font-size:.88rem;color:var(--green);margin-top:4px">
-            הכמות בפועל (${fmtN(qtyConverted)} ${unitLabelHe}) מנצלת ${pct.toFixed(1)}% מה-MAQ (${fmtN(finalMAQ)} ${unitLabelHe}).
-            נותרו עוד ${fmtN(finalMAQ - qtyConverted)} ${unitLabelHe}.
-          </div>
-        </div>`;
-    }
-
-    // Breakdown table
-    const bk = document.getElementById('maqBreakdown');
-    bk.style.display = 'block';
-    const bkRow = (l,v)=>`<tr><td style="padding:7px 12px;color:var(--muted);font-size:.85rem;border-bottom:1px solid #f0f0ee">${l}</td>
-      <td style="padding:7px 12px;font-weight:600;font-size:.88rem;border-bottom:1px solid #f0f0ee;text-align:left">${v}</td></tr>`;
-    document.getElementById('maqBreakdownBody').innerHTML =
-      bkRow('חומר', `${item.he} / ${item.en}`) +
-      bkRow('קבוצה', item.grp || '—') +
-      (item.cls ? bkRow('סיווג NFPA 30', item.cls) : '') +
-      bkRow('קטגוריית NFPA 400', base.he || '—') +
-      bkRow('מצב צבירה', state==='gas'?'גז':state==='solid'?'מוצק':'נוזל') +
-      bkRow('סוג פעולה', document.getElementById('maqUseType').selectedOptions[0].text) +
-      bkRow('MAQ בסיסי (Table 5.2.1.1.3)', `${fmtN(baseVal)} ${unitLabelHe}`) +
-      bkRow('Footnotes', base.fn || 'ללא') +
-      bkRow('מכפיל הגנה', `×${prot.mult} (${prot.desc})`) +
-      bkRow('מכפיל קומה (Table 5.2.2.1)', `${floorInfo.pct}% (${floorInfo.label}) | דירוג אש: ${floorInfo.fire_hr} שעות`) +
-      bkRow('MAQ סופי', `<strong>${fmtN(finalMAQ)} ${unitLabelHe}</strong>`) +
-      bkRow('כמות בפועל', `${fmtN(qtyConverted)} ${unitLabelHe} (${qty} ${maqGetUnitLabel(unit)})`) +
-      bkRow('ניצול', `<strong style="color:${pct>100?'#b71c1c':pct>75?'#e65100':'var(--green)'}">${pct.toFixed(1)}%</strong>`);
-  } else {
-    document.getElementById('maqPctText').textContent = 'הזן כמות';
-    document.getElementById('maqPctText').style.color = 'var(--muted)';
-    document.getElementById('maqBar').style.width = '0%';
-    document.getElementById('maqStatus').innerHTML = '';
-    document.getElementById('maqBreakdown').style.display='none';
-  }
-
-  maqShowAllTypes(item);
-}
-
-/* ── Show all MAQ types for reference ── */
-function maqShowAllTypes(item){
-  const cont = document.getElementById('maqAllTypes');
-  const hasMaq = item.msc||item.mso||item.muc||item.muo||item.mgs||item.mgu;
-  if(!hasMaq){ cont.innerHTML=''; return; }
-
-  const row = (label, val)=> val && val!=='' && val!=='0' ?
-    `<tr><td style="padding:7px 12px;color:var(--muted);font-size:.85rem;border-bottom:1px solid #f0f0ee">${label}</td>
-         <td style="padding:7px 12px;font-weight:600;font-size:.88rem;border-bottom:1px solid #f0f0ee">${val}</td></tr>` : '';
-
-  cont.innerHTML = `
-    <div style="font-size:.78rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">
-      כל ערכי MAQ הבסיסיים – ${item.he}
-    </div>
-    <table style="width:100%;border-collapse:collapse;border:1px solid var(--border);border-radius:8px;overflow:hidden">
-      <thead><tr style="background:var(--green);color:#fff">
-        <th style="padding:9px 12px;text-align:right;font-size:.82rem">סוג</th>
-        <th style="padding:9px 12px;text-align:right;font-size:.82rem">MAQ בסיסי (לפני מכפילים)</th>
-      </tr></thead>
-      <tbody>
-        ${row('אחסון – מערכת סגורה', item.msc ? item.msc+' ליטר/ק"ג' : '')}
-        ${row('אחסון – מערכת פתוחה', item.mso ? item.mso+' ליטר/ק"ג' : '')}
-        ${row('שימוש – מערכת סגורה', item.muc ? item.muc+' ליטר/ק"ג' : '')}
-        ${row('שימוש – מערכת פתוחה', item.muo ? item.muo+' ליטר/ק"ג' : '')}
-        ${row('גז – אחסון', item.mgs ? item.mgs+' מ"ק' : '')}
-        ${row('גז – שימוש', item.mgu ? item.mgu+' מ"ק' : '')}
-      </tbody>
-    </table>`;
-}
-
-/* ── Number format ── */
-function fmtN(n, d=1){
-  if(n===Infinity) return 'ללא הגבלה';
-  return Number(n).toLocaleString('he-IL', {maximumFractionDigits:d});
-}
-
-/* ── Close MAQ dropdown on outside click ── */
-document.addEventListener('click', e=>{
-  if(!e.target.closest('#maqSearch') && !e.target.closest('#maqDrop'))
-    document.getElementById('maqDrop') && (document.getElementById('maqDrop').style.display='none');
-});
-
 /* ─── INIT ─── */
+</script>
+
+<!-- ══════════ NFPA 400 DATA ══════════ -->
+<script src="nfpa400_data.js"></script>
+<!-- ══════════ NFPA 400 SCRIPT ══════════ -->
+<script>
+const N400_DB = [
+  // ── מחמצנים סיווג 1 ──────────────────────────────────────────────────────
+  {name:"כל הניטראטים הדומגניים (All inorganic nitrates)",cas:"varies",cat:"Oxidizer",cls:"1",clsLbl:"סיווג 1",cc:"nc-ox1",desc:"מאיץ במידה קלה את בעירת חמרים דליקים",note:"אלא אם כן מסווג אחרת — חל על כל מלחי הניטראט הדומגניים"},
+  {name:"כל הניטריטים הדומגניים (All inorganic nitrites)",cas:"varies",cat:"Oxidizer",cls:"1",clsLbl:"סיווג 1",cc:"nc-ox1",desc:"מאיץ במידה קלה את בעירת חמרים דליקים",note:"אלא אם כן מסווג אחרת — חל על כל מלחי הניטריט הדומגניים"},
+  {name:"אמוניום פרסולפאט (Ammonium persulfate)",cas:"7727-54-0",cat:"Oxidizer",cls:"1",clsLbl:"סיווג 1",cc:"nc-ox1",desc:"מאיץ במידה קלה את בעירת חמרים דליקים"},
+  {name:"בריום פרוקסיד (Barium peroxide)",cas:"1304-29-6",cat:"Oxidizer",cls:"1",clsLbl:"סיווג 1",cc:"nc-ox1",desc:"מאיץ במידה קלה את בעירת חמרים דליקים"},
+  {name:"תמיסת סידן היפוכלוריט 80% עם מגנזיום סולפאט 20% (Calcium hypochlorite blend 80%/MgSO4 20%)",cas:"7778-54-3",cat:"Oxidizer",cls:"1",clsLbl:"סיווג 1",cc:"nc-ox1",desc:"מאיץ במידה קלה את בעירת חמרים דליקים",note:"≤66% כלור זמין, ≥17% תכולת מים כוללת"},
+  {name:"סידן פרוקסיד (Calcium peroxide)",cas:"1305-79-9",cat:"Oxidizer",cls:"1",clsLbl:"סיווג 1",cc:"nc-ox1",desc:"מאיץ במידה קלה את בעירת חמרים דליקים"},
+  {name:"מי חמצן 8–27.5% (Hydrogen peroxide 8–27.5%)",cas:"7722-84-1",cat:"Oxidizer",cls:"1",clsLbl:"סיווג 1",cc:"nc-ox1",desc:"מאיץ במידה קלה את בעירת חמרים דליקים",note:"ריכוז גדול מ-8% ועד 27.5%"},
+  {name:"דיוקסיד עופרת (Lead dioxide)",cas:"1309-60-0",cat:"Oxidizer",cls:"1",clsLbl:"סיווג 1",cc:"nc-ox1",desc:"מאיץ במידה קלה את בעירת חמרים דליקים"},
+  {name:"ליתיום היפוכלוריט ≤39% כלור (Lithium hypochlorite ≤39%)",cas:"13840-33-0",cat:"Oxidizer",cls:"1",clsLbl:"סיווג 1",cc:"nc-ox1",desc:"מאיץ במידה קלה את בעירת חמרים דליקים"},
+  {name:"ליתיום פרוקסיד (Lithium peroxide)",cas:"12031-80-0",cat:"Oxidizer",cls:"1",clsLbl:"סיווג 1",cc:"nc-ox1",desc:"מאיץ במידה קלה את בעירת חמרים דליקים"},
+  {name:"מגנזיום פרוקסיד (Magnesium peroxide)",cas:"1335-26-8",cat:"Oxidizer",cls:"1",clsLbl:"סיווג 1",cc:"nc-ox1",desc:"מאיץ במידה קלה את בעירת חמרים דליקים"},
+  {name:"מנגן דיוקסיד (Manganese dioxide)",cas:"1313-13-9",cat:"Oxidizer",cls:"1",clsLbl:"סיווג 1",cc:"nc-ox1",desc:"מאיץ במידה קלה את בעירת חמרים דליקים"},
+  {name:"חומצה חנקתית ≤40% (Nitric acid ≤40%)",cas:"7697-37-2",cat:"Oxidizer",cls:"1",clsLbl:"סיווג 1",cc:"nc-ox1",desc:"מאיץ במידה קלה את בעירת חמרים דליקים",note:"ריכוז של 40% ומטה"},
+  {name:"חומצה פרכלורית <50% (Perchloric acid <50%)",cas:"7601-90-3",cat:"Oxidizer",cls:"1",clsLbl:"סיווג 1",cc:"nc-ox1",desc:"מאיץ במידה קלה את בעירת חמרים דליקים",note:"פחות מ-50% במשקל"},
+  {name:"אשלגן דיכרומאט (Potassium dichromate)",cas:"7778-50-9",cat:"Oxidizer",cls:"1",clsLbl:"סיווג 1",cc:"nc-ox1",desc:"מאיץ במידה קלה את בעירת חמרים דליקים"},
+  {name:"אשלגן מונופרסולפאט (Potassium monopersulfate)",cas:"70693-62-8",cat:"Oxidizer",cls:"1",clsLbl:"סיווג 1",cc:"nc-ox1",desc:"מאיץ במידה קלה את בעירת חמרים דליקים"},
+  {name:"אשלגן פרקרבונאט (Potassium percarbonate)",cas:"589-97-9",cat:"Oxidizer",cls:"1",clsLbl:"סיווג 1",cc:"nc-ox1",desc:"מאיץ במידה קלה את בעירת חמרים דליקים"},
+  {name:"אשלגן פרסולפאט (Potassium persulfate)",cas:"7727-21-1",cat:"Oxidizer",cls:"1",clsLbl:"סיווג 1",cc:"nc-ox1",desc:"מאיץ במידה קלה את בעירת חמרים דליקים"},
+  {name:"נתרן קרבונאט פרוקסיד (Sodium carbonate peroxide)",cas:"15630-89-4",cat:"Oxidizer",cls:"1",clsLbl:"סיווג 1",cc:"nc-ox1",desc:"מאיץ במידה קלה את בעירת חמרים דליקים"},
+  {name:"נתרן פרקרבונאט 99% (Sodium percarbonate 99%)",cas:"15630-89-4",cat:"Oxidizer",cls:"1",clsLbl:"סיווג 1",cc:"nc-ox1",desc:"מאיץ במידה קלה את בעירת חמרים דליקים"},
+  {name:"נתרן דיכלורואיזוציאנורט דיהידראט (Sodium dichloroisocyanurate dihydrate)",cas:"51580-86-0",cat:"Oxidizer",cls:"1",clsLbl:"סיווג 1",cc:"nc-ox1",desc:"מאיץ במידה קלה את בעירת חמרים דליקים"},
+  {name:"נתרן דיכרומאט (Sodium dichromate)",cas:"10588-01-9",cat:"Oxidizer",cls:"1",clsLbl:"סיווג 1",cc:"nc-ox1",desc:"מאיץ במידה קלה את בעירת חמרים דליקים"},
+  {name:"נתרן פרבוראט אנהידרי (Sodium perborate anhydrous)",cas:"7632-04-4",cat:"Oxidizer",cls:"1",clsLbl:"סיווג 1",cc:"nc-ox1",desc:"מאיץ במידה קלה את בעירת חמרים דליקים"},
+  {name:"אשלגן ניטראט — מלח בארות (Potassium nitrate)",cas:"7757-79-1",cat:"Oxidizer",cls:"1",clsLbl:"סיווג 1",cc:"nc-ox1",desc:"מאיץ במידה קלה את בעירת חמרים דליקים",note:"ניטראט דומגני — מחמצן סיווג 1"},
+  {name:"נתרן ניטראט — מלח צ'ילה (Sodium nitrate)",cas:"7631-99-4",cat:"Oxidizer",cls:"1",clsLbl:"סיווג 1",cc:"nc-ox1",desc:"מאיץ במידה קלה את בעירת חמרים דליקים",note:"ניטראט דומגני — מחמצן סיווג 1"},
+  {name:"כסף ניטראט (Silver nitrate)",cas:"7761-88-8",cat:"Oxidizer",cls:"1",clsLbl:"סיווג 1",cc:"nc-ox1",desc:"מאיץ במידה קלה את בעירת חמרים דליקים",note:"גם מאכל וגם רעיל"},
+  {name:"אבץ ניטראט (Zinc nitrate)",cas:"7779-88-6",cat:"Oxidizer",cls:"1",clsLbl:"סיווג 1",cc:"nc-ox1",desc:"מאיץ במידה קלה את בעירת חמרים דליקים"},
+  {name:"ליתיום ניטראט (Lithium nitrate)",cas:"7790-69-4",cat:"Oxidizer",cls:"1",clsLbl:"סיווג 1",cc:"nc-ox1",desc:"מאיץ במידה קלה את בעירת חמרים דליקים"},
+  {name:"עופרת ניטראט (Lead nitrate)",cas:"10099-74-8",cat:"Oxidizer",cls:"1",clsLbl:"סיווג 1",cc:"nc-ox1",desc:"מאיץ במידה קלה את בעירת חמרים דליקים",note:"גם רעיל"},
+  {name:"סידן ניטראט (Calcium nitrate)",cas:"10124-37-5",cat:"Oxidizer",cls:"1",clsLbl:"סיווג 1",cc:"nc-ox1",desc:"מאיץ במידה קלה את בעירת חמרים דליקים"},
+  {name:"אמוניום ניטראט דרגת דשן <99% (Ammonium nitrate fertilizer grade)",cas:"6484-52-2",cat:"Oxidizer",cls:"1",clsLbl:"סיווג 1",cc:"nc-ox1",desc:"מאיץ במידה קלה את בעירת חמרים דליקים",note:"דרגת דשן — גרגיר 99% טהור הוא סיווג 2"},
+  {name:"נתרן ניטריט (Sodium nitrite)",cas:"7632-00-0",cat:"Oxidizer",cls:"1",clsLbl:"סיווג 1",cc:"nc-ox1",desc:"מאיץ במידה קלה את בעירת חמרים דליקים"},
+  {name:"אשלגן ניטריט (Potassium nitrite)",cas:"7758-09-0",cat:"Oxidizer",cls:"1",clsLbl:"סיווג 1",cc:"nc-ox1",desc:"מאיץ במידה קלה את בעירת חמרים דליקים"},
+  {name:"חומצה טריכלורואיזוציאנורית TCCA (Trichloroisocyanuric acid)",cas:"87-90-1",cat:"Oxidizer",cls:"3",clsLbl:"סיווג 3",cc:"nc-ox3",desc:"מאיץ בחוזקה את בעירת חמרים דליקים",note:"תרכובת חנקן-הלוגן; כלור לבריכות (Table B.3.2)"},
+  {name:"נתרן דיכלורואיזוציאנורט NaDCC (Sodium dichloroisocyanurate)",cas:"2893-78-9",cat:"Oxidizer",cls:"2",clsLbl:"סיווג 2",cc:"nc-ox2",desc:"מאיץ במידה בינונית את בעירת חמרים דליקים",note:"תרכובת חנקן-הלוגן; כלור לבריכות (Table B.3.2)"},
+  // ── מחמצנים סיווג 2 ──────────────────────────────────────────────────────
+  {name:"אמוניום ניטראט גרנולרי 99% (Ammonium nitrate prill 99%)",cas:"31432-46-9",cat:"Oxidizer",cls:"2",clsLbl:"סיווג 2",cc:"nc-ox2",desc:"מאיץ במידה בינונית את בעירת חמרים דליקים"},
+  {name:"בריום ברומאט (Barium bromate)",cas:"13967-90-3",cat:"Oxidizer",cls:"2",clsLbl:"סיווג 2",cc:"nc-ox2",desc:"מאיץ במידה בינונית את בעירת חמרים דליקים"},
+  {name:"בריום כלוראט (Barium chlorate)",cas:"13477-00-4",cat:"Oxidizer",cls:"2",clsLbl:"סיווג 2",cc:"nc-ox2",desc:"מאיץ במידה בינונית את בעירת חמרים דליקים"},
+  {name:"בריום היפוכלוריט (Barium hypochlorite)",cas:"13477-10-6",cat:"Oxidizer",cls:"2",clsLbl:"סיווג 2",cc:"nc-ox2",desc:"מאיץ במידה בינונית את בעירת חמרים דליקים"},
+  {name:"בריום פרכלוראט (Barium perchlorate)",cas:"13465-95-7",cat:"Oxidizer",cls:"2",clsLbl:"סיווג 2",cc:"nc-ox2",desc:"מאיץ במידה בינונית את בעירת חמרים דליקים"},
+  {name:"בריום פרמנגנאט (Barium permanganate)",cas:"7787-36-2",cat:"Oxidizer",cls:"2",clsLbl:"סיווג 2",cc:"nc-ox2",desc:"מאיץ במידה בינונית את בעירת חמרים דליקים"},
+  {name:"BCDMH — ברומו-כלורו-דימתיל-הידנטואין (1-Bromo-3-chloro-5,5-dimethylhydantoin)",cas:"16079-88-2",cat:"Oxidizer",cls:"2",clsLbl:"סיווג 2",cc:"nc-ox2",desc:"מאיץ במידה בינונית את בעירת חמרים דליקים"},
+  {name:"סידן כלוראט (Calcium chlorate)",cas:"10137-74-3",cat:"Oxidizer",cls:"2",clsLbl:"סיווג 2",cc:"nc-ox2",desc:"מאיץ במידה בינונית את בעירת חמרים דליקים"},
+  {name:"סידן כלוריט (Calcium chlorite)",cas:"14674-72-7",cat:"Oxidizer",cls:"2",clsLbl:"סיווג 2",cc:"nc-ox2",desc:"מאיץ במידה בינונית את בעירת חמרים דליקים"},
+  {name:"סידן היפוכלוריט ≤50% (Calcium hypochlorite ≤50%)",cas:"7778-54-3",cat:"Oxidizer",cls:"2",clsLbl:"סיווג 2",cc:"nc-ox2",desc:"מאיץ במידה בינונית את בעירת חמרים דליקים",note:"48–50% ומטה במשקל"},
+  {name:"סידן פרכלוראט (Calcium perchlorate)",cas:"13477-36-6",cat:"Oxidizer",cls:"2",clsLbl:"סיווג 2",cc:"nc-ox2",desc:"מאיץ במידה בינונית את בעירת חמרים דליקים"},
+  {name:"סידן פרמנגנאט (Calcium permanganate)",cas:"10118-76-0",cat:"Oxidizer",cls:"2",clsLbl:"סיווג 2",cc:"nc-ox2",desc:"מאיץ במידה בינונית את בעירת חמרים דליקים"},
+  {name:"סידן פרוקסיד 75% (Calcium peroxide 75%)",cas:"1305-79-9",cat:"Oxidizer",cls:"2",clsLbl:"סיווג 2",cc:"nc-ox2",desc:"מאיץ במידה בינונית את בעירת חמרים דליקים",note:"ריכוז 75%"},
+  {name:"כרום טריאוקסיד — חומצה כרומית (Chromium trioxide / chromic acid)",cas:"1333-82-0",cat:"Oxidizer",cls:"2",clsLbl:"סיווג 2",cc:"nc-ox2",desc:"מאיץ במידה בינונית את בעירת חמרים דליקים"},
+  {name:"נחושת כלוראט (Copper chlorate)",cas:"135821-00-0",cat:"Oxidizer",cls:"2",clsLbl:"סיווג 2",cc:"nc-ox2",desc:"מאיץ במידה בינונית את בעירת חמרים דליקים"},
+  {name:"הלאן — דיכלורו-דימתיל-הידנטואין (Halane / 1,3-dichloro-5,5-dimethylhydantoin)",cas:"118-52-5",cat:"Oxidizer",cls:"2",clsLbl:"סיווג 2",cc:"nc-ox2",desc:"מאיץ במידה בינונית את בעירת חמרים דליקים"},
+  {name:"מי חמצן >27.5%–52% (Hydrogen peroxide >27.5–52%)",cas:"7722-84-1",cat:"Oxidizer",cls:"2",clsLbl:"סיווג 2",cc:"nc-ox2",desc:"מאיץ במידה בינונית את בעירת חמרים דליקים",note:"ריכוז גדול מ-27.5% ועד 52%"},
+  {name:"עופרת פרכלוראט (Lead perchlorate)",cas:"13637-76-8",cat:"Oxidizer",cls:"2",clsLbl:"סיווג 2",cc:"nc-ox2",desc:"מאיץ במידה בינונית את בעירת חמרים דליקים"},
+  {name:"ליתיום כלוראט (Lithium chlorate)",cas:"13453-71-9",cat:"Oxidizer",cls:"2",clsLbl:"סיווג 2",cc:"nc-ox2",desc:"מאיץ במידה בינונית את בעירת חמרים דליקים"},
+  {name:"ליתיום היפוכלוריט >39% (Lithium hypochlorite >39%)",cas:"13840-33-0",cat:"Oxidizer",cls:"2",clsLbl:"סיווג 2",cc:"nc-ox2",desc:"מאיץ במידה בינונית את בעירת חמרים דליקים",note:"יותר מ-39% כלור זמין"},
+  {name:"ליתיום פרכלוראט (Lithium perchlorate)",cas:"7791-03-9",cat:"Oxidizer",cls:"2",clsLbl:"סיווג 2",cc:"nc-ox2",desc:"מאיץ במידה בינונית את בעירת חמרים דליקים"},
+  {name:"מגנזיום ברומאט (Magnesium bromate)",cas:"14519-17-6",cat:"Oxidizer",cls:"2",clsLbl:"סיווג 2",cc:"nc-ox2",desc:"מאיץ במידה בינונית את בעירת חמרים דליקים"},
+  {name:"מגנזיום כלוראט (Magnesium chlorate)",cas:"10326-21-3",cat:"Oxidizer",cls:"2",clsLbl:"סיווג 2",cc:"nc-ox2",desc:"מאיץ במידה בינונית את בעירת חמרים דליקים"},
+  {name:"מגנזיום פרכלוראט (Magnesium perchlorate)",cas:"10034-81-8",cat:"Oxidizer",cls:"2",clsLbl:"סיווג 2",cc:"nc-ox2",desc:"מאיץ במידה בינונית את בעירת חמרים דליקים"},
+  {name:"כספית כלוראט (Mercurous chlorate)",cas:"10294-44-7",cat:"Oxidizer",cls:"2",clsLbl:"סיווג 2",cc:"nc-ox2",desc:"מאיץ במידה בינונית את בעירת חמרים דליקים"},
+  {name:"חומצה חנקתית >40%–86% (Nitric acid >40%–86%)",cas:"7697-37-2",cat:"Oxidizer",cls:"2",clsLbl:"סיווג 2",cc:"nc-ox2",desc:"מאיץ במידה בינונית את בעירת חמרים דליקים",note:"ריכוז גדול מ-40% ופחות מ-86%"},
+  {name:"חנקן טטראוקסיד (Nitrogen tetroxide)",cas:"10544-72-6",cat:"Oxidizer",cls:"2",clsLbl:"סיווג 2",cc:"nc-ox2",desc:"מאיץ במידה בינונית את בעירת חמרים דליקים"},
+  {name:"חומצה פרכלורית >50%–60% (Perchloric acid >50–60%)",cas:"7601-90-3",cat:"Oxidizer",cls:"2",clsLbl:"סיווג 2",cc:"nc-ox2",desc:"מאיץ במידה בינונית את בעירת חמרים דליקים"},
+  {name:"אשלגן פרכלוראט (Potassium perchlorate)",cas:"7778-74-7",cat:"Oxidizer",cls:"2",clsLbl:"סיווג 2",cc:"nc-ox2",desc:"מאיץ במידה בינונית את בעירת חמרים דליקים"},
+  {name:"אשלגן פרמנגנאט (Potassium permanganate)",cas:"7722-64-7",cat:"Oxidizer",cls:"2",clsLbl:"סיווג 2",cc:"nc-ox2",desc:"מאיץ במידה בינונית את בעירת חמרים דליקים"},
+  {name:"אשלגן פרוקסיד (Potassium peroxide)",cas:"17014-71-0",cat:"Oxidizer",cls:"2",clsLbl:"סיווג 2",cc:"nc-ox2",desc:"מאיץ במידה בינונית את בעירת חמרים דליקים"},
+  {name:"אשלגן סופרוקסיד (Potassium superoxide)",cas:"12030-88-5",cat:"Oxidizer",cls:"2",clsLbl:"סיווג 2",cc:"nc-ox2",desc:"מאיץ במידה בינונית את בעירת חמרים דליקים"},
+  {name:"כסף פרוקסיד (Silver peroxide)",cas:"1301-96-8",cat:"Oxidizer",cls:"2",clsLbl:"סיווג 2",cc:"nc-ox2",desc:"מאיץ במידה בינונית את בעירת חמרים דליקים"},
+  {name:"נתרן דיכלורואיזוציאנורט אנהידרי (Sodium dichloroisocyanurate anhydrous)",cas:"51580-86-0",cat:"Oxidizer",cls:"2",clsLbl:"סיווג 2",cc:"nc-ox2",desc:"מאיץ במידה בינונית את בעירת חמרים דליקים"},
+  {name:"נתרן כלוריט ≤40% (Sodium chlorite ≤40%)",cas:"7758-19-2",cat:"Oxidizer",cls:"2",clsLbl:"סיווג 2",cc:"nc-ox2",desc:"מאיץ במידה בינונית את בעירת חמרים דליקים"},
+  {name:"נתרן פרכלוראט (Sodium perchlorate)",cas:"7601-89-0",cat:"Oxidizer",cls:"2",clsLbl:"סיווג 2",cc:"nc-ox2",desc:"מאיץ במידה בינונית את בעירת חמרים דליקים"},
+  {name:"נתרן פרכלוראט מונוהידראט (Sodium perchlorate monohydrate)",cas:"7601-89-0",cat:"Oxidizer",cls:"2",clsLbl:"סיווג 2",cc:"nc-ox2",desc:"מאיץ במידה בינונית את בעירת חמרים דליקים"},
+  {name:"נתרן פרמנגנאט (Sodium permanganate)",cas:"10101-50-5",cat:"Oxidizer",cls:"2",clsLbl:"סיווג 2",cc:"nc-ox2",desc:"מאיץ במידה בינונית את בעירת חמרים דליקים"},
+  {name:"נתרן פרוקסיד (Sodium peroxide)",cas:"1313-60-6",cat:"Oxidizer",cls:"2",clsLbl:"סיווג 2",cc:"nc-ox2",desc:"מאיץ במידה בינונית את בעירת חמרים דליקים"},
+  {name:"נתרן פרסולפאט 99% (Sodium persulfate 99%)",cas:"7775-27-1",cat:"Oxidizer",cls:"2",clsLbl:"סיווג 2",cc:"nc-ox2",desc:"מאיץ במידה בינונית את בעירת חמרים דליקים"},
+  {name:"סטרונציום כלוראט (Strontium chlorate)",cas:"7791-10-8",cat:"Oxidizer",cls:"2",clsLbl:"סיווג 2",cc:"nc-ox2",desc:"מאיץ במידה בינונית את בעירת חמרים דליקים"},
+  {name:"סטרונציום פרכלוראט (Strontium perchlorate)",cas:"13450-97-0",cat:"Oxidizer",cls:"2",clsLbl:"סיווג 2",cc:"nc-ox2",desc:"מאיץ במידה בינונית את בעירת חמרים דליקים"},
+  {name:"תאליום כלוראט (Thallium chlorate)",cas:"13453-30-0",cat:"Oxidizer",cls:"2",clsLbl:"סיווג 2",cc:"nc-ox2",desc:"מאיץ במידה בינונית את בעירת חמרים דליקים"},
+  {name:"שתנן פרוקסיד — אוריאה-H₂O₂ (Urea hydrogen peroxide)",cas:"124-43-6",cat:"Oxidizer",cls:"2",clsLbl:"סיווג 2",cc:"nc-ox2",desc:"מאיץ במידה בינונית את בעירת חמרים דליקים"},
+  {name:"אבץ ברומאט (Zinc bromate)",cas:"14519-07-4",cat:"Oxidizer",cls:"2",clsLbl:"סיווג 2",cc:"nc-ox2",desc:"מאיץ במידה בינונית את בעירת חמרים דליקים"},
+  {name:"אבץ כלוראט (Zinc chlorate)",cas:"10361-95-2",cat:"Oxidizer",cls:"2",clsLbl:"סיווג 2",cc:"nc-ox2",desc:"מאיץ במידה בינונית את בעירת חמרים דליקים"},
+  {name:"אבץ פרמנגנאט (Zinc permanganate)",cas:"23414-72-4",cat:"Oxidizer",cls:"2",clsLbl:"סיווג 2",cc:"nc-ox2",desc:"מאיץ במידה בינונית את בעירת חמרים דליקים"},
+  // ── מחמצנים סיווג 3 ──────────────────────────────────────────────────────
+  {name:"אמוניום דיכרומאט (Ammonium dichromate)",cas:"7789-09-5",cat:"Oxidizer",cls:"3",clsLbl:"סיווג 3",cc:"nc-ox3",desc:"מאיץ בחוזקה את בעירת חמרים דליקים"},
+  {name:"סידן היפוכלוריט >50% (Calcium hypochlorite >50%)",cas:"7778-54-3",cat:"Oxidizer",cls:"3",clsLbl:"סיווג 3",cc:"nc-ox3",desc:"מאיץ בחוזקה את בעירת חמרים דליקים",note:"יותר מ-50% במשקל"},
+  {name:"חומצה כלורית ≤10% (Chloric acid ≤10%)",cas:"7790-93-4",cat:"Oxidizer",cls:"3",clsLbl:"סיווג 3",cc:"nc-ox3",desc:"מאיץ בחוזקה את בעירת חמרים דליקים"},
+  {name:"מי חמצן >52%–91% (Hydrogen peroxide >52–91%)",cas:"7722-84-1",cat:"Oxidizer",cls:"3",clsLbl:"סיווג 3",cc:"nc-ox3",desc:"מאיץ בחוזקה את בעירת חמרים דליקים",note:"ריכוז גדול מ-52% ועד 91%"},
+  {name:"חומצה חנקתית מעשנת >86% (Fuming nitric acid >86%)",cas:"7697-37-2",cat:"Oxidizer",cls:"3",clsLbl:"סיווג 3",cc:"nc-ox3",desc:"מאיץ בחוזקה את בעירת חמרים דליקים",note:"חומצה חנקתית מעשנת — יותר מ-86% ריכוז"},
+  {name:"חומצה פרכלורית 60%–72% (Perchloric acid 60–72%)",cas:"7601-90-3",cat:"Oxidizer",cls:"3",clsLbl:"סיווג 3",cc:"nc-ox3",desc:"מאיץ בחוזקה את בעירת חמרים דליקים",note:"60% עד 72% במשקל"},
+  {name:"אשלגן ברומאט (Potassium bromate)",cas:"7758-01-2",cat:"Oxidizer",cls:"3",clsLbl:"סיווג 3",cc:"nc-ox3",desc:"מאיץ בחוזקה את בעירת חמרים דליקים"},
+  {name:"אשלגן כלוראט (Potassium chlorate)",cas:"3811-04-9",cat:"Oxidizer",cls:"3",clsLbl:"סיווג 3",cc:"nc-ox3",desc:"מאיץ בחוזקה את בעירת חמרים דליקים"},
+  {name:"אשלגן דיכלורואיזוציאנורט (Potassium dichloroisocyanurate)",cas:"2244-21-5",cat:"Oxidizer",cls:"3",clsLbl:"סיווג 3",cc:"nc-ox3",desc:"מאיץ בחוזקה את בעירת חמרים דליקים"},
+  {name:"אשלגן פרכלוראט 99% (Potassium perchlorate 99%)",cas:"7778-74-7",cat:"Oxidizer",cls:"3",clsLbl:"סיווג 3",cc:"nc-ox3",desc:"מאיץ בחוזקה את בעירת חמרים דליקים",note:"טוהר 99% — טוהר נמוך יותר הוא סיווג 2"},
+  {name:"אשלגן פרמנגנאט >97.5% (Potassium permanganate >97.5%)",cas:"7722-64-7",cat:"Oxidizer",cls:"3",clsLbl:"סיווג 3",cc:"nc-ox3",desc:"מאיץ בחוזקה את בעירת חמרים דליקים",note:"גדול מ-97.5% — ריכוז נמוך יותר הוא סיווג 2"},
+  {name:"נתרן ברומאט (Sodium bromate)",cas:"7789-38-0",cat:"Oxidizer",cls:"3",clsLbl:"סיווג 3",cc:"nc-ox3",desc:"מאיץ בחוזקה את בעירת חמרים דליקים"},
+  {name:"נתרן כלוראט (Sodium chlorate)",cas:"7775-09-9",cat:"Oxidizer",cls:"3",clsLbl:"סיווג 3",cc:"nc-ox3",desc:"מאיץ בחוזקה את בעירת חמרים דליקים"},
+  {name:"נתרן כלוריט >40% (Sodium chlorite >40%)",cas:"7758-19-2",cat:"Oxidizer",cls:"3",clsLbl:"סיווג 3",cc:"nc-ox3",desc:"מאיץ בחוזקה את בעירת חמרים דליקים",note:"יותר מ-40% במשקל — ריכוז נמוך יותר הוא סיווג 2"},
+  // ── מחמצנים סיווג 4 ──────────────────────────────────────────────────────
+  {name:"אמוניום פרכלוראט (Ammonium perchlorate >15 מיקרון)",cas:"7790-98-9",cat:"Oxidizer",cls:"4",clsLbl:"סיווג 4",cc:"nc-ox4",desc:"סכנה קיצונית — שריפה, פיצוץ או פיצוח",note:"גודל חלקיק גדול מ-15 מיקרון; חלקיקים קטנים יותר מסווגים כנפץ"},
+  {name:"אמוניום פרמנגנאט (Ammonium permanganate)",cas:"13446-10-1",cat:"Oxidizer",cls:"4",clsLbl:"סיווג 4",cc:"nc-ox4",desc:"סכנה קיצונית — שריפה, פיצוץ או פיצוח"},
+  {name:"גואנידין ניטראט (Guanidine nitrate)",cas:"506-93-4",cat:"Oxidizer",cls:"4",clsLbl:"סיווג 4",cc:"nc-ox4",desc:"סכנה קיצונית — שריפה, פיצוץ או פיצוח"},
+  {name:"מי חמצן >91% (Hydrogen peroxide >91%)",cas:"7722-84-1",cat:"Oxidizer",cls:"4",clsLbl:"סיווג 4",cc:"nc-ox4",desc:"סכנה קיצונית — שריפה, פיצוץ או פיצוח",note:"ריכוז גדול מ-91%"},
+  {name:"טטרניטרומתאן (Tetranitromethane)",cas:"509-14-8",cat:"Oxidizer",cls:"4",clsLbl:"סיווג 4",cc:"nc-ox4",desc:"סכנה קיצונית — שריפה, פיצוץ או פיצוח"},
+  // ── פרוקסידים אורגניים סיווג I ──────────────────────────────────────────
+  {name:"אצטיל אצטון פרוקסיד >68% (Acetyl acetone peroxide >68%)",cas:"37187-22-7",cat:"Organic Peroxide",cls:"I",clsLbl:"סיווג I",cc:"nc-op1",desc:"סכנת שריפה ופיצוץ חמורה — מסוגל לפיצוץ"},
+  {name:"דיאצטיל פרוקסיד >27% (Diacetyl peroxide >27%)",cas:"110-22-5",cat:"Organic Peroxide",cls:"I",clsLbl:"סיווג I",cc:"nc-op1",desc:"סכנת שריפה ופיצוץ חמורה — מסוגל לפיצוץ"},
+  {name:"דיבנזואיל פרוקסיד >77% בטולואן (Dibenzoyl peroxide >77% in toluene)",cas:"94-36-0",cat:"Organic Peroxide",cls:"I",clsLbl:"סיווג I",cc:"nc-op1",desc:"סכנת שריפה ופיצוץ חמורה — מסוגל לפיצוץ",note:"גדול מ-77% בתמיסת טולואן"},
+  // ── פרוקסידים אורגניים סיווג IIA ────────────────────────────────────────
+  {name:"די-(2-פנוקסיאתיל) פרוקסידיקרבונאט ≤85% (Di-(2-phenoxyethyl) peroxydicarbonate ≤85%)",cas:"41935-39-1",cat:"Organic Peroxide",cls:"IIA",clsLbl:"סיווג IIA",cc:"nc-op2a",desc:"סכנת שריפה חמורה — פירוק מואץ עצמאי אפשרי"},
+  {name:"די-(3,5,5-טרימתילהקסנואיל) פרוקסיד >38%–82% (Di-(3,5,5-trimethylhexanoyl) peroxide)",cas:"3851-87-4",cat:"Organic Peroxide",cls:"IIA",clsLbl:"סיווג IIA",cc:"nc-op2a",desc:"סכנת שריפה חמורה — פירוק מואץ עצמאי אפשרי"},
+  {name:"אתיל 3,3-די-(t-אמיל פרוקסי)בוטיראט ≤67% (Ethyl 3,3-di-(t-amylperoxy)butyrate ≤67%)",cas:"67567-23-1",cat:"Organic Peroxide",cls:"IIA",clsLbl:"סיווג IIA",cc:"nc-op2a",desc:"סכנת שריפה חמורה — פירוק מואץ עצמאי אפשרי"},
+  // ── פרוקסידים אורגניים סיווג IIB ────────────────────────────────────────
+  {name:"t-בוטיל הידרופרוקסיד ≤79% >14% מים (t-Butyl hydroperoxide ≤79%)",cas:"75-91-2",cat:"Organic Peroxide",cls:"IIB",clsLbl:"סיווג IIB",cc:"nc-op2b",desc:"סכנת שריפה בינונית — בוער מהר יותר מחמרים דליקים רגילים"},
+  {name:"t-בוטיל פרוקסיבנזואט ≤52% (t-Butyl peroxybenzoate ≤52%)",cas:"614-45-9",cat:"Organic Peroxide",cls:"IIB",clsLbl:"סיווג IIB",cc:"nc-op2b",desc:"סכנת שריפה בינונית — בוער מהר יותר מחמרים דליקים רגילים"},
+  {name:"t-בוטיל פרוקסיאיזובוטיראט ≤52% (t-Butyl peroxyisobutyrate ≤52%)",cas:"109-13-7",cat:"Organic Peroxide",cls:"IIB",clsLbl:"סיווג IIB",cc:"nc-op2b",desc:"סכנת שריפה בינונית — בוער מהר יותר מחמרים דליקים רגילים"},
+  {name:"2,5-דימתיל-2,5-די-(t-בוטיל פרוקסי)הקסאן >90% (2,5-Dimethyl-2,5-di-(t-butylperoxy)hexane >90%)",cas:"78-63-7",cat:"Organic Peroxide",cls:"IIB",clsLbl:"סיווג IIB",cc:"nc-op2b",desc:"סכנת שריפה בינונית — בוער מהר יותר מחמרים דליקים רגילים"},
+  {name:"דיבנזואיל פרוקסיד ≤77% עם ≥23% מים (Dibenzoyl peroxide ≤77% ≥23% water)",cas:"94-36-0",cat:"Organic Peroxide",cls:"IIB",clsLbl:"סיווג IIB",cc:"nc-op2b",desc:"סכנת שריפה בינונית — בוער מהר יותר מחמרים דליקים רגילים"},
+  {name:"די-t-אמיל פרוקסיד 100% (Di-t-amyl peroxide 100%)",cas:"10508-09-5",cat:"Organic Peroxide",cls:"IIB",clsLbl:"סיווג IIB",cc:"nc-op2b",desc:"סכנת שריפה בינונית — בוער מהר יותר מחמרים דליקים רגילים"},
+  {name:"קומיל פרוקסינאודקנואט ≤77% (Cumyl peroxyneodecanoate ≤77%)",cas:"26748-47-0",cat:"Organic Peroxide",cls:"IIB",clsLbl:"סיווג IIB",cc:"nc-op2b",desc:"סכנת שריפה בינונית — בוער מהר יותר מחמרים דליקים רגילים"},
+  // ── פרוקסידים אורגניים סיווג III ────────────────────────────────────────
+  {name:"t-בוטיל הידרופרוקסיד ≤72% עם ≥28% מים (t-Butyl hydroperoxide ≤72%)",cas:"75-91-2",cat:"Organic Peroxide",cls:"III",clsLbl:"סיווג III",cc:"nc-op3",desc:"סכנת שריפה בינונית — בוער כמו חמרים דליקים רגילים"},
+  {name:"t-בוטיל פרוקסיאצטאט ≤32% (t-Butyl peroxyacetate ≤32%)",cas:"107-71-1",cat:"Organic Peroxide",cls:"III",clsLbl:"סיווג III",cc:"nc-op3",desc:"סכנת שריפה בינונית — בוער כמו חמרים דליקים רגילים"},
+  {name:"t-בוטיל פרוקסי-2-אתילהקסנואט >32%–52% (t-Butyl peroxy-2-ethylhexanoate >32–52%)",cas:"3006-82-4",cat:"Organic Peroxide",cls:"III",clsLbl:"סיווג III",cc:"nc-op3",desc:"סכנת שריפה בינונית — בוער כמו חמרים דליקים רגילים"},
+  {name:"t-בוטיל פרוקסינאודקנואט ≤32% (t-Butyl peroxyneodecanoate ≤32%)",cas:"26748-41-4",cat:"Organic Peroxide",cls:"III",clsLbl:"סיווג III",cc:"nc-op3",desc:"סכנת שריפה בינונית — בוער כמו חמרים דליקים רגילים"},
+  {name:"t-בוטיל פרוקסיפיבלאט ≤27% (t-Butyl peroxypivalate ≤27%)",cas:"927-07-1",cat:"Organic Peroxide",cls:"III",clsLbl:"סיווג III",cc:"nc-op3",desc:"סכנת שריפה בינונית — בוער כמו חמרים דליקים רגילים"},
+  {name:"t-בוטיל קומיל פרוקסיד >42%–100% (t-Butyl cumyl peroxide >42–100%)",cas:"3457-61-2",cat:"Organic Peroxide",cls:"III",clsLbl:"סיווג III",cc:"nc-op3",desc:"סכנת שריפה בינונית — בוער כמו חמרים דליקים רגילים"},
+  {name:"קומיל הידרופרוקסיד >90%–98% (Cumyl hydroperoxide >90–98%)",cas:"80-15-9",cat:"Organic Peroxide",cls:"III",clsLbl:"סיווג III",cc:"nc-op3",desc:"סכנת שריפה בינונית — בוער כמו חמרים דליקים רגילים"},
+  {name:"MEKP — מתיל אתיל קטון פרוקסיד (Methyl ethyl ketone peroxide in solution)",cas:"1338-23-4",cat:"Organic Peroxide",cls:"III",clsLbl:"סיווג III",cc:"nc-op3",desc:"סכנת שריפה בינונית — בוער כמו חמרים דליקים רגילים"},
+  {name:"חומצה פרוקסיאצטית ≤43% (Peroxyacetic acid ≤43%)",cas:"79-21-0",cat:"Organic Peroxide",cls:"III",clsLbl:"סיווג III",cc:"nc-op3",desc:"סכנת שריפה בינונית — בוער כמו חמרים דליקים רגילים"},
+  {name:"אצטיל אצטון פרוקסיד ≤42% (Acetyl acetone peroxide ≤42%)",cas:"37187-22-7",cat:"Organic Peroxide",cls:"III",clsLbl:"סיווג III",cc:"nc-op3",desc:"סכנת שריפה בינונית — בוער כמו חמרים דליקים רגילים"},
+  // ── פרוקסידים אורגניים סיווג IV ─────────────────────────────────────────
+  {name:"t-בוטיל פרוקסינאודקנואט ≤52% תמיסה יציבה (t-Butyl peroxyneodecanoate ≤52% stable dispersion)",cas:"26748-41-4",cat:"Organic Peroxide",cls:"IV",clsLbl:"סיווג IV",cc:"nc-op4",desc:"סכנת שריפה קלה — בוער כמו חמרים דליקים רגילים"},
+  {name:"t-בוטיל פרוקסינאוהפטנואט ≤42% (t-Butyl peroxyneoheptanoate ≤42% stable dispersion)",cas:"26748-38-9",cat:"Organic Peroxide",cls:"IV",clsLbl:"סיווג IV",cc:"nc-op4",desc:"סכנת שריפה קלה — בוער כמו חמרים דליקים רגילים"},
+  {name:"די-(4-t-בוטיל ציקלוהקסיל) פרוקסידיקרבונאט ≤42% (Di-(4-t-butylcyclohexyl) peroxydicarbonate ≤42%)",cas:"15520-11-3",cat:"Organic Peroxide",cls:"IV",clsLbl:"סיווג IV",cc:"nc-op4",desc:"סכנת שריפה קלה — בוער כמו חמרים דליקים רגילים"},
+  // ── פרוקסידים אורגניים סיווג V ──────────────────────────────────────────
+  {name:"ציקלוהקסנון פרוקסיד ≤32% עם ≥68% אינרט (Cyclohexanone peroxide ≤32%)",cas:"12262-58-7",cat:"Organic Peroxide",cls:"V",clsLbl:"סיווג V",cc:"nc-op5",desc:"ללא סכנת שריפה משמעותית — בוער פחות מחמרים דליקים רגילים"},
+  {name:"דיבנזואיל פרוקסיד ≤35% עם ≥65% אינרט (Dibenzoyl peroxide ≤35% ≥65% inert)",cas:"94-36-0",cat:"Organic Peroxide",cls:"V",clsLbl:"סיווג V",cc:"nc-op5",desc:"ללא סכנת שריפה משמעותית — בוער פחות מחמרים דליקים רגילים"},
+  {name:"דיקומיל פרוקסיד ≤52% עם ≥48% אינרט (Dicumyl peroxide ≤52% ≥48% inert)",cas:"80-43-3",cat:"Organic Peroxide",cls:"V",clsLbl:"סיווג V",cc:"nc-op5",desc:"ללא סכנת שריפה משמעותית — בוער פחות מחמרים דליקים רגילים"},
+  // ── מאכלים (Corrosives) ──────────────────────────────────────────────────
+  {name:"חומצה מלחה (Hydrochloric acid)",cas:"7647-01-0",cat:"Corrosive",cls:"—",clsLbl:"מאכל",cc:"nc-corr",desc:"גורם לפגיעה גלויה ברקמות במגע"},
+  {name:"חומצה גופרתית (Sulfuric acid)",cas:"7664-93-9",cat:"Corrosive",cls:"—",clsLbl:"מאכל",cc:"nc-corr",desc:"גורם לפגיעה גלויה ברקמות במגע"},
+  {name:"נתרן הידרוקסיד — אשלה (Sodium hydroxide / caustic soda)",cas:"1310-73-2",cat:"Corrosive",cls:"—",clsLbl:"מאכל",cc:"nc-corr",desc:"בסיס חזק — גורם לכוויות כימיות חמורות"},
+  {name:"חומצה פלואורית (Hydrofluoric acid)",cas:"7664-39-3",cat:"Corrosive",cls:"—",clsLbl:"מאכל",cc:"nc-corr",desc:"מאכל קיצוני — סכנת רעילות פלואוריד מערכתית",note:"גם רעיל מאוד"},
+  {name:"חומצה אצטית קרחונית (Acetic acid glacial)",cas:"64-19-7",cat:"Corrosive",cls:"—",clsLbl:"מאכל",cc:"nc-corr",desc:"מאכל נוזלי — גם נוזל דליק Class II"},
+  {name:"אמוניה — תמיסה מימית (Ammonia aqueous solution)",cas:"1336-21-6",cat:"Corrosive",cls:"—",clsLbl:"מאכל",cc:"nc-corr",desc:"בסיס מאכל — גם גז רעיל בעת שחרור"},
+  {name:"חומצה זרחתית (Phosphoric acid)",cas:"7664-38-2",cat:"Corrosive",cls:"—",clsLbl:"מאכל",cc:"nc-corr",desc:"מאכל בינוני — גורם לכוויות כימיות"},
+  {name:"אשלגן הידרוקסיד — קאוסטיק פוטש (Potassium hydroxide / caustic potash)",cas:"1310-58-3",cat:"Corrosive",cls:"—",clsLbl:"מאכל",cc:"nc-corr",desc:"בסיס חזק — גורם לכוויות כימיות חמורות"},
+  // ── גזים דליקים ──────────────────────────────────────────────────────────
+  {name:"מימן גזי (Hydrogen gas)",cas:"1333-74-0",cat:"Flammable Gas",cls:"—",clsLbl:"גז דליק",cc:"nc-flam",desc:"גז דליק ביותר — טווח בעירה רחב (4–75%)",note:"מוסדר גם ע\"י NFPA 2 / NFPA 55"},
+  {name:"מתאן (Methane)",cas:"74-82-8",cat:"Flammable Gas",cls:"—",clsLbl:"גז דליק",cc:"nc-flam",desc:"גז דליק — רכיב עיקרי של גז טבעי"},
+  {name:"פרופן (Propane)",cas:"74-98-6",cat:"Flammable Gas",cls:"—",clsLbl:"גז דליק",cc:"nc-flam",desc:"גז נוזלי דליק LPG",note:"מוסדר גם ע\"י NFPA 58"},
+  {name:"בוטן (Butane)",cas:"106-97-8",cat:"Flammable Gas",cls:"—",clsLbl:"גז דליק",cc:"nc-flam",desc:"גז נוזלי דליק LPG"},
+  {name:"אצטילן גזי (Acetylene gas)",cas:"74-86-2",cat:"Flammable Gas",cls:"—",clsLbl:"גז דליק",cc:"nc-flam",desc:"גז דליק מאוד — גם בלתי יציב (תגובתי)",note:"מאוחסן מומס באצטון — ר' NFPA 51"},
+  {name:"אתילן (Ethylene)",cas:"74-85-1",cat:"Flammable Gas",cls:"—",clsLbl:"גז דליק",cc:"nc-flam",desc:"גז דליק — גם חונק פשוט"},
+  {name:"אמוניה אנהידרית (Ammonia anhydrous gas)",cas:"7664-41-7",cat:"Flammable Gas",cls:"—",clsLbl:"גז דליק",cc:"nc-flam",desc:"גז דליק — גם רעיל מאוד",note:"מוסדר גם ע\"י NFPA 55"},
+  // ── מוצקים דליקים ────────────────────────────────────────────────────────
+  {name:"מגנזיום — אבקה/סרט (Magnesium powder/ribbon)",cas:"7439-95-4",cat:"Flammable Solid",cls:"—",clsLbl:"מוצק דליק",cc:"nc-flam",desc:"מוצק דליק בנקל — בוער להבה לבנה עזה",note:"מגיב עם מים — גם תגובתי למים"},
+  {name:"אבקת אלומיניום דקה (Aluminum powder fine)",cas:"7429-90-5",cat:"Flammable Solid",cls:"—",clsLbl:"מוצק דליק",cc:"nc-flam",desc:"אבק דליק / מוצק דליק — סכנת פיצוץ בפיזור"},
+  {name:"גופרית (Sulfur)",cas:"7704-34-9",cat:"Flammable Solid",cls:"—",clsLbl:"מוצק דליק",cc:"nc-flam",desc:"מוצק דליק — יוצר SO₂ רעיל בבעירה"},
+  {name:"נפטלן (Naphthalene)",cas:"91-20-3",cat:"Flammable Solid",cls:"—",clsLbl:"מוצק דליק",cc:"nc-flam",desc:"מוצק דליק — מתאדה בנקל, אדים דליקים"},
+  {name:"זרחן אדום (Phosphorus red)",cas:"7723-14-0",cat:"Flammable Solid",cls:"—",clsLbl:"מוצק דליק",cc:"nc-flam",desc:"מוצק דליק מאוד — מתלקח בחיכוך",note:"זרחן לבן הוא פירופורי"},
+  {name:"ניטרוצלולוזה (Nitrocellulose / cellulose nitrate)",cas:"9004-70-0",cat:"Flammable Solid",cls:"—",clsLbl:"מוצק דליק",cc:"nc-flam",desc:"מוצק דליק ביותר — תגובה עצמית בטמפ' גבוהה",note:"גם בלתי יציב (תגובתי)"},
+  // ── פירופוריים ───────────────────────────────────────────────────────────
+  {name:"טריאתיל אלומיניום TEA (Triethylaluminum)",cas:"97-93-8",cat:"Pyrophoric",cls:"—",clsLbl:"פירופורי",cc:"nc-pyr",desc:"מתלקח ספונטנית במגע עם אוויר — גם תגובתי למים"},
+  {name:"זרחן לבן (White phosphorus)",cas:"12185-10-3",cat:"Pyrophoric",cls:"—",clsLbl:"פירופורי",cc:"nc-pyr",desc:"מתלקח ספונטנית באוויר בטמפ' חדר",note:"יש לאחסן מתחת למים"},
+  {name:"סילאן SiH₄ (Silane)",cas:"7803-62-5",cat:"Pyrophoric",cls:"—",clsLbl:"פירופורי",cc:"nc-pyr",desc:"גז פירופורי — מתלקח ספונטנית באוויר",note:"מוסדר גם כגז דחוס"},
+  {name:"דיבוראן B₂H₆ (Diborane)",cas:"19287-45-7",cat:"Pyrophoric",cls:"—",clsLbl:"פירופורי",cc:"nc-pyr",desc:"גז פירופורי — גם רעיל ודליק"},
+  {name:"פוספין PH₃ (Phosphine)",cas:"7803-51-2",cat:"Pyrophoric",cls:"—",clsLbl:"פירופורי",cc:"nc-pyr",desc:"גז פירופורי / רעיל מאוד",note:"גם מסווג כרעיל מאוד"},
+  {name:"טריבוטיל אלומיניום (Tributylaluminum)",cas:"1116-70-7",cat:"Pyrophoric",cls:"—",clsLbl:"פירופורי",cc:"nc-pyr",desc:"מתלקח ספונטנית במגע עם אוויר"},
+  // ── רעיל / רעיל מאוד ────────────────────────────────────────────────────
+  {name:"כלור גזי Cl₂ (Chlorine gas)",cas:"7782-50-5",cat:"Toxic",cls:"Highly Toxic",clsLbl:"רעיל מאוד",cc:"nc-tox",desc:"IDLH 10 ppm — גורם לנזק חמור בדרכי הנשימה"},
+  {name:"פוסגן — קרבוניל כלוריד (Phosgene / carbonyl chloride)",cas:"75-44-5",cat:"Toxic",cls:"Highly Toxic",clsLbl:"רעיל מאוד",cc:"nc-tox",desc:"IDLH 2 ppm — גורם לבצקת ריאות עם השהיה"},
+  {name:"ציאנוגן מימן — גז (Hydrogen cyanide gas)",cas:"74-90-8",cat:"Toxic",cls:"Highly Toxic",clsLbl:"רעיל מאוד",cc:"nc-tox",desc:"IDLH 50 ppm — מעכב נשימה תאית"},
+  {name:"מימן גופרני H₂S (Hydrogen sulfide)",cas:"7783-06-4",cat:"Toxic",cls:"Highly Toxic",clsLbl:"רעיל מאוד",cc:"nc-tox",desc:"IDLH 50 ppm — שיתוק חוש הריח בריכוזים גבוהים"},
+  {name:"פחמן חד-חמצני CO (Carbon monoxide)",cas:"630-08-0",cat:"Toxic",cls:"Toxic",clsLbl:"רעיל",cc:"nc-tox",desc:"IDLH 1200 ppm — חונק — נקשר להמוגלובין"},
+  {name:"דו-תחמוצת חנקן NO₂ (Nitrogen dioxide)",cas:"10102-44-0",cat:"Toxic",cls:"Highly Toxic",clsLbl:"רעיל מאוד",cc:"nc-tox",desc:"IDLH 20 ppm — גורם לבצקת ריאות"},
+  {name:"דו-תחמוצת גופרית SO₂ (Sulfur dioxide)",cas:"7446-09-5",cat:"Toxic",cls:"Toxic",clsLbl:"רעיל",cc:"nc-tox",desc:"IDLH 100 ppm — מגרה את דרכי הנשימה"},
+  {name:"ברום נוזלי (Bromine liquid)",cas:"7726-95-6",cat:"Toxic",cls:"Highly Toxic",clsLbl:"רעיל מאוד",cc:"nc-tox",desc:"מאכל ורעיל מאוד — משחרר אדים רעילים",note:"גם מאכל"},
+  {name:"כספית — אדים (Mercury vapor)",cas:"7439-97-6",cat:"Toxic",cls:"Highly Toxic",clsLbl:"רעיל מאוד",cc:"nc-tox",desc:"נוירוטוקסין מצטבר — לחץ אדים משמעותי בטמפ' חדר"},
+  // ── בלתי יציב (תגובתי) ──────────────────────────────────────────────────
+  {name:"אצטילן מומס (Acetylene dissolved in acetone)",cas:"74-86-2",cat:"Unstable (Reactive)",cls:"—",clsLbl:"בלתי יציב",cc:"nc-unst",desc:"עלול להתפוצץ בלחץ או הלם",note:"מאוחסן מומס באצטון לאחסון בטוח — ר' NFPA 51"},
+  {name:"בוטאדיאן 1,3 (1,3-Butadiene)",cas:"106-99-0",cat:"Unstable (Reactive)",cls:"—",clsLbl:"בלתי יציב",cc:"nc-unst",desc:"גז דליק — מתפלמר בענף אם מעכב מדולדל"},
+  {name:"ציאנוגן מימן — נוזל (Hydrogen cyanide liquid)",cas:"74-90-8",cat:"Unstable (Reactive)",cls:"—",clsLbl:"בלתי יציב",cc:"nc-unst",desc:"מתפלמר בפיצוץ — אורך מדף קצר ללא מייצב",note:"גם רעיל מאוד"},
+  {name:"חומצה מתאקרילית (Methacrylic acid)",cas:"79-41-4",cat:"Unstable (Reactive)",cls:"—",clsLbl:"בלתי יציב",cc:"nc-unst",desc:"עלולה להתפלמר בחוזקה — נדרש מעכב באחסון"},
+  {name:"נתרן אזיד (Sodium azide)",cas:"26628-22-8",cat:"Unstable (Reactive)",cls:"—",clsLbl:"בלתי יציב",cc:"nc-unst",desc:"פירוק נפיץ — מייצר חנקן הידראזי רעיל במגע עם חומצה",note:"גם רעיל מאוד. משמש בנפחי אוויר. Annex B Table B.3.2"},
+  // ── גזים מחמצנים ─────────────────────────────────────────────────────────
+  {name:"כלור גזי Cl₂ — גז מחמצן (Chlorine gas — oxidizing gas)",cas:"7782-50-5",cat:"Oxidizing Gas",cls:"—",clsLbl:"גז מחמצן",cc:"nc-ox3",desc:"גז מחמצן — גם רעיל מאוד",note:"NFPA 400 A.3.3.78. IDLH: 10 ppm"},
+  {name:"ברום גזי (Bromine gas/vapor)",cas:"7726-95-6",cat:"Oxidizing Gas",cls:"—",clsLbl:"גז מחמצן",cc:"nc-ox3",desc:"גז מחמצן — גם רעיל מאוד ומאכל",note:"NFPA 400 A.3.3.78"},
+  {name:"פלואור F₂ (Fluorine)",cas:"7782-41-4",cat:"Oxidizing Gas",cls:"—",clsLbl:"גז מחמצן",cc:"nc-ox4",desc:"גז מחמצן עוצמתי ביותר — האלמנט האלקטרונגטיבי ביותר",note:"NFPA 400 A.3.3.78. מגיב בחוזקה עם כמעט כל החמרים"},
+  {name:"חמצן O₂ (Oxygen)",cas:"7782-44-7",cat:"Oxidizing Gas",cls:"—",clsLbl:"גז מחמצן",cc:"nc-ox2",desc:"גז מחמצן — מאיץ בחוזקה בעירה של כל החמרים הדליקים",note:"מוסדר ע\"י NFPA 55; מערכות חמצן בתפזורת — NFPA 400 פרק 21"},
+  {name:"תחמוצת חנקן N₂O — גז צחוק (Nitrous oxide N₂O)",cas:"10024-97-2",cat:"Oxidizing Gas",cls:"—",clsLbl:"גז מחמצן",cc:"nc-ox2",desc:"גז מחמצן — תומך בבעירה בטמפ' גבוהה",note:"מוסדר גם ע\"י NFPA 55 פרק 16"},
+  {name:"חנקן טטראוקסיד N₂O₄ (Nitrogen tetroxide / nitrogen dioxide)",cas:"10544-72-6",cat:"Oxidizing Gas",cls:"—",clsLbl:"גז מחמצן",cc:"nc-ox3",desc:"גז מחמצן — גם רעיל מאוד ומאכל",note:"מסווג גם כמחמצן נוזלי סיווג 2"},
+  // ── תגובתי למים ──────────────────────────────────────────────────────────
+  {name:"נתרן מתכתי (Sodium metal)",cas:"7440-23-5",cat:"Water-Reactive",cls:"3",clsLbl:"תגובתי למים 3",cc:"nc-wat",desc:"מגיב בחוזקה עם מים — משחרר מימן דליק — סכנת הצתה ספונטנית"},
+  {name:"אשלגן מתכתי (Potassium metal)",cas:"7440-09-7",cat:"Water-Reactive",cls:"3",clsLbl:"תגובתי למים 3",cc:"nc-wat",desc:"מגיב בפיצוץ עם מים — מגיב חזק יותר מנתרן"},
+  {name:"קרביד סידן (Calcium carbide)",cas:"75-20-7",cat:"Water-Reactive",cls:"2",clsLbl:"תגובתי למים 2",cc:"nc-wat",desc:"מגיב עם מים — מייצר גז אצטילן דליק ופוטנציאלית מתפוצץ"},
+  {name:"ליתיום מתכתי (Lithium metal)",cas:"7439-93-2",cat:"Water-Reactive",cls:"2",clsLbl:"תגובתי למים 2",cc:"nc-wat",desc:"מגיב עם מים — משחרר מימן וחום"},
+  {name:"סידן מתכתי (Calcium metal)",cas:"7440-70-2",cat:"Water-Reactive",cls:"2",clsLbl:"תגובתי למים 2",cc:"nc-wat",desc:"מגיב עם מים — משחרר מימן — איטי יותר ממתכות אלקלי"},
+  {name:"מגנזיום — גרגירים/שבבים (Magnesium chips/turnings)",cas:"7439-95-4",cat:"Water-Reactive",cls:"1",clsLbl:"תגובתי למים 1",cc:"nc-wat",desc:"מגיב לאט עם מים אך מהיר עם אדים — גם מוצק דליק"},
+];
+
+// ── SECONDARY HAZARD MAP (cas|cat → tags) ─────────────────────────────────
+const N400_ALSO = {
+  '7761-88-8|Oxidizer':          ['מאכל','רעיל'],
+  '10099-74-8|Oxidizer':         ['רעיל'],
+  '7664-39-3|Corrosive':         ['רעיל מאוד'],
+  '26628-22-8|Unstable (Reactive)': ['רעיל מאוד'],
+  '7664-41-7|Flammable Gas':     ['רעיל מאוד'],
+  '1336-21-6|Corrosive':         ['גז דליק'],
+  '7803-51-2|Pyrophoric':        ['רעיל מאוד'],
+  '9004-70-0|Flammable Solid':   ['בלתי יציב'],
+  '7439-95-4|Flammable Solid':   ['תגובתי למים'],
+  '7439-95-4|Water-Reactive':    ['מוצק דליק'],
+  '7782-50-5|Toxic':             ['גז מחמצן'],
+  '7782-50-5|Oxidizing Gas':     ['רעיל מאוד'],
+  '7726-95-6|Toxic':             ['גז מחמצן','מאכל'],
+  '7726-95-6|Oxidizing Gas':     ['רעיל מאוד','מאכל'],
+  '10544-72-6|Oxidizer':         ['גז מחמצן'],
+  '10544-72-6|Oxidizing Gas':    ['מחמצן סיווג 2'],
+  '74-86-2|Flammable Gas':       ['בלתי יציב'],
+  '74-86-2|Unstable (Reactive)': ['גז דליק'],
+  '74-90-8|Toxic':               ['בלתי יציב'],
+  '74-90-8|Unstable (Reactive)': ['רעיל מאוד'],
+};
+const N400_ALSO_COL = {
+  'מחמצן':'#ea580c','מחמצן סיווג 2':'#ca8a04','מאכל':'#7c3aed',
+  'רעיל':'#059669','רעיל מאוד':'#047857','גז מחמצן':'#ea580c',
+  'גז דליק':'#d97706','מוצק דליק':'#d97706','בלתי יציב':'#db2777','תגובתי למים':'#0284c7',
+};
+
+// ── STATE ──────────────────────────────────────────────────────────────────
+let n400filter = 'all', n400sort = 'name', n400query = '';
+
+// ── HELPERS ───────────────────────────────────────────────────────────────
+const n400catColors = {
+  'Oxidizer':'#ea580c','Organic Peroxide':'#c026d3','Corrosive':'#7c3aed',
+  'Flammable Gas':'#d97706','Flammable Solid':'#d97706','Pyrophoric':'#dc2626',
+  'Toxic':'#059669','Unstable (Reactive)':'#db2777','Water-Reactive':'#0284c7','Oxidizing Gas':'#ea580c'
+};
+const n400catHe = {
+  'Oxidizer':'מחמצן','Organic Peroxide':'פרוקסיד אורגני','Corrosive':'מאכל',
+  'Flammable Gas':'גז דליק','Flammable Solid':'מוצק דליק','Pyrophoric':'פירופורי',
+  'Toxic':'רעיל','Unstable (Reactive)':'בלתי יציב','Water-Reactive':'תגובתי למים','Oxidizing Gas':'גז מחמצן'
+};
+
+function n400esc(t){ return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function n400hl(t,q){
+  if(!q) return n400esc(t);
+  const re = new RegExp('('+q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi');
+  return n400esc(t).replace(re,'<mark>$1</mark>');
+}
+
+// ── WELCOME GRID ──────────────────────────────────────────────────────────
+(function buildN400Welcome(){
+  const cats={};
+  // Use hazmatNFPA400 (from external file) for counts
+  const db = (typeof hazmatNFPA400 !== 'undefined') ? hazmatNFPA400 : N400_DB;
+  db.forEach(c=>{ cats[c.cat]=(cats[c.cat]||0)+1; });
+  const g=document.getElementById('n400wcards');
+  if(!g) return;
+  Object.entries(cats).forEach(([cat,cnt])=>{
+    const d=document.createElement('div');
+    d.className='n400-wcard';
+    d.innerHTML=`<div class="wdot" style="background:${n400catColors[cat]||'#888'}"></div>
+      <div><div class="wcat">${n400catHe[cat]||cat}</div><div class="wcnt">${cnt} חומרים</div></div>`;
+    d.onclick=()=>{ n400setFilter(document.querySelector(`.n400-pill[data-n400="${cat}"]`),cat); };
+    g.appendChild(d);
+  });
+})();
+
+// ── FILTER & SEARCH ───────────────────────────────────────────────────────
+function n400setFilter(el,val){
+  document.querySelectorAll('.n400-pill').forEach(p=>p.classList.remove('active'));
+  if(el) el.classList.add('active');
+  n400filter=val;
+  n400render();
+}
+function n400doSearch(){
+  n400query=document.getElementById('n400search').value.trim();
+  n400render();
+}
+function n400setSort(s){
+  n400sort=s;
+  document.getElementById('n400sortName').classList.toggle('btn-green',s==='name');
+  document.getElementById('n400sortName').classList.toggle('btn-outline',s!=='name');
+  document.getElementById('n400sortCls').classList.toggle('btn-green',s==='class');
+  document.getElementById('n400sortCls').classList.toggle('btn-outline',s!=='class');
+  n400render();
+}
+
+// ── RENDER ────────────────────────────────────────────────────────────────
+function n400render(){
+  const q=n400query.toLowerCase();
+  const searching=q.length>0;
+
+  // Use hazmatNFPA400 (detailed data) if available, fall back to N400_DB
+  const useDB = (typeof hazmatNFPA400 !== 'undefined') ? hazmatNFPA400 : N400_DB;
+
+  let res=useDB.filter(c=>{
+    const name = c.nameHe||c.name||'';
+    const nameEn = c.nameEn||'';
+    const cas = c.cas||'';
+    const mf=n400filter==='all'||c.cat===n400filter||(n400filter==='Toxic'&&(c.cat==='Toxic'||c.cat==='Highly Toxic'));
+    const ms=!searching||
+      name.toLowerCase().includes(q)||
+      nameEn.toLowerCase().includes(q)||
+      cas.toLowerCase().includes(q)||
+      (c.un&&c.un.toLowerCase().includes(q))||
+      (c.note&&c.note.toLowerCase().includes(q))||
+      (c.catHe&&c.catHe.toLowerCase().includes(q));
+    return mf&&ms;
+  });
+
+  const clsOrd=['1','2','3','4','I','IIA','IIB','III','IV','V','Highly Toxic','Toxic','—'];
+  if(n400sort==='name') res.sort((a,b)=>(a.nameHe||a.name||'').localeCompare(b.nameHe||b.name||'','he'));
+  else res.sort((a,b)=>{ if(a.cat!==b.cat) return a.cat.localeCompare(b.cat); return clsOrd.indexOf(a.cls)-clsOrd.indexOf(b.cls)||(a.nameHe||a.name||'').localeCompare(b.nameHe||b.name||'','he'); });
+
+  const grid=document.getElementById('n400grid');
+  const empty=document.getElementById('n400empty');
+  const welcome=document.getElementById('n400welcome');
+  const meta=document.getElementById('n400resultsMeta');
+  const count=document.getElementById('n400count');
+  const show=searching||n400filter!=='all';
+
+  if(!show){ grid.style.display='none'; empty.style.display='none'; meta.style.display='none'; welcome.style.display='block'; return; }
+  welcome.style.display='none'; meta.style.display='block';
+  count.innerHTML=`<strong>${res.length}</strong> תוצאות${q?' עבור "'+n400esc(n400query)+'"':''}`;
+
+  if(res.length===0){ grid.style.display='none'; empty.style.display='block'; return; }
+  empty.style.display='none'; grid.style.display='grid';
+
+  const catBadge={
+    'Oxidizer':'מחמצן','Organic Peroxide':'פרוקסיד','Corrosive':'מאכל',
+    'Flammable Gas':'גז דליק','Flammable Solid':'מוצק דליק','Pyrophoric':'פירופורי',
+    'Toxic':'רעיל','Unstable (Reactive)':'בלתי יציב','Water-Reactive':'תגובתי למים',
+    'Oxidizing Gas':'גז מחמצן','Flammable Liquid':'נוזל דליק'
+  };
+
+  // helper for property box
+  function propBox(lbl, val, unit){
+    const v = (val&&val!=='')?n400esc(val+(unit||'')):'—';
+    return `<div class="nfpa-prop-box"><div class="nfpa-prop-lbl">${lbl}</div><div class="nfpa-prop-val" title="${v}">${v}</div></div>`;
+  }
+  // NFPA 704 diamond color helpers
+  const hfrCol = [
+    ['#fef2f2','#b91c1c','#fca5a5'],  // 0: red
+    ['#fef9c3','#a16207','#fde047'],  // 1: yellow
+    ['#fef3c7','#92400e','#fcd34d'],  // 2: orange-y
+    ['#fee2e2','#b91c1c','#fca5a5'],  // 3: red
+    ['#dc2626','#ffffff','#b91c1c'],  // 4: dark red
+  ];
+  function hfrBox(val, type){
+    const n=parseInt(val)||0;
+    const cls={h:'hfr-h',f:'hfr-f',r:'hfr-r'}[type]||'hfr-r';
+    const labels={h:'H',f:'F',r:'R'};
+    return `<div class="nfpa-hfr-box ${cls}" title="${{h:'בריאות',f:'דליקות',r:'תגובתיות'}[type]} = ${n}">${labels[type]}${n}</div>`;
+  }
+
+  grid.innerHTML=res.map((c,i)=>{
+    // Support both new (hazmatNFPA400) and old (N400_DB) schema
+    const nameHe = c.nameHe||c.name||'';
+    const nameEn = c.nameEn||'';
+    const formula = c.formula||'';
+    const cas = c.cas||'';
+    const un = c.un||'';
+    const dot = c.dot||'';
+    const fp = c.fp||'';
+    const bp = c.bp||'';
+    const lel = c.lel||'', uel = c.uel||'';
+    const ait = c.ait||'';
+    const h = c.h||'', f = c.f||'', r = c.r||'', sp = c.sp||'';
+    const cc = c.cc||'nc-ox';
+
+    const also=N400_ALSO[cas+'|'+c.cat]||[];
+    const alsoHtml=also.length?`<div class="nfpa-also-row">
+      <span class="nfpa-also-lbl">גם:</span>
+      ${also.map(t=>{const col=N400_ALSO_COL[t]||'#888';return`<span class="nfpa-also-tag" style="background:${col}18;border-color:${col}44;color:${col}">${t}</span>`;}).join('')}
+    </div>`:'';
+
+    // Property grid rows (only shown for new-style records with meaningful data)
+    const hasProps = fp||bp||lel||uel||ait||un||dot;
+    const propsHtml = hasProps ? `<div class="nfpa-props">
+      ${propBox('נ"ב °C', fp)}
+      ${propBox('רתיחה °C', bp)}
+      ${propBox('LEL %', lel)}
+      ${propBox('UEL %', uel)}
+      ${propBox('AIT °C', ait)}
+    </div>
+    <div class="nfpa-props" style="grid-template-columns:repeat(3,1fr); margin-top:4px;">
+      ${propBox('UN', un)}
+      ${propBox('DOT', dot)}
+      ${propBox('CAS', cas)}
+    </div>` : (cas&&cas!=='—'&&cas!=='varies'?`<div class="nfpa-cas">CAS ${n400esc(cas)}</div>`:'');
+
+    // NFPA 704 diamond
+    const hasDiamond = h!==''||f!==''||r!=='';
+    const diamondHtml = hasDiamond ? `<div class="nfpa-diamond-row">
+      <span class="nfpa-diamond-lbl">NFPA 704:</span>
+      <div class="nfpa-hfr">
+        ${hfrBox(h,'h')}
+        ${hfrBox(f,'f')}
+        ${hfrBox(r,'r')}
+        ${sp?`<div class="nfpa-hfr-box hfr-sp" title="Special">${n400esc(sp)}</div>`:''}
+      </div>
+    </div>` : '';
+
+    // desc/note for old-style; note for new-style
+    const descHtml = c.desc ? `<div class="nfpa-desc">${n400esc(c.desc)}</div>` : '';
+    const noteHtml = c.note ? `<div class="nfpa-note">${n400esc(c.note)}</div>` : '';
+
+    return`<div class="nfpa-card ${cc}" style="animation-delay:${Math.min(i*18,280)}ms">
+      <div class="nfpa-card-header">
+        <div>
+          <div class="nfpa-card-name">${n400hl(nameHe,n400query)}</div>
+          ${nameEn?`<div class="nfpa-en-name">${n400hl(nameEn,n400query)}</div>`:''}
+        </div>
+        <div class="nfpa-badge">
+          <span class="nfpa-badge-cat">${catBadge[c.cat]||c.cat}</span>
+          <span class="nfpa-badge-cls">${c.clsLbl||''}</span>
+        </div>
+      </div>
+      ${formula?`<span class="nfpa-formula">${n400esc(formula)}</span> `:''}
+      ${descHtml}
+      ${propsHtml}
+      ${diamondHtml}
+      ${alsoHtml}
+      ${noteHtml}
+    </div>`;
+  }).join('');
+}
+
+function n400toggleRef(){
+  const b=document.getElementById('n400refBody');
+  const a=document.getElementById('n400refArrow');
+  const open=b.style.display==='none';
+  b.style.display=open?'block':'none';
+  a.textContent=open?'▴':'▾';
+}
+
+function n400accToggle(id, btn){
+  const body=document.getElementById(id);
+  if(!body) return;
+  const open=body.style.display!=='none'&&body.style.display!=='';
+  body.style.display=open?'none':'block';
+  const arr=btn.querySelector('.n400-arr');
+  if(arr) arr.textContent=open?'▾':'▴';
+}
+
+// initial render
+n400render();
 </script>
 </body>
 </html>
