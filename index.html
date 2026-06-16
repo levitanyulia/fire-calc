@@ -702,11 +702,17 @@
             💡 בחר חומר מהרשימה – הערך הקלורי יתמלא אוטומטית וניתן לשנותו ידנית.
             לחומר שאינו ברשימה בחר <strong>אחר (הזן ידנית)</strong>.
           </div>
+          <button onclick="calculate(); document.getElementById('fireLoadResults').scrollIntoView({behavior:'smooth', block:'start'});"
+                  style="width:100%; margin-top:14px; background:var(--gold); color:#fff; border:none;
+                         padding:14px; border-radius:10px; font-size:1.05rem; font-weight:800; cursor:pointer;
+                         transition:background .2s; letter-spacing:.01em;">
+            📊 חשב מטען אש
+          </button>
         </div>
       </div>
 
       <!-- תוצאות -->
-      <div class="section">
+      <div class="section" id="fireLoadResults">
         <div class="section-head">📊 תוצאות</div>
         <div class="section-body">
 
