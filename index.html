@@ -662,13 +662,19 @@
         <p>חישוב מטען אש לפי SFPE Handbook • סיווג לפי נוהל הערכת סיכוני אש (גרסה 2, 2024)</p>
       </div>
 
-      <!-- פרטי האזור -->
+      <!-- פרטי אגף האש -->
       <div class="section">
-        <div class="section-head">📐 פרטי האזור המבוקר</div>
+        <div class="section-head">📐 פרטי אגף האש</div>
         <div class="section-body">
-          <div style="max-width:300px">
-            <div class="field-label">שטח האזור [מ"ר] <span class="req">*</span></div>
-            <input class="field-input" type="number" id="roomArea" placeholder="הזן שטח" min="0.1" step="0.1" oninput="calculate()" />
+          <div class="room-row" style="grid-template-columns:1fr 1fr; gap:14px; max-width:560px">
+            <div>
+              <div class="field-label">שם אגף האש</div>
+              <input class="field-input" type="text" id="compName" placeholder="למשל: אגף A / מחסן 1" />
+            </div>
+            <div>
+              <div class="field-label">שטח אגף אש [מ"ר] <span class="req">*</span></div>
+              <input class="field-input" type="number" id="roomArea" placeholder="הזן שטח" min="0.1" step="0.1" oninput="calculate()" />
+            </div>
           </div>
         </div>
       </div>
@@ -684,7 +690,7 @@
                   <th class="col-num">#</th>
                   <th class="col-mat">חומר</th>
                   <th class="col-hi">ערך קלורי Hi <small>[קק"ל/ק"ג]</small></th>
-                  <th class="col-wt">משקל <small>[ק"ג]</small></th>
+                  <th class="col-wt">משקל החומר <small>(ק"ג)</small></th>
                   <th class="col-heat">חום כולל <small>[קק"ל]</small></th>
                   <th class="col-del"></th>
                 </tr>
@@ -694,7 +700,7 @@
           </div>
           <div class="tbl-footer">
             <button class="btn btn-green" onclick="addRow()">＋ הוסף שורה</button>
-            <button class="btn btn-outline" onclick="clearAll()">🗑 נקה הכל</button>
+            <button class="btn btn-outline" onclick="clearAll()">🗑 נקה אגף נוכחי</button>
           </div>
         </div>
         <div class="section-body" style="padding-top:0">
@@ -702,7 +708,8 @@
             💡 בחר חומר מהרשימה – הערך הקלורי יתמלא אוטומטית וניתן לשנותו ידנית.
             לחומר שאינו ברשימה בחר <strong>אחר (הזן ידנית)</strong>.
           </div>
-          <button onclick="calculate(); document.getElementById('fireLoadResults').scrollIntoView({behavior:'smooth', block:'start'});"
+          <div id="fireLoadError" style="display:none; margin-top:14px;"></div>
+          <button onclick="fireLoadCalc()"
                   style="width:100%; margin-top:14px; background:var(--gold); color:#fff; border:none;
                          padding:14px; border-radius:10px; font-size:1.05rem; font-weight:800; cursor:pointer;
                          transition:background .2s; letter-spacing:.01em;">
@@ -748,6 +755,22 @@
             🟡 <strong>מטען אש רגיל</strong> – 40,000 קק"ל/מ"ר ומעלה
           </div>
 
+        </div>
+      </div>
+
+      <!-- אגפי אש -->
+      <div class="section">
+        <div class="section-head">🏢 אגפי אש (חישוב מרובה)</div>
+        <div class="section-body">
+          <div class="tip" style="margin-bottom:14px">
+            💡 חישבת אגף אש? לחץ <strong>"הוסף אגף אש"</strong> כדי לשמור את האגף הנוכחי ולהתחיל אגף חדש בלי לאבד את הנתונים.
+            הטבלה המתכללת למטה תרכז את כל האגפים. לבדיקה חדשה לגמרי לחץ <strong>"התחל מחדש"</strong>.
+          </div>
+          <div style="display:flex; gap:12px; flex-wrap:wrap">
+            <button class="btn btn-green" onclick="fireSaveCompartment()">➕ הוסף אגף אש נוסף</button>
+            <button class="btn btn-outline" onclick="fireResetAll()">🗑 התחל מחדש (מחק הכל)</button>
+          </div>
+          <div id="fireCompartmentsList" style="margin-top:16px"></div>
         </div>
       </div>
 
@@ -1000,20 +1023,21 @@
           <!-- רשימת חומרים שנוספו -->
           <div id="maqMaterialsList" style="margin-top:16px;"></div>
 
-          <!-- כפתורי חישוב / איפוס -->
-          <div id="maqCalcBtnWrap" style="margin-top:16px; display:none; gap:12px;">
-            <div style="display:flex; gap:12px;">
-              <button onclick="maqCalcAll()" style="flex:1; background:var(--gold); color:#fff; border:none;
-                      padding:14px; border-radius:10px; font-size:1.05rem; font-weight:800; cursor:pointer;
-                      transition:background .2s; letter-spacing:.01em;">
-                📊 חשב MAQ
-              </button>
-              <button onclick="maqClearAll()" style="flex-shrink:0; background:#fff; color:#c62828; border:1.5px solid #ef9a9a;
-                      padding:14px 20px; border-radius:10px; font-size:.95rem; font-weight:700; cursor:pointer;
-                      transition:all .2s;">
-                🗑 נקה הכל
-              </button>
-            </div>
+          <!-- כפתור חישוב -->
+          <div id="maqCalcBtnWrap" style="margin-top:16px; display:none;">
+            <button onclick="maqCalcAll()" style="width:100%; background:var(--gold); color:#fff; border:none;
+                    padding:14px; border-radius:10px; font-size:1.05rem; font-weight:800; cursor:pointer;
+                    transition:background .2s; letter-spacing:.01em;">
+              📊 חשב MAQ
+            </button>
+          </div>
+
+          <!-- כפתור ניקוי כל הנתונים (זמין תמיד) -->
+          <div style="margin-top:12px;">
+            <button onclick="maqClearAll()" style="width:100%; background:#fff; color:#c62828; border:1.5px solid #ef9a9a;
+                    padding:12px; border-radius:10px; font-size:.95rem; font-weight:700; cursor:pointer; transition:all .2s;">
+              🗑 נקה את כל הנתונים
+            </button>
           </div>
         </div>
       </div>
@@ -1438,12 +1462,177 @@ function renum(){
 }
 
 function clearAll(){
-  if(!confirm('לנקות את כל הנתונים?')) return;
+  if(!confirm('לנקות את נתוני האגף הנוכחי? (אגפים שמורים יישארו)')) return;
   document.getElementById('matBody').innerHTML = '';
   document.getElementById('roomArea').value = '';
+  const cn = document.getElementById('compName'); if(cn) cn.value = '';
   _id = 0;
   calculate();
   addRow(); addRow(); addRow();
+}
+
+/* ─── FIRE COMPARTMENTS – multiple אגפי אש ─── */
+let fireCompartments = [];
+
+function fireComputeCurrent(){
+  let total = 0;
+  document.querySelectorAll('#matBody tr').forEach(tr=>{
+    const id = tr.id.replace('R','');
+    const hi = parseFloat(document.getElementById('H'+id)?.value) || 0;
+    const wt = parseFloat(document.getElementById('W'+id)?.value) || 0;
+    total += hi * wt;
+  });
+  const area = parseFloat(document.getElementById('roomArea').value) || 0;
+  const fl = (area > 0 && total > 0) ? total / area : null;
+  return {total, area, fl};
+}
+
+function fireResetCurrentForm(){
+  document.getElementById('matBody').innerHTML = '';
+  document.getElementById('roomArea').value = '';
+  const cn = document.getElementById('compName'); if(cn) cn.value = '';
+  _id = 0;
+  addRow(); addRow(); addRow();
+  calculate();
+}
+
+function fireSaveCompartment(){
+  const missing = fireRowsMissingWeight();
+  if(missing.length){ fireShowLoadError(missing); return; }
+  const {total, area, fl} = fireComputeCurrent();
+  if(!(area > 0)){ alert('יש להזין שטח אגף אש חיובי לפני שמירה'); return; }
+  if(!(total > 0)){ alert('יש להזין לפחות חומר אחד (ערך קלורי + משקל) לפני שמירה'); return; }
+  const name = (document.getElementById('compName').value || '').trim() || ('אגף אש ' + (fireCompartments.length + 1));
+  fireCompartments.push({name, area, total, fl, isLow: fl < LOW});
+  fireRenderCompartments();
+  fireResetCurrentForm();
+  document.getElementById('fireCompartmentsList').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function fireRemoveCompartment(i){
+  fireCompartments.splice(i, 1);
+  fireRenderCompartments();
+}
+
+function fireResetAll(){
+  const hasData = fireCompartments.length || (document.getElementById('roomArea').value) ||
+                  document.querySelector('#matBody input[type="number"]')?.value;
+  if(hasData && !confirm('למחוק את כל הנתונים (כולל כל האגפים השמורים) ולהתחיל מחדש?')) return;
+  fireCompartments = [];
+  fireRenderCompartments();
+  fireResetCurrentForm();
+}
+
+/* ── Validation: a material is chosen but its weight is missing ── */
+function fireRowsMissingWeight(){
+  const missing = [];
+  document.querySelectorAll('#matBody tr').forEach((tr,i)=>{
+    const id = tr.id.replace('R','');
+    const sel = document.getElementById('S'+id);
+    const hi  = parseFloat(document.getElementById('H'+id)?.value);
+    const wtRaw = document.getElementById('W'+id)?.value;
+    const wt = parseFloat(wtRaw);
+    const materialChosen = (sel && sel.value !== '') || (!isNaN(hi) && hi > 0);
+    const noWeight = (wtRaw === '' || wtRaw == null || isNaN(wt) || wt <= 0);
+    if(materialChosen && noWeight) missing.push(i + 1);
+  });
+  return missing;
+}
+
+function fireShowLoadError(missing){
+  const errEl = document.getElementById('fireLoadError');
+  if(!errEl) return;
+  errEl.innerHTML = `
+    <div style="background:#ffebee;border:1.5px solid #c62828;border-radius:9px;padding:12px 16px">
+      <div style="font-weight:800;color:#b71c1c;font-size:.95rem">⚠️ נדרש להזין משקל החומר</div>
+      <div style="font-weight:500;color:#c62828;font-size:.86rem;margin-top:4px">
+        נבחר חומר ללא משקל ב${missing.length > 1 ? 'שורות' : 'שורה'} ${missing.join(', ')}.
+        ללא משקל החומר לא ניתן לבצע את חישוב מטען האש.
+      </div>
+    </div>`;
+  errEl.style.display = 'block';
+}
+
+function fireClearLoadError(){
+  const errEl = document.getElementById('fireLoadError');
+  if(errEl){ errEl.style.display = 'none'; errEl.innerHTML = ''; }
+}
+
+function fireLoadCalc(){
+  const missing = fireRowsMissingWeight();
+  if(missing.length){ fireShowLoadError(missing); return; }
+  fireClearLoadError();
+  calculate();
+  document.getElementById('fireLoadResults').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function fireRenderCompartments(){
+  const cont = document.getElementById('fireCompartmentsList');
+  if(!cont) return;
+  if(!fireCompartments.length){ cont.innerHTML = ''; return; }
+
+  const badge = isLow => isLow
+    ? '<span style="background:#e4f5e9;color:#1a5c2a;border:1px solid #43a858;border-radius:5px;padding:2px 8px;font-weight:700;font-size:.8rem">🟢 נמוך</span>'
+    : '<span style="background:#fef9ec;color:#7a5500;border:1px solid #d4a017;border-radius:5px;padding:2px 8px;font-weight:700;font-size:.8rem">🟡 רגיל</span>';
+
+  const totalArea = fireCompartments.reduce((s,c)=>s + c.area, 0);
+  const totalHeat = fireCompartments.reduce((s,c)=>s + c.total, 0);
+  const anyRegular = fireCompartments.some(c => !c.isLow);
+
+  const rows = fireCompartments.map((c,i)=>`
+    <tr>
+      <td style="padding:8px 12px;border-bottom:1px solid #f0f0ee;font-weight:700">${i+1}</td>
+      <td style="padding:8px 12px;border-bottom:1px solid #f0f0ee">${c.name}</td>
+      <td style="padding:8px 12px;border-bottom:1px solid #f0f0ee">${fmt(c.area,1)}</td>
+      <td style="padding:8px 12px;border-bottom:1px solid #f0f0ee">${fmt(c.total)}</td>
+      <td style="padding:8px 12px;border-bottom:1px solid #f0f0ee;font-weight:700">${fmt(c.fl)}</td>
+      <td style="padding:8px 12px;border-bottom:1px solid #f0f0ee">${badge(c.isLow)}</td>
+      <td style="padding:8px 12px;border-bottom:1px solid #f0f0ee">
+        <button onclick="fireRemoveCompartment(${i})" style="background:#ffebee;color:#c62828;border:1px solid #ef9a9a;
+                border-radius:6px;padding:3px 9px;font-size:.78rem;cursor:pointer;font-weight:600">✕</button>
+      </td>
+    </tr>`).join('');
+
+  const buildingNote = anyRegular
+    ? `<div style="margin-top:12px;background:#fef9ec;border:1.5px solid #d4a017;border-radius:9px;padding:12px 16px;
+             font-weight:700;color:#7a5500;font-size:.92rem">
+         🟡 הבניין ברמת סיכון רגילה
+         <div style="font-weight:500;font-size:.84rem;margin-top:4px">לפחות אגף אש אחד סווג ברמת סיכון רגילה (מטען אש ≥ 40,000 קק"ל/מ"ר).</div>
+       </div>`
+    : `<div style="margin-top:12px;background:#e4f5e9;border:1.5px solid #43a858;border-radius:9px;padding:12px 16px;
+             font-weight:700;color:#1a5c2a;font-size:.92rem">
+         🟢 הבניין ברמת סיכון נמוכה
+         <div style="font-weight:500;font-size:.84rem;margin-top:4px">כל אגפי האש סווגו ברמת סיכון נמוכה (מטען אש < 40,000 קק"ל/מ"ר).</div>
+       </div>`;
+
+  cont.innerHTML = `
+    <div style="background:var(--green);color:#fff;border-radius:8px 8px 0 0;padding:11px 16px;
+         font-weight:800;font-size:1rem;letter-spacing:.01em">
+      🏢 טבלה מתכללת לבניין לפי אגפי אש (${fireCompartments.length} אגפים)
+    </div>
+    <div style="overflow-x:auto">
+    <table style="width:100%;border-collapse:collapse;border:1px solid var(--border);border-top:none;overflow:hidden">
+      <thead><tr style="background:var(--green-mid);color:#fff">
+        <th style="padding:9px 12px;text-align:right;font-size:.82rem">מס׳ אגף</th>
+        <th style="padding:9px 12px;text-align:right;font-size:.82rem">שם אגף האש</th>
+        <th style="padding:9px 12px;text-align:right;font-size:.82rem">שטח [מ"ר]</th>
+        <th style="padding:9px 12px;text-align:right;font-size:.82rem">חום כולל [קק"ל]</th>
+        <th style="padding:9px 12px;text-align:right;font-size:.82rem">מטען אש [קק"ל/מ"ר]</th>
+        <th style="padding:9px 12px;text-align:right;font-size:.82rem">רמת סיכון</th>
+        <th style="padding:9px 12px;text-align:right;font-size:.82rem">הסרה</th>
+      </tr></thead>
+      <tbody>${rows}</tbody>
+      <tfoot><tr style="background:#f8faf6;font-weight:800">
+        <td colspan="2" style="padding:9px 12px;border-top:2px solid var(--border)">סה"כ בניין</td>
+        <td style="padding:9px 12px;border-top:2px solid var(--border)">${fmt(totalArea,1)}</td>
+        <td style="padding:9px 12px;border-top:2px solid var(--border)">${fmt(totalHeat)}</td>
+        <td colspan="3" style="padding:9px 12px;border-top:2px solid var(--border);font-weight:500;color:var(--muted);font-size:.82rem">
+          כל אגף אש מסווג בנפרד
+        </td>
+      </tr></tfoot>
+    </table>
+    </div>
+    ${buildingNote}`;
 }
 
 /* ─── CALCULATION ─── */
@@ -1487,6 +1676,9 @@ function calculate(){
     document.getElementById('r-fl').textContent = '—';
     box.className = 'class-box';
   }
+
+  // Auto-hide the missing-weight error once the user has resolved it
+  if(typeof fireRowsMissingWeight === 'function' && !fireRowsMissingWeight().length) fireClearLoadError();
 }
 
 /* ─── NAVIGATION ─── */
@@ -2430,12 +2622,12 @@ function maqCalcAll(){
     surveyEl.innerHTML = `
       <div style="background:#ffebee;border:2px solid #b71c1c;border-radius:10px;padding:16px 20px;animation:pop .2s ease">
         <div style="font-weight:900;font-size:1.08rem;color:#b71c1c;display:flex;align-items:center;gap:8px">
-          🚨 נדרשת הכנת סקר סיכוני אש
+          🚨 רמת סיכון גבוהה – נדרש להגיש סקר סיכוני אש
         </div>
         <div style="font-size:.9rem;color:#b71c1c;margin-top:8px;line-height:1.7">
-          חריגה מ-MAQ מסווגת את המבנה כ-<strong>סיכון גבוה (High-Hazard)</strong> לפי NFPA 400.
+          חריגה מ-MAQ מסווגת את המבנה כ-<strong>רמת סיכון גבוהה לפי דוח הערכת סיכוני אש</strong> (High-Hazard לפי NFPA 400).
           ${protLine}
-          <br>במצב זה <strong>נדרש להכין סקר סיכוני אש</strong> ולעמוד בדרישות הנוספות:
+          <br><strong>נדרש להגיש סקר סיכוני אש</strong> ולעמוד בדרישות הנוספות:
           <ul style="margin:8px 18px 0;padding:0">
             <li>סיווג תפוסה High-Hazard ועמידה ב-NFPA 400 Section 5.3 ו-Chapter 6</li>
             <li>בחינת אמצעי הגנה (מתזים NFPA 13, ארונות מאושרים, חדרי גזים, פליטה)</li>
